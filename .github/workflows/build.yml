@@ -39,17 +39,20 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew :tv:assembleRelease
     
+    - name: Output directory structure
+      run: sudo apt-get install tree && tree -L 10
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: mytv-android.apk
-        path: tv/original/release/*.apk
+        path: build/outputs/release/*.apk
 
     - name: Read alpha apk output metadata
       id: apk-meta-alpha
       uses: juliangruber/read-file-action@v1
       with:
-        path: tv/original/release/output-metadata.json
+        path: build/outputs/release/output-metadata.json
     
     - name: Parse apk infos
       id: versionCode
@@ -61,7 +64,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-            tv/original/release/*.apk
+            build/outputs/release/*.apk
         tag_name: ${{ env.info_version_code }}
         release_name: Release V ${{ env.info_version_code }}
     

@@ -119,7 +119,7 @@ object ChannelUtil {
             ChannelAlias.standardChannelName("风云足球") to listOf(
                 "https://www.yangshipin.cn/tv/home?pid=600099636"
             ),
-            ChannelAlias.standardChannelName("高尔夫·网球") to listOf(
+            ChannelAlias.standardChannelName("高尔夫网球") to listOf(
                 "https://www.yangshipin.cn/tv/home?pid=600099659"
             ),
             ChannelAlias.standardChannelName("女性时尚") to listOf(
