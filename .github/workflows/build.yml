@@ -46,13 +46,13 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: mytv-android.apk
-        path: tv/outputs/apk/release/*.apk
+        path: tv/build/outputs/apk/release/*.apk
 
     - name: Read alpha apk output metadata
       id: apk-meta-alpha
       uses: juliangruber/read-file-action@v1
       with:
-        path: tv/outputs/apk/original/release/output-metadata.json
+        path: tv/build/outputs/apk/original/release/output-metadata.json
     
     - name: Parse apk infos
       id: versionCode
@@ -64,7 +64,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-            tv/outputs/apk/release/*.apk
+            tv/build/outputs/apk/release/*.apk
         tag_name: ${{ env.info_version_code }}
         release_name: Release V ${{ env.info_version_code }}
     
