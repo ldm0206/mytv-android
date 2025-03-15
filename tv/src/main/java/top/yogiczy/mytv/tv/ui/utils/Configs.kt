@@ -67,6 +67,9 @@ object Configs {
         /** 混合模式 */
         IPTV_HYBRID_MODE,
 
+        /** 混合源央视频Cookie */
+        IPTV_HYBRID_YANGSHIPIN_COOKIE,
+
         /** 相似频道合并 */
         IPTV_SIMILAR_CHANNEL_MERGE,
 
@@ -318,8 +321,8 @@ object Configs {
     
     /** 混合模式央视频Cookie */
     iptvHybridYangshipinCookie: String
-        get() = SP.getString(KEY.HYBRID_YANGSHIPIN_COOKIE.name, Constants.HYBRID_YANGSHIPIN_COOKIE)
-        set(value) = SP.putString(KEY.HYBRID_YANGSHIPIN_COOKIE.name, value)
+        get() = SP.getString(KEY.IPTV_HYBRID_YANGSHIPIN_COOKIE.name, Constants.HYBRID_YANGSHIPIN_COOKIE)
+        set(value) = SP.putString(KEY.IPTV_HYBRID_YANGSHIPIN_COOKIE.name, value)
 
     /** 相似频道合并 */
     var iptvSimilarChannelMerge: Boolean

@@ -103,7 +103,7 @@ fun WebViewScreen(
                     settings.builtInZoomControls = false
                     settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                     settings.mediaPlaybackRequiresUserGesture = false
-                    settings.setDomStorageEnabled = true
+                    settings.domStorageEnabled = true
                     isHorizontalScrollBarEnabled = false
                     isVerticalScrollBarEnabled = false
                     /*isClickable = false
@@ -113,18 +113,11 @@ fun WebViewScreen(
                     // 设置Cookie
                     val cookieManager = CookieManager.getInstance()
                     cookieManager.setAcceptCookie(true)
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                        // 跨域cookie读取
-                        cookieManager.setAcceptThirdPartyCookies(wv, true)
-                    }
+                    cookieManager.setAcceptThirdPartyCookies(this, true)
                     if (yangshipinCookie.isNotEmpty()) {
                         cookieManager.setCookie("https://www.yangshipin.cn", yangshipinCookie)
                     }
-                    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
-                        CookieSyncManager.getInstance().sync();
-                    } else {
-                        cookieManager.flush();
-                    }
+                    cookieManager.flush();
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,
