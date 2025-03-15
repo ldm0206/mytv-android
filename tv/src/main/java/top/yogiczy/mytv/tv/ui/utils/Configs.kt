@@ -815,7 +815,7 @@ object Configs {
         configs.iptvSourceList?.let { iptvSourceList = it }
         configs.iptvChannelGroupHiddenList?.let { iptvChannelGroupHiddenList = it }
         configs.iptvHybridMode?.let { iptvHybridMode = it }
-        configs.iptvHybridYangshipinCookie?.let (iptvHybridYangshipinCookie = it)
+        configs.iptvHybridYangshipinCookie?.let { iptvHybridYangshipinCookie = it }
         configs.iptvSimilarChannelMerge?.let { iptvSimilarChannelMerge = it }
         configs.iptvChannelLogoProvider?.let { iptvChannelLogoProvider = it }
         configs.iptvChannelLogoOverride?.let { iptvChannelLogoOverride = it }
