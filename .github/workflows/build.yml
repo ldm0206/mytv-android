@@ -65,6 +65,6 @@ jobs:
       with:
         files: |
             tv/build/outputs/apk/release/*.apk
-        tag_name: ${{ env.info_version_code }}
-        release_name: Release V ${{ env.info_version_code }}
+        tag_name: ${{ env.info_version_name }}
+        release_name: Release V ${{ env.info_version_name }},Version${{ env.info_version_code }}
     
