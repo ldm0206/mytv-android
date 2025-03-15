@@ -44,14 +44,24 @@ jobs:
       with:
         name: mytv-android.apk
         path: tv/original/release/*.apk
-    - name: Get current versionCode
+
+    - name: Read alpha apk output metadata
+      id: apk-meta-alpha
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: tv/original/release/output-metadata.json
+    
+    - name: Parse apk infos
       id: versionCode
-      run: echo "::set-output name=tag::$(date +'%Y%m%d%H%M%S')"
+      run: |
+        echo "info_version_code=${{ fromJson(steps.apk-meta-alpha.outputs.content).elements[0].versionCode }}" >> $GITHUB_ENV
+        echo "info_version_name=${{ fromJson(steps.apk-meta-alpha.outputs.content).elements[0].versionName }}" >> $GITHUB_ENV
+
     - name: Publish Pre-Release
       uses: softprops/action-gh-release@v2
       with:
         files: |
             tv/original/release/*.apk
-        tag_name: ${{ steps.versionCode.outputs.tag }}
-        release_name: Release V ${{ steps.versionCode.outputs.tag }}
+        tag_name: ${{ env.info_version_code }}
+        release_name: Release V ${{ env.info_version_code }}
     
