@@ -54,10 +54,7 @@ fun WebViewScreen(
         logger.i("WebView加载URL: $processedUrl")
         processedUrl
     }
-    var yangshipinCookie = ""
-    if (actualUrl.contains("yangshipin.cn")){
-        yangshipinCookie = settingsVM.iptvHybridYangshipinCookie
-    }
+    
     val onUpdatePlaceholderVisible = { visible: Boolean, message: String ->
         placeholderVisible = visible
         placeholderMessage = message
@@ -80,7 +77,18 @@ fun WebViewScreen(
                             logger.i("WebView页面加载完成")
                         },
                     )
-
+                    if (actualUrl.contains("yangshipin.cn")){
+                        // 设置Cookie
+                        val cookieManager = CookieManager.getInstance()
+                        cookieManager.setAcceptCookie(true)
+                        cookieManager.setAcceptThirdPartyCookies(this, true)
+                        cookieManager.removeSessionCookies(null);
+                        val cookies = yangshipinCookie.split(";")
+                        for (cookie in cookies) {
+                            cookieManager.setCookie("https://www.yangshipin.cn", cookie.trim())
+                        }
+                        cookieManager.flush()
+                    }
                     setBackgroundColor(Color.Black.toArgb())
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -110,14 +118,6 @@ fun WebViewScreen(
                     isFocusable = false
                     isFocusableInTouchMode = false*/
 
-                    // 设置Cookie
-                    val cookieManager = CookieManager.getInstance()
-                    cookieManager.setAcceptCookie(true)
-                    cookieManager.setAcceptThirdPartyCookies(this, true)
-                    if (yangshipinCookie.isNotEmpty()) {
-                        cookieManager.setCookie("https://www.yangshipin.cn", yangshipinCookie)
-                    }
-                    cookieManager.flush();
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,
