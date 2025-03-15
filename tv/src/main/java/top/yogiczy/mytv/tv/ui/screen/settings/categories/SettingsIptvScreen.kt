@@ -154,6 +154,15 @@ fun SettingsIptvScreen(
                 link = true,
             )
         }
+
+        item {
+            SettingsListItem(
+                headlineContent = "混合源央视频Cookie",
+                supportingContent = "登录到央视频以收看付费频道",
+                trailingContent = settingsViewModel.iptvHybridYangshipinCookie,
+                remoteConfig = true,
+            )
+        }
     }
 }
 

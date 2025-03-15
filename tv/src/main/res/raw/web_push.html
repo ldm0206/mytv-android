@@ -78,6 +78,23 @@
                             </template>
                         </van-cell>
 
+                        <van-cell title="混合模式央视频Cookie">
+                            <template #label>
+                                <van-space class="w-full" direction="vertical" size="small">
+                                    <span>请在网页版打开央视频网站，并在登录后复制所有cookie</span>
+                        
+                                    <van-field class="!p-0" 
+                                        v-model="configs.iptvHybridYangshipinCookie"></van-field>
+                        
+                                    <div class="flex justify-end">
+                                        <van-button @click="pushConfigs" size="small" type="primary">
+                                            推送
+                                        </van-button>
+                                    </div>
+                                </van-space>
+                            </template>
+                        </van-cell>
+
                         <van-cell title="频道图标提供">
                             <template #label>
                                 <van-space class="w-full" direction="vertical" size="small">

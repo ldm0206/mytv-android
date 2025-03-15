@@ -315,6 +315,11 @@ object Configs {
             SP.getInt(KEY.IPTV_HYBRID_MODE.name, IptvHybridMode.IPTV_FIRST.value)
         )
         set(value) = SP.putInt(KEY.IPTV_HYBRID_MODE.name, value.value)
+    
+    /** 混合模式央视频Cookie */
+    iptvHybridYangshipinCookie: String
+        get() = SP.getString(KEY.HYBRID_YANGSHIPIN_COOKIE.name, Constants.HYBRID_YANGSHIPIN_COOKIE)
+        set(value) = SP.putString(KEY.HYBRID_YANGSHIPIN_COOKIE.name, value)
 
     /** 相似频道合并 */
     var iptvSimilarChannelMerge: Boolean
@@ -733,6 +738,7 @@ object Configs {
             iptvSourceList = iptvSourceList,
             iptvChannelGroupHiddenList = iptvChannelGroupHiddenList,
             iptvHybridMode = iptvHybridMode,
+            iptvHybridYangshipinCookie = iptvHybridYangshipinCookie,
             iptvSimilarChannelMerge = iptvSimilarChannelMerge,
             iptvChannelLogoProvider = iptvChannelLogoProvider,
             iptvChannelLogoOverride = iptvChannelLogoOverride,
@@ -806,6 +812,7 @@ object Configs {
         configs.iptvSourceList?.let { iptvSourceList = it }
         configs.iptvChannelGroupHiddenList?.let { iptvChannelGroupHiddenList = it }
         configs.iptvHybridMode?.let { iptvHybridMode = it }
+        configs.iptvHybridYangshipinCookie?.let (iptvHybridYangshipinCookie = it)
         configs.iptvSimilarChannelMerge?.let { iptvSimilarChannelMerge = it }
         configs.iptvChannelLogoProvider?.let { iptvChannelLogoProvider = it }
         configs.iptvChannelLogoOverride?.let { iptvChannelLogoOverride = it }
@@ -881,6 +888,7 @@ object Configs {
         val iptvSourceList: IptvSourceList? = null,
         val iptvChannelGroupHiddenList: Set<String>? = null,
         val iptvHybridMode: IptvHybridMode? = null,
+        val iptvHybridYangshipinCookie: String? = null,
         val iptvSimilarChannelMerge: Boolean? = null,
         val iptvChannelLogoProvider: String? = null,
         val iptvChannelLogoOverride: Boolean? = null,

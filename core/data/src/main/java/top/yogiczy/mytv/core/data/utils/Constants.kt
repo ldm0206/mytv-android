@@ -59,6 +59,10 @@ object Constants {
     const val EPG_REFRESH_TIME_THRESHOLD = 2 // 不到2点不刷新
 
     /**
+     * 混合模式央视频Cookie
+     */
+    const val HYBRID_YANGSHIPIN_COOKIE = ""
+    /**
      * 频道图标提供
      *
      * {name} 频道名称

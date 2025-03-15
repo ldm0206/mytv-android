@@ -149,7 +149,15 @@ class SettingsViewModel : ViewModel() {
             Configs.iptvHybridMode = value
             afterSetWhenCloudSyncAutoPull()
         }
-
+    
+    private var _iptvHybridYangshipinCookie by mutableStateOf("")
+    var iptvHybridYangshipinCookie: String
+        get() = _iptvHybridYangshipinCookie
+        set(value) {
+            _iptvHybridYangshipinCookie = value
+            Configs.iptvHybridYangshipinCookie = value
+            afterSetWhenCloudSyncAutoPull()
+        }
     private var _iptvSimilarChannelMerge by mutableStateOf(false)
     var iptvSimilarChannelMerge: Boolean
         get() = _iptvSimilarChannelMerge
@@ -678,6 +686,7 @@ class SettingsViewModel : ViewModel() {
         _iptvSourceList = Configs.iptvSourceList
         _iptvChannelGroupHiddenList = Configs.iptvChannelGroupHiddenList
         _iptvHybridMode = Configs.iptvHybridMode
+        _iptvHybridYangshipinCookie = Configs.iptvHybridYangshipinCookie
         _iptvSimilarChannelMerge = Configs.iptvSimilarChannelMerge
         _iptvChannelLogoProvider = Configs.iptvChannelLogoProvider
         _iptvChannelLogoOverride = Configs.iptvChannelLogoOverride

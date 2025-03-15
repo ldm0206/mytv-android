@@ -10,6 +10,7 @@ import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.CookieManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -28,6 +29,7 @@ import top.yogiczy.mytv.core.data.entities.channel.ChannelLine
 import top.yogiczy.mytv.tv.ui.material.Visibility
 import top.yogiczy.mytv.tv.ui.screensold.webview.components.WebViewPlaceholder
 import top.yogiczy.mytv.core.data.utils.Logger
+import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
@@ -52,7 +54,10 @@ fun WebViewScreen(
         logger.i("WebView加载URL: $processedUrl")
         processedUrl
     }
-
+    var yangshipinCookie = ""
+    if (actualUrl.contains("yangshipin.cn")){
+        yangshipinCookie = settingsVM.iptvHybridYangshipinCookie
+    }
     val onUpdatePlaceholderVisible = { visible: Boolean, message: String ->
         placeholderVisible = visible
         placeholderMessage = message
@@ -98,13 +103,28 @@ fun WebViewScreen(
                     settings.builtInZoomControls = false
                     settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                     settings.mediaPlaybackRequiresUserGesture = false
-
+                    settings.setDomStorageEnabled = true
                     isHorizontalScrollBarEnabled = false
                     isVerticalScrollBarEnabled = false
                     /*isClickable = false
                     isFocusable = false
                     isFocusableInTouchMode = false*/
 
+                    // 设置Cookie
+                    val cookieManager = CookieManager.getInstance()
+                    cookieManager.setAcceptCookie(true)
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        // 跨域cookie读取
+                        cookieManager.setAcceptThirdPartyCookies(wv, true)
+                    }
+                    if (yangshipinCookie.isNotEmpty()) {
+                        cookieManager.setCookie("https://www.yangshipin.cn", yangshipinCookie)
+                    }
+                    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        CookieSyncManager.getInstance().sync();
+                    } else {
+                        cookieManager.flush();
+                    }
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,
