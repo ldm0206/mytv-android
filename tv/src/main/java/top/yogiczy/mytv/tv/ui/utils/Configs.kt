@@ -320,7 +320,7 @@ object Configs {
         set(value) = SP.putInt(KEY.IPTV_HYBRID_MODE.name, value.value)
     
     /** 混合模式央视频Cookie */
-    iptvHybridYangshipinCookie: String
+    var iptvHybridYangshipinCookie: String
         get() = SP.getString(KEY.IPTV_HYBRID_YANGSHIPIN_COOKIE.name, Constants.HYBRID_YANGSHIPIN_COOKIE)
         set(value) = SP.putString(KEY.IPTV_HYBRID_YANGSHIPIN_COOKIE.name, value)
 
