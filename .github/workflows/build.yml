@@ -22,15 +22,36 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: gradle
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Add signing properties
+      env:
+        SIGNING_PROPERTIES: ${{ secrets.SIGNING_PROPERTIES }}
+      run: |
+          echo ${{ secrets.SIGNING_PROPERTIES }} > encoded_signing_properties
+          base64 -d -i encoded_signing_properties > signing.properties
+
+    - name: Add jks file
+      run: |
+          echo ${{ secrets.SIGN_KEY }} > ./encoded_key
+          base64 -d -i encoded_key > keystore.jks
+
     - name: Build with Gradle
       run: ./gradlew :tv:assembleRelease
     
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: mytv-android-tv-3.3.7-all-sdk21-original.apk
-        path: tv/original/release/mytv-android-tv-3.3.7-all-sdk21-original.apk
+        name: mytv-android.apk
+        path: tv/original/release/*.apk
+    - name: Get current versionCode
+      id: versionCode
+      run: echo "::set-output name=tag::$(date +'%Y%m%d%H%M%S')"
+    - name: Publish Pre-Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+            tv/original/release/*.apk
+        tag_name: ${{ steps.versionCode.outputs.tag }}
+        release_name: Release V ${{ steps.versionCode.outputs.tag }}
     

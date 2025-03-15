@@ -18,11 +18,11 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "top.yogiczy.slcs.tv"
+        applicationId = "com.github.ldm0206.tv"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 2
-        versionName = "3.3.7"
+        versionCode = 1
+        versionName = "1.0.0"
         vectorDrawables {
             useSupportLibrary = true
         }

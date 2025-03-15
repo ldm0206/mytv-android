@@ -14,7 +14,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
 }
 
-val keystorePropertiesFile = rootProject.file("key.properties")
+val keystorePropertiesFile = rootProject.file("signing.properties")
 val keystoreProperties = Properties()
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
@@ -25,17 +25,17 @@ allprojects {
         signingConfigs {
             val localKeystore = rootProject.file("keystore.jks")
             val userKeystore = file(
-                System.getenv("KEYSTORE") ?: keystoreProperties.getProperty("storeFile")
+                System.getenv("KEYSTORE") ?: keystoreProperties.getProperty("keystore.path")
                 ?: "keystore.jks"
             )
 
             create("release") {
                 storeFile = if (userKeystore.exists()) userKeystore else localKeystore
                 storePassword = System.getenv("KEYSTORE_PASSWORD")
-                    ?: keystoreProperties.getProperty("storePassword")
-                keyAlias = System.getenv("KEY_ALIAS") ?: keystoreProperties.getProperty("keyAlias")
+                    ?: keystoreProperties.getProperty("keystore.pwd")
+                keyAlias = System.getenv("KEY_ALIAS") ?: keystoreProperties.getProperty("keystore.alias")
                 keyPassword =
-                    System.getenv("KEY_PASSWORD") ?: keystoreProperties.getProperty("keyPassword")
+                    System.getenv("KEY_PASSWORD") ?: keystoreProperties.getProperty("keystore.alias_pwd")
             }
         }
 
