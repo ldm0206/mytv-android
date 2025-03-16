@@ -73,8 +73,8 @@ fun QuickOpBtnList(
                 modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Tv, 
-                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Icon(Icons.Filled.Tv)
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text("节目单") 
                     }
                 },
@@ -84,9 +84,13 @@ fun QuickOpBtnList(
 
         item {
             QuickOpBtn(
-                title = { Icon(Icons.Filled.Satellite, 
-                Spacer(modifier = Modifier.width(4.dp)), 
-                Text("播放源") },
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Satellite)
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("播放源") 
+                    }
+                },
                 onSelect = onShowChannelLine,
             )
         }
@@ -95,8 +99,8 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.PlayArrow, 
-                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Icon(Icons.Filled.PlayArrow)
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text("播放控制")
                     }
                 },
@@ -108,8 +112,8 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.AspectRatio, 
-                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Icon(Icons.Filled.AspectRatio)
+                        Spacer(modifier = Modifier.width(4.dp)) 
                         Text("显示模式") 
                     }
                 },
@@ -122,8 +126,8 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.VideoLibrary, 
-                            Spacer(modifier = Modifier.width(4.dp)), 
+                            Icon(Icons.Filled.VideoLibrary)
+                            Spacer(modifier = Modifier.width(4.dp)) 
                             Text("视轨") 
                         }
                     },
@@ -137,8 +141,8 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.MusicNote, 
-                            Spacer(modifier = Modifier.width(4.dp)), 
+                            Icon(Icons.Filled.MusicNote)
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text("音轨")
                         }
                     },
@@ -152,8 +156,8 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.Subtitles, 
-                            Spacer(modifier = Modifier.width(4.dp)), 
+                            Icon(Icons.Filled.Subtitles)
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text("字幕") 
                         }
                 },
@@ -180,8 +184,8 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) { 
-                        Icon(Icons.Filled.ClearAll),
-                        Spacer(modifier = Modifier.width(4.dp)),
+                        Icon(Icons.Filled.ClearAll)
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text("清除缓存")
                     }
                 },
@@ -193,8 +197,8 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Home, 
-                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Icon(Icons.Filled.Home)
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text("主页") 
                     }
                 },
@@ -206,8 +210,8 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Settings, 
-                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Icon(Icons.Filled.Settings)
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text("更多设置") 
                     }
                 },
