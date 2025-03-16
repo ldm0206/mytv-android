@@ -83,7 +83,7 @@ fun WebViewScreen(
                         cookieManager.setAcceptCookie(true)
                         cookieManager.setAcceptThirdPartyCookies(this, true)
                         cookieManager.removeSessionCookies(null);
-                        val cookies = yangshipinCookie.split(";")
+                        val cookies = settingsVM.iptvHybridYangshipinCookie.split(";")
                         for (cookie in cookies) {
                             cookieManager.setCookie("https://www.yangshipin.cn", cookie.trim())
                         }

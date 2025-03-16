@@ -17,7 +17,7 @@ object Constants {
     /**
      * 应用 代码仓库
      */
-    const val APP_REPO = "https://github.com/0047ol/mytv-android"
+    const val APP_REPO = "https://github.com/ldm0206/mytv-android"
 
     /**
      * 交流群 telegram
@@ -83,9 +83,9 @@ object Constants {
      * Git最新版本信息
      */
     val GIT_RELEASE_LATEST_URL = mapOf(
-        "stable" to "${GITHUB_PROXY}https://raw.githubusercontent.com/yaoxieyoulei/mytv-android-update/main/tv-stable.json",
-        "beta" to "${GITHUB_PROXY}https://raw.githubusercontent.com/yaoxieyoulei/mytv-android-update/main/tv-beta.json",
-        "dev" to "${GITHUB_PROXY}https://raw.githubusercontent.com/yaoxieyoulei/mytv-android-update/main/tv-dev.json",
+        "stable" to "${GITHUB_PROXY}https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        "beta" to "${GITHUB_PROXY}https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        "dev" to "${GITHUB_PROXY}https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
     )
 
     /**
