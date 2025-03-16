@@ -6,7 +6,6 @@ import kotlinx.serialization.json.jsonPrimitive
 import top.yogiczy.mytv.core.data.entities.git.GitRelease
 import top.yogiczy.mytv.core.data.utils.Constants
 import top.yogiczy.mytv.core.data.utils.Globals
-import com.github.ldm0206.mytv.BuildConfig
 
 /**
  * github发行版解析
@@ -18,17 +17,11 @@ class GithubGitReleaseParser : GitReleaseParser {
 
     override suspend fun parse(data: String): GitRelease {
         val json = Globals.json.parseToJsonElement(data).jsonObject
-        val packageName = BuildConfig.APPLICATION_ID
-        var downloadUrl = ""
-        if (packageName.contains("com.chinablue.tv")){
-            downloadUrl = Constants.GITHUB_PROXY + json.getValue("assets").jsonArray[0].jsonObject["browser_download_url"]!!.jsonPrimitive.content
-        }else{
-            downloadUrl = Constants.GITHUB_PROXY + json.getValue("assets").jsonArray[1].jsonObject["browser_download_url"]!!.jsonPrimitive.content
-        }
+        val downloadUrl = Constants.GITHUB_PROXY + json.getValue("assets").jsonArray[1].jsonObject["browser_download_url"]!!.jsonPrimitive.content
         return GitRelease(
             version = json.getValue("tag_name").jsonPrimitive.content.substring(1),
             downloadUrl = downloadUrl,
-            description = json.getValue("body").jsonPrimitive.content,
+            description = "伪装版本请到Github项目主页手动更新\n" + json.getValue("body").jsonPrimitive.content,
         )
     }
 }
