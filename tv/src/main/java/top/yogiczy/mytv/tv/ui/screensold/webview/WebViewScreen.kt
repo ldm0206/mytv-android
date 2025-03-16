@@ -88,7 +88,6 @@ fun WebViewScreen(
                     val cookieManager = CookieManager.getInstance()
                     cookieManager.setAcceptCookie(true)
                     cookieManager.setAcceptThirdPartyCookies(this, true)
-                    cookieManager.removeAllCookies(null)
                     cookieManager.flush()
                     for (cookie in cookies) {
                         cookieManager.setCookie("https://yangshipin.cn", cookie.trim()+";Path=/; Max-Age=86400; HttpOnly")
