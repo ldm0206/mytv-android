@@ -20,10 +20,16 @@ import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.utlis.HttpServer
 import kotlin.system.exitProcess
-
+import com.github.ldm0206.mytv.BuildConfig
 class MainActivity : ComponentActivity() {
+    
+    companion object {
+        lateinit var PACKAGE_NAME: String
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        PACKAGE_NAME = BuildConfig.APPLICATION_ID
         enableEdgeToEdge()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
 
