@@ -40,7 +40,7 @@ fun WebViewScreen(
 ) {
     val url = urlProvider()
     var placeholderVisible by remember { mutableStateOf(true) }
-    var placeholderMessage by remember { mutableStateOf("加载中...") }
+    var placeholderMessage by remember { mutableStateOf("正在加载...") }
     val logger = remember { Logger.create("WebViewScreen") }
 
     // 处理webview://前缀
@@ -73,10 +73,12 @@ fun WebViewScreen(
                 MyWebView(it).apply {
                     webViewClient = MyClient(
                         onPageStarted = { 
-                            placeholderVisible = true
+                            // placeholderVisible = true
+                            placeholderMessage = "正在加载网页，请稍候..."
                             logger.i("WebView开始加载页面")
                         },
                         onPageFinished = { 
+                            placeholderMessage = "网页页面加载完成，正在初始化..."
                             logger.i("WebView页面加载完成")
                         },
                     )
@@ -86,7 +88,7 @@ fun WebViewScreen(
                     cookieManager.setAcceptThirdPartyCookies(this, true)
                     cookieManager.removeSessionCookies(null);
                     for (cookie in cookies) {
-                        cookieManager.setCookie("https://www.yangshipin.cn", cookie.trim())
+                        cookieManager.setCookie("https://yangshipin.cn", cookie.trim())
                     }
                     cookieManager.flush()
                     setBackgroundColor(Color.Black.toArgb())
@@ -166,15 +168,14 @@ class MyClient(
     }
 
     override fun onPageFinished(view: WebView, url: String) {
-        logger.i("WebView页面加载完成: $url")
+        onPageFinished()
         val scriptContent = readAssetFile(view.context, "webview_player_impl.js")
         logger.i("注入脚本到WebView")
-        onPageFinished()
         view.evaluateJavascript(scriptContent.trimIndent()
         ) {
             logger.i("脚本注入完成")
-            // onPageFinished()
         }
+        logger.i("WebView页面注入完成: $url")
     }
 }
 
