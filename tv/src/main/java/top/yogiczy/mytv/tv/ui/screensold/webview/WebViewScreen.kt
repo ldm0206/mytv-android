@@ -59,7 +59,7 @@ fun WebViewScreen(
         placeholderVisible = visible
         placeholderMessage = message
     }
-    var cookies = ""
+    var cookies:List<String> = emptyList()
     if (actualUrl.contains("yangshipin.cn")){
         cookies = settingsVM.iptvHybridYangshipinCookie.split(";")
     }
