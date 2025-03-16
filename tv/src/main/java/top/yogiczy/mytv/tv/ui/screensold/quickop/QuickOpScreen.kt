@@ -194,7 +194,7 @@ private fun QuickOpScreenBottom(
                 onShowMoreSettings = onShowMoreSettings,
                 onShowVideoTracks = onShowVideoTracks,
                 onShowAudioTracks = onShowAudioTracks,
-                onShowDashboardScreen = toDashboardScreen,
+                onShowDashboardScreen = onShowDashboardScreen,
                 onShowSubtitleTracks = onShowSubtitleTracks,
                 onClearCache = onClearCache,
                 onUserAction = onUserAction,

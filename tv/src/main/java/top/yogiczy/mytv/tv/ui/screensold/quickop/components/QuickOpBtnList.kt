@@ -128,11 +128,12 @@ fun QuickOpBtnList(
         }
 
         item{
-            QuickOpBtn{
+            QuickOpBtn(
                 title = { Text("🏠︎ 主页") },
                 onSelect = onShowDashboardScreen,
-            }
+            )
         }
+
         item {
             QuickOpBtn(
                 title = { Text("⚙️ 更多设置") },
