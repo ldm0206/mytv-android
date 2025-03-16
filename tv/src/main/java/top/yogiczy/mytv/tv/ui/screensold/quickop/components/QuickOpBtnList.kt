@@ -23,9 +23,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Alignment
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Tv
-import androidx.compose.material.icons.filled.Satellite
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.automirrored.outlined.LibraryBooks
+import androidx.compose.material.icons.outlined.LiveTv
+import androidx.compose.material.icons.outlined.ControlCamera
+import androidx.compose.material.icons.outlined.SmartDisplay
+
 import androidx.compose.material.icons.filled.AspectRatio
 import androidx.compose.material.icons.filled.VideoLibrary
 import androidx.compose.material.icons.filled.MusicNote
@@ -67,12 +69,13 @@ fun QuickOpBtnList(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(start = childPadding.start, end = childPadding.end),
     ) {
+        val settingsViewModel = settingsVM
         item {
             QuickOpBtn(
                 modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Tv, contentDescription = "图标")
+                        Icon(Icons.AutoMirrored.Outlined.LibraryBooks, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("节目单") 
                     }
@@ -85,9 +88,9 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Satellite, contentDescription = "图标")
+                        Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("播放源") 
+                        Text(settingsViewModel.iptvSourceCurrent.name) 
                     }
                 },
                 onSelect = onShowChannelLine,
@@ -98,7 +101,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.PlayArrow, contentDescription = "图标")
+                        Icon(Icons.Outlined.ControlCamera, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("播放控制")
                     }
@@ -113,7 +116,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.AspectRatio, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp)) 
-                        Text("显示模式") 
+                        Text(settingsViewModel.videoPlayerDisplayMode) 
                     }
                 },
                 onSelect = onShowVideoPlayerDisplayMode,
@@ -155,7 +158,7 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.Subtitles, contentDescription = "字幕图标")
+                            Icon(Icons.Filled.Subtitles, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
                             Text("字幕") 
                         }
@@ -166,10 +169,14 @@ fun QuickOpBtnList(
         }
 
         item {
-            val settingsViewModel = settingsVM
-
             QuickOpBtn(
-                title = { Text(settingsVM.videoPlayerCore.label) },
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Outlined.SmartDisplay, contentDescription = "图标")
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text( settingsViewModel.videoPlayerCore.label) 
+                    }
+                },
                 onSelect = {
                     settingsViewModel.videoPlayerCore = when (settingsViewModel.videoPlayerCore) {
                         Configs.VideoPlayerCore.MEDIA3 -> Configs.VideoPlayerCore.IJK

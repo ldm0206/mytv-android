@@ -80,6 +80,9 @@ object ChannelUtil {
                 "https://tv.cctv.com/live/cctv17/",
                 "https://yangshipin.cn/tv/home?pid=600001810"
             ),
+            ChannelAlias.standardChannelName("cctv-4k") to listOf(
+                "https://www.yangshipin.cn/tv/home?pid=600002264"
+            ),
             ChannelAlias.standardChannelName("cgtn") to listOf(
                 "https://yangshipin.cn/tv/home?pid=600014550"
             ),
