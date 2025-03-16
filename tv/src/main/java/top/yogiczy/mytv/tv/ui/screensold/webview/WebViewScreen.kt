@@ -63,6 +63,14 @@ fun WebViewScreen(
     if (actualUrl.contains("yangshipin.cn")){
         cookies = settingsVM.iptvHybridYangshipinCookie.split(";")
     }
+    CookieManager.getInstance().apply {
+        setAcceptCookie(true)
+        setAcceptThirdPartyCookies(this, true)
+        cookies.forEach { cookie ->
+            setCookie(".yangshipin.cn", cookie.trim())
+        }
+        flush()
+    }
     Box(modifier = modifier.fillMaxSize()) {
         AndroidView(
             modifier = Modifier
@@ -84,15 +92,6 @@ fun WebViewScreen(
                             placeholderVisible = false
                         },
                     )
-                    // 设置Cookie
-                    val cookieManager = CookieManager.getInstance()
-                    cookieManager.setAcceptCookie(true)
-                    cookieManager.setAcceptThirdPartyCookies(this, true)
-                    cookieManager.flush()
-                    for (cookie in cookies) {
-                        cookieManager.setCookie("https://yangshipin.cn", cookie.trim()+";Path=/; Max-Age=86400; HttpOnly")
-                    }
-                    cookieManager.flush()
                     setBackgroundColor(Color.Black.toArgb())
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
