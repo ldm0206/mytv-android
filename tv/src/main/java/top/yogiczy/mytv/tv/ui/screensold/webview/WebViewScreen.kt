@@ -59,7 +59,10 @@ fun WebViewScreen(
         placeholderVisible = visible
         placeholderMessage = message
     }
-
+    var cookies = ""
+    if (actualUrl.contains("yangshipin.cn")){
+        cookies = settingsVM.iptvHybridYangshipinCookie.split(";")
+    }
     Box(modifier = modifier.fillMaxSize()) {
         AndroidView(
             modifier = Modifier
@@ -77,18 +80,15 @@ fun WebViewScreen(
                             logger.i("WebView页面加载完成")
                         },
                     )
-                    if (actualUrl.contains("yangshipin.cn")){
-                        // 设置Cookie
-                        val cookieManager = CookieManager.getInstance()
-                        cookieManager.setAcceptCookie(true)
-                        cookieManager.setAcceptThirdPartyCookies(this, true)
-                        cookieManager.removeSessionCookies(null);
-                        val cookies = settingsVM.iptvHybridYangshipinCookie.split(";")
-                        for (cookie in cookies) {
-                            cookieManager.setCookie("https://www.yangshipin.cn", cookie.trim())
-                        }
-                        cookieManager.flush()
+                    // 设置Cookie
+                    val cookieManager = CookieManager.getInstance()
+                    cookieManager.setAcceptCookie(true)
+                    cookieManager.setAcceptThirdPartyCookies(this, true)
+                    cookieManager.removeSessionCookies(null);
+                    for (cookie in cookies) {
+                        cookieManager.setCookie("https://www.yangshipin.cn", cookie.trim())
                     }
+                    cookieManager.flush()
                     setBackgroundColor(Color.Black.toArgb())
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,

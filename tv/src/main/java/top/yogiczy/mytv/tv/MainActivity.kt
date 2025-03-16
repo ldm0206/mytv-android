@@ -20,7 +20,6 @@ import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.utlis.HttpServer
 import kotlin.system.exitProcess
-import com.github.ldm0206.mytv.BuildConfig
 
 class MainActivity : ComponentActivity() {
 
