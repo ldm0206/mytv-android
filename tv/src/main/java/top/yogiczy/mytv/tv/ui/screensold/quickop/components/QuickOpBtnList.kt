@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
-import androidx.compose.material.icons.Icons
 import kotlinx.coroutines.flow.distinctUntilChanged
 import top.yogiczy.mytv.tv.ui.rememberChildPadding
 import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
@@ -19,6 +18,24 @@ import top.yogiczy.mytv.tv.ui.screensold.videoplayer.player.VideoPlayer
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.utils.focusOnLaunched
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Tv
+import androidx.compose.material.icons.filled.Satellite
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.AspectRatio
+import androidx.compose.material.icons.filled.VideoLibrary
+import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.Subtitles
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.ClearAll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun QuickOpBtnList(
