@@ -31,6 +31,7 @@ fun QuickOpBtnList(
     onShowAudioTracks: () -> Unit = {},
     onShowSubtitleTracks: () -> Unit = {},
     onShowMoreSettings: () -> Unit = {},
+    onShowDashboardScreen: () -> Unit = {},
     onClearCache: () -> Unit = {},
     onUserAction: () -> Unit = {},
 ) {
@@ -52,28 +53,28 @@ fun QuickOpBtnList(
         item {
             QuickOpBtn(
                 modifier = Modifier.focusOnLaunched(),
-                title = { Text("节目单") },
+                title = { Text("📺 节目单") },
                 onSelect = onShowEpg,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("多线路") },
+                title = { Text("📡 播放源") },
                 onSelect = onShowChannelLine,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("播放控制") },
+                title = { Text("⏯️ 播放控制") },
                 onSelect = onShowVideoPlayerController,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("显示模式") },
+                title = { Text("🖵 显示模式") },
                 onSelect = onShowVideoPlayerDisplayMode,
             )
         }
@@ -81,7 +82,7 @@ fun QuickOpBtnList(
         if (playerMetadata.videoTracks.isNotEmpty()) {
             item {
                 QuickOpBtn(
-                    title = { Text("视轨") },
+                    title = { Text("📹 视轨") },
                     onSelect = onShowVideoTracks,
                 )
             }
@@ -90,7 +91,7 @@ fun QuickOpBtnList(
         if (playerMetadata.audioTracks.isNotEmpty()) {
             item {
                 QuickOpBtn(
-                    title = { Text("音轨") },
+                    title = { Text("🎵 音轨") },
                     onSelect = onShowAudioTracks,
                 )
             }
@@ -99,7 +100,7 @@ fun QuickOpBtnList(
         if (playerMetadata.subtitleTracks.isNotEmpty()) {
             item {
                 QuickOpBtn(
-                    title = { Text("字幕") },
+                    title = { Text("✍ 字幕") },
                     onSelect = onShowSubtitleTracks,
                 )
             }
@@ -125,9 +126,16 @@ fun QuickOpBtnList(
                 onSelect = onClearCache,
             )
         }
+
+        item{
+            QuickOpBtn{
+                title = { Text("🏠︎ 主页") },
+                onSelect = onShowDashboardScreen,
+            }
+        }
         item {
             QuickOpBtn(
-                title = { Text("更多设置") },
+                title = { Text("⚙️ 更多设置") },
                 onSelect = onShowMoreSettings,
             )
         }

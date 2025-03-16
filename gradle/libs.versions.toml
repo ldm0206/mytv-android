@@ -24,7 +24,7 @@ tinypinyin = "2.0.3.RELEASE"
 tvMaterial = "1.0.0-rc01"
 navigationCompose = "2.8.3"
 sentry = "4.11.0"
-minSdk = "21"
+minSdk = "29"
 targetSdk = "35"
 compileSdk = "35"
 

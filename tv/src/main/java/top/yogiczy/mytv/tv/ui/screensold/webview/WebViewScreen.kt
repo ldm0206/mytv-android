@@ -83,7 +83,7 @@ fun WebViewScreen(
                     // 设置Cookie
                     val cookieManager = CookieManager.getInstance()
                     cookieManager.setAcceptCookie(true)
-                    cookieManager.setAcceptThirdPartyCookies(this, true)
+                    cookieManager.setAcceptThirdPartyCookies(it, true)
                     cookieManager.removeSessionCookies(null);
                     for (cookie in cookies) {
                         cookieManager.setCookie("https://www.yangshipin.cn", cookie.trim())

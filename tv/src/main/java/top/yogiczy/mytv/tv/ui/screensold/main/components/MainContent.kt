@@ -22,6 +22,8 @@ import top.yogiczy.mytv.tv.ui.material.Snackbar
 import top.yogiczy.mytv.tv.ui.material.Visibility
 import top.yogiczy.mytv.tv.ui.material.popupable
 import top.yogiczy.mytv.tv.ui.screen.settings.SettingsSubCategories
+import top.yogiczy.mytv.tv.ui.screen.main.MainViewModel
+import top.yogiczy.mytv.tv.ui.screen.main.mainVM
 import top.yogiczy.mytv.tv.ui.screen.settings.SettingsViewModel
 import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
 import top.yogiczy.mytv.tv.ui.screensold.audiotracks.AudioTracksScreen
@@ -57,6 +59,7 @@ fun MainContent(
     settingsViewModel: SettingsViewModel = settingsVM,
     onChannelFavoriteToggle: (Channel) -> Unit = {},
     toSettingsScreen: (SettingsSubCategories?) -> Unit = {},
+    toDashboardScreen: () -> Unit = {},
     onBackPressed: () -> Unit = {},
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -395,6 +398,10 @@ fun MainContent(
             toSettingsScreen = {
                 mainContentState.isQuickOpScreenVisible = false
                 toSettingsScreen(it)
+            },
+            toDashboardScreen = {
+                mainContentState.isQuickOpScreenVisible = false
+                toDashboardScreen()
             },
             onClearCache = {
                 settingsViewModel.iptvChannelLinePlayableHostList = emptySet()

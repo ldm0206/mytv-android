@@ -249,7 +249,7 @@ private fun IptvSourceItem(
                         listOf(
                             "共${iptvSourceDetail.channelGroupCount}个分组",
                             "${iptvSourceDetail.channelCount}个频道",
-                            "${iptvSourceDetail.lineCount}条线路"
+                            "${iptvSourceDetail.lineCount}条源"
                         ).joinToString("，")
                     )
                 }

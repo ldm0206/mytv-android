@@ -50,7 +50,7 @@ fun SettingsIptvHybridModeScreen(
                         Text(
                             when (mode) {
                                 Configs.IptvHybridMode.DISABLE -> ""
-                                Configs.IptvHybridMode.IPTV_FIRST -> "优先尝试播放直播源中线路，若所有直播源线路不可用，则尝试混合线路"
+                                Configs.IptvHybridMode.IPTV_FIRST -> "优先尝试播放直播源中播放源，若所有直播源播放源不可用，则尝试混合线路"
                                 Configs.IptvHybridMode.HYBRID_FIRST -> "优先尝试播放混合线路，若混合线路不可用，则播放直播源中线路"
                             }
                         )
