@@ -201,7 +201,7 @@ enum class SettingsCategories(
     THEME(Icons.Outlined.ColorLens, "主题"),
     CONTROL(Icons.Outlined.ControlCamera, "控制"),
     VIDEO_PLAYER(Icons.Outlined.SmartDisplay, "播放器"),
-    // UPDATE(Icons.Outlined.Update, "更新"),
+    UPDATE(Icons.Outlined.Update, "更新"),
     NETWORK(Icons.Outlined.Wifi, "网络"),
     CLOUD_SYNC(Icons.Outlined.CloudSync, "云同步"),
     PERMISSIONS(Icons.Outlined.Shield, "权限"),

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
+import androidx.compose.material.icons.Icons
 import kotlinx.coroutines.flow.distinctUntilChanged
 import top.yogiczy.mytv.tv.ui.rememberChildPadding
 import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
@@ -53,28 +54,48 @@ fun QuickOpBtnList(
         item {
             QuickOpBtn(
                 modifier = Modifier.focusOnLaunched(),
-                title = { Text("📺 节目单") },
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Tv, 
+                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Text("节目单") 
+                    }
+                },
                 onSelect = onShowEpg,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("📡 播放源") },
+                title = { Icon(Icons.Filled.Satellite, 
+                Spacer(modifier = Modifier.width(4.dp)), 
+                Text("播放源") },
                 onSelect = onShowChannelLine,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("⏯️ 播放控制") },
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.PlayArrow, 
+                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Text("播放控制")
+                    }
+                },
                 onSelect = onShowVideoPlayerController,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("🖵 显示模式") },
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.AspectRatio, 
+                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Text("显示模式") 
+                    }
+                },
                 onSelect = onShowVideoPlayerDisplayMode,
             )
         }
@@ -82,7 +103,13 @@ fun QuickOpBtnList(
         if (playerMetadata.videoTracks.isNotEmpty()) {
             item {
                 QuickOpBtn(
-                    title = { Text("📹 视轨") },
+                    title = { 
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.VideoLibrary, 
+                            Spacer(modifier = Modifier.width(4.dp)), 
+                            Text("视轨") 
+                        }
+                    },
                     onSelect = onShowVideoTracks,
                 )
             }
@@ -91,7 +118,13 @@ fun QuickOpBtnList(
         if (playerMetadata.audioTracks.isNotEmpty()) {
             item {
                 QuickOpBtn(
-                    title = { Text("🎵 音轨") },
+                    title = { 
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.MusicNote, 
+                            Spacer(modifier = Modifier.width(4.dp)), 
+                            Text("音轨")
+                        }
+                    },
                     onSelect = onShowAudioTracks,
                 )
             }
@@ -100,7 +133,13 @@ fun QuickOpBtnList(
         if (playerMetadata.subtitleTracks.isNotEmpty()) {
             item {
                 QuickOpBtn(
-                    title = { Text("✍ 字幕") },
+                    title = { 
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.Subtitles, 
+                            Spacer(modifier = Modifier.width(4.dp)), 
+                            Text("字幕") 
+                        }
+                },
                     onSelect = onShowSubtitleTracks,
                 )
             }
@@ -122,21 +161,39 @@ fun QuickOpBtnList(
 
         item {
             QuickOpBtn(
-                title = { Text("清除缓存") },
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) { 
+                        Icon(Icons.Filled.ClearAll),
+                        Spacer(modifier = Modifier.width(4.dp)),
+                        Text("清除缓存")
+                    }
+                },
                 onSelect = onClearCache,
             )
         }
 
         item{
             QuickOpBtn(
-                title = { Text("🏠︎ 主页") },
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Home, 
+                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Text("主页") 
+                    }
+                },
                 onSelect = onShowDashboardScreen,
             )
         }
 
         item {
             QuickOpBtn(
-                title = { Text("⚙️ 更多设置") },
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Settings, 
+                        Spacer(modifier = Modifier.width(4.dp)), 
+                        Text("更多设置") 
+                    }
+                },
                 onSelect = onShowMoreSettings,
             )
         }

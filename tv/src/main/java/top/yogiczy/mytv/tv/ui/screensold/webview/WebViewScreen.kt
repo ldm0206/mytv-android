@@ -169,10 +169,11 @@ class MyClient(
         logger.i("WebView页面加载完成: $url")
         val scriptContent = readAssetFile(view.context, "webview_player_impl.js")
         logger.i("注入脚本到WebView")
+        onPageFinished()
         view.evaluateJavascript(scriptContent.trimIndent()
         ) {
             logger.i("脚本注入完成")
-            onPageFinished()
+            // onPageFinished()
         }
     }
 }
