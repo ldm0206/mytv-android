@@ -73,13 +73,15 @@ fun WebViewScreen(
                 MyWebView(it).apply {
                     webViewClient = MyClient(
                         onPageStarted = { 
-                            // placeholderVisible = true
+                            placeholderVisible = true
                             placeholderMessage = "正在加载网页，请稍候..."
                             logger.i("WebView开始加载页面")
+                            placeholderVisible = false
                         },
                         onPageFinished = { 
                             placeholderMessage = "网页页面加载完成，正在初始化..."
                             logger.i("WebView页面加载完成")
+                            placeholderVisible = false
                         },
                     )
                     // 设置Cookie
