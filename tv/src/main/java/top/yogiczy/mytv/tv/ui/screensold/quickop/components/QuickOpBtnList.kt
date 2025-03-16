@@ -72,7 +72,7 @@ fun QuickOpBtnList(
                 modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Tv)
+                        Icon(Icons.Filled.Tv, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("节目单") 
                     }
@@ -85,7 +85,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Satellite)
+                        Icon(Icons.Filled.Satellite, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("播放源") 
                     }
@@ -98,7 +98,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.PlayArrow)
+                        Icon(Icons.Filled.PlayArrow, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("播放控制")
                     }
@@ -111,7 +111,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.AspectRatio)
+                        Icon(Icons.Filled.AspectRatio, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp)) 
                         Text("显示模式") 
                     }
@@ -125,7 +125,7 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.VideoLibrary)
+                            Icon(Icons.Filled.VideoLibrary, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp)) 
                             Text("视轨") 
                         }
@@ -140,7 +140,7 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.MusicNote)
+                            Icon(Icons.Filled.MusicNote, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
                             Text("音轨")
                         }
@@ -155,7 +155,7 @@ fun QuickOpBtnList(
                 QuickOpBtn(
                     title = { 
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.Subtitles)
+                            Icon(Icons.Filled.Subtitles, contentDescription = "字幕图标")
                             Spacer(modifier = Modifier.width(4.dp))
                             Text("字幕") 
                         }
@@ -183,7 +183,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) { 
-                        Icon(Icons.Filled.ClearAll)
+                        Icon(Icons.Filled.ClearAll, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("清除缓存")
                     }
@@ -196,7 +196,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Home)
+                        Icon(Icons.Filled.Home, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("主页") 
                     }
@@ -209,7 +209,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Settings)
+                        Icon(Icons.Filled.Settings, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("更多设置") 
                     }
