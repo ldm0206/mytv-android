@@ -88,9 +88,10 @@ fun WebViewScreen(
                     val cookieManager = CookieManager.getInstance()
                     cookieManager.setAcceptCookie(true)
                     cookieManager.setAcceptThirdPartyCookies(this, true)
-                    cookieManager.removeSessionCookies(null);
+                    cookieManager.removeAllCookies(null)
+                    cookieManager.flush()
                     for (cookie in cookies) {
-                        cookieManager.setCookie("https://yangshipin.cn", cookie.trim())
+                        cookieManager.setCookie("https://yangshipin.cn", cookie.trim()+";Path=/; Max-Age=86400; HttpOnly")
                     }
                     cookieManager.flush()
                     setBackgroundColor(Color.Black.toArgb())
@@ -107,7 +108,7 @@ fun WebViewScreen(
                     settings.loadsImagesAutomatically = false
                     settings.blockNetworkImage = true
                     settings.userAgentString =
-                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0"
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
                     settings.cacheMode = WebSettings.LOAD_DEFAULT
                     settings.javaScriptCanOpenWindowsAutomatically = true
                     settings.setSupportZoom(false)
