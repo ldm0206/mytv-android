@@ -57,6 +57,7 @@ fun QuickOpBtnList(
     val childPadding = rememberChildPadding()
     val listState = rememberLazyListState()
     val playerMetadata = playerMetadataProvider()
+    val settingsViewModel = settingsVM
 
     LaunchedEffect(listState) {
         snapshotFlow { listState.isScrollInProgress }.distinctUntilChanged()
@@ -69,7 +70,6 @@ fun QuickOpBtnList(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(start = childPadding.start, end = childPadding.end),
     ) {
-        val settingsViewModel = settingsVM
         item {
             QuickOpBtn(
                 modifier = Modifier.focusOnLaunched(),
@@ -116,7 +116,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.AspectRatio, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp)) 
-                        Text(settingsViewModel.videoPlayerDisplayMode) 
+                        Text(settingsViewModel.videoPlayerDisplayMode.label) 
                     }
                 },
                 onSelect = onShowVideoPlayerDisplayMode,
