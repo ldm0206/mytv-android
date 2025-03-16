@@ -6,7 +6,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import top.yogiczy.mytv.core.data.entities.git.GitRelease
 import top.yogiczy.mytv.core.data.utils.Constants
 import top.yogiczy.mytv.core.data.utils.Globals
-import top.yogiczy.mytv.tv.MainActivity
+import com.github.ldm0206.mytv.BuildConfig
 
 /**
  * github发行版解析
@@ -18,7 +18,7 @@ class GithubGitReleaseParser : GitReleaseParser {
 
     override suspend fun parse(data: String): GitRelease {
         val json = Globals.json.parseToJsonElement(data).jsonObject
-        val packageName = MainActivity.PACKAGE_NAME
+        val packageName = BuildConfig.APPLICATION_ID
         var downloadUrl = ""
         if (packageName.contains("com.chinablue.tv")){
             downloadUrl = Constants.GITHUB_PROXY + json.getValue("assets").jsonArray[0].jsonObject["browser_download_url"]!!.jsonPrimitive.content
