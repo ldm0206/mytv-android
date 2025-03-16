@@ -33,8 +33,7 @@ import androidx.compose.material.icons.filled.Subtitles
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ClearAll
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.tv.material3.Icon
 import androidx.compose.ui.unit.dp
 
 @Composable
