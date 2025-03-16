@@ -84,14 +84,14 @@ fun WebViewScreen(
                             placeholderVisible = false
                         },
                     )
-                    CookieManager.getInstance().apply {
-                        setAcceptCookie(true)
-                        setAcceptThirdPartyCookies(this, true)
-                        cookies.forEach { cookie ->
-                            setCookie(".yangshipin.cn", cookie.trim())
-                        }
-                        flush()
+                    val cookieManager = CookieManager.getInstance()
+                    cookieManager.setAcceptCookie(true)
+                    cookieManager.setAcceptThirdPartyCookies(this, true)
+                    cookies.forEach { cookie ->
+                        cookieManager.setCookie(".yangshipin.cn", cookie.trim())
                     }
+                    cookieManager.flush()
+                    
                     setBackgroundColor(Color.Black.toArgb())
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
