@@ -63,14 +63,6 @@ fun WebViewScreen(
     if (actualUrl.contains("yangshipin.cn")){
         cookies = settingsVM.iptvHybridYangshipinCookie.split(";")
     }
-    CookieManager.getInstance().apply {
-        setAcceptCookie(true)
-        setAcceptThirdPartyCookies(this, true)
-        cookies.forEach { cookie ->
-            setCookie(".yangshipin.cn", cookie.trim())
-        }
-        flush()
-    }
     Box(modifier = modifier.fillMaxSize()) {
         AndroidView(
             modifier = Modifier
@@ -92,6 +84,14 @@ fun WebViewScreen(
                             placeholderVisible = false
                         },
                     )
+                    CookieManager.getInstance().apply {
+                        setAcceptCookie(true)
+                        setAcceptThirdPartyCookies(this, true)
+                        cookies.forEach { cookie ->
+                            setCookie(".yangshipin.cn", cookie.trim())
+                        }
+                        flush()
+                    }
                     setBackgroundColor(Color.Black.toArgb())
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
