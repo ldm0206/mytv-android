@@ -83,9 +83,9 @@ object Constants {
      * Git最新版本信息
      */
     val GIT_RELEASE_LATEST_URL = mapOf(
-        "stable" to "${GITHUB_PROXY}https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
-        "beta" to "${GITHUB_PROXY}https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
-        "dev" to "${GITHUB_PROXY}https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        "stable" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        "beta" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        "dev" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
     )
 
     /**
