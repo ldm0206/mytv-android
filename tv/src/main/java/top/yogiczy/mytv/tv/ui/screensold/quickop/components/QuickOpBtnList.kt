@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 fun QuickOpBtnList(
     modifier: Modifier = Modifier,
     playerMetadataProvider: () -> VideoPlayer.Metadata = { VideoPlayer.Metadata() },
+    currentChannelLineIdxProvider: () -> Int = { 0 },
     onShowEpg: () -> Unit = {},
     onShowChannelLine: () -> Unit = {},
     onShowVideoPlayerController: () -> Unit = {},
@@ -90,7 +91,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(settingsViewModel.iptvSourceCurrent.name) 
+                        Text("线路"+currentChannelLineIdxProvider().toString()) 
                     }
                 },
                 onSelect = onShowChannelLine,
@@ -130,7 +131,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.VideoLibrary, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp)) 
-                            Text("视轨") 
+                            Text(playerMetadata.videoTracks.joinToString(", ") { it.label }) 
                         }
                     },
                     onSelect = onShowVideoTracks,
@@ -145,7 +146,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.MusicNote, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("音轨")
+                            Text(playerMetadata.audioTracks.joinToString(", ") { it.label })
                         }
                     },
                     onSelect = onShowAudioTracks,
@@ -174,7 +175,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Outlined.SmartDisplay, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text( settingsViewModel.videoPlayerCore.label) 
+                        Text( "播放器："+settingsViewModel.videoPlayerCore.label) 
                     }
                 },
                 onSelect = {
@@ -205,7 +206,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.Home, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("主页") 
+                        Text("主页面") 
                     }
                 },
                 onSelect = onShowDashboardScreen,
