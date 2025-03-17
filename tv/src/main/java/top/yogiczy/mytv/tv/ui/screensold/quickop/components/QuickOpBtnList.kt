@@ -59,12 +59,37 @@ fun QuickOpBtnList(
     val listState = rememberLazyListState()
     val playerMetadata = playerMetadataProvider()
     val settingsViewModel = settingsVM
-
+    var currentVideoTrack = ""
+    var currentAudioTrack = ""
+    var currentSubtitleTrack = ""
     LaunchedEffect(listState) {
         snapshotFlow { listState.isScrollInProgress }.distinctUntilChanged()
             .collect { _ -> onUserAction() }
     }
-
+    if (playerMetadata.videoTracks.isNotEmpty()) {
+        for (videoTrack in playerMetadata.videoTracks) {
+            if (videoTrack.isSelected) {
+                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + videoTrack.decoder.toString()
+                break
+            }
+        }
+    }
+    if (playerMetadata.audioTracks.isNotEmpty()) {
+        for (audioTrack in playerMetadata.audioTracks) {
+            if (audioTrack.isSelected) {
+                currentAudioTrack = audioTrack.mimeType.toString() + "," + audioTrack.decoder.toString()
+                break
+            }
+        }
+    }
+    if (playerMetadata.subtitleTracks.isNotEmpty()) {
+        for (subtitleTrack in playerMetadata.subtitleTracks) {
+            if (subtitleTrack.isSelected) {
+                currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.toString()
+                break
+            }
+        }
+    }
     LazyRow(
         modifier = modifier,
         state = listState,
@@ -131,7 +156,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.VideoLibrary, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp)) 
-                            Text(playerMetadata.videoTracks.joinToString(", ") { it.label }) 
+                            Text(currentVideoTrack) 
                         }
                     },
                     onSelect = onShowVideoTracks,
@@ -146,7 +171,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.MusicNote, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(playerMetadata.audioTracks.joinToString(", ") { it.label })
+                            Text(currentAudioTrack)
                         }
                     },
                     onSelect = onShowAudioTracks,
@@ -161,7 +186,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.Subtitles, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("字幕") 
+                            Text(currentSubtitleTrack) 
                         }
                 },
                     onSelect = onShowSubtitleTracks,
