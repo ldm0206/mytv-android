@@ -69,7 +69,7 @@ fun QuickOpBtnList(
     if (playerMetadata.videoTracks.isNotEmpty()) {
         for (videoTrack in playerMetadata.videoTracks) {
             if (videoTrack.isSelected == true) {
-                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + videoTrack.decoder.toString()
+                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + audioTrack.mimeType.toString() + "," + videoTrack.decoder.toString()
                 break
             }
         }
@@ -116,7 +116,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("线路"+currentChannelLineIdxProvider().toString()) 
+                        Text("线路" + (currentChannelLineIdxProvider() + 1).toString()) 
                     }
                 },
                 onSelect = onShowChannelLine,
