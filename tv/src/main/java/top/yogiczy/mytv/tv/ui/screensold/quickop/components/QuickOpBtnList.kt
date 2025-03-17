@@ -68,7 +68,7 @@ fun QuickOpBtnList(
     }
     if (playerMetadata.videoTracks.isNotEmpty()) {
         for (videoTrack in playerMetadata.videoTracks) {
-            if (videoTrack.isSelected) {
+            if (videoTrack.isSelected == true) {
                 currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + videoTrack.decoder.toString()
                 break
             }
@@ -76,7 +76,7 @@ fun QuickOpBtnList(
     }
     if (playerMetadata.audioTracks.isNotEmpty()) {
         for (audioTrack in playerMetadata.audioTracks) {
-            if (audioTrack.isSelected) {
+            if (audioTrack.isSelected == true) {
                 currentAudioTrack = audioTrack.mimeType.toString() + "," + audioTrack.decoder.toString()
                 break
             }
@@ -84,7 +84,7 @@ fun QuickOpBtnList(
     }
     if (playerMetadata.subtitleTracks.isNotEmpty()) {
         for (subtitleTrack in playerMetadata.subtitleTracks) {
-            if (subtitleTrack.isSelected) {
+            if (subtitleTrack.isSelected == true) {
                 currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.toString()
                 break
             }
