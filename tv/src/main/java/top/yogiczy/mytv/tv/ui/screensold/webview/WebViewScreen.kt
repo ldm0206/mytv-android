@@ -68,7 +68,7 @@ fun WebViewScreen(
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxHeight()
-                .background(Color.Black),
+                .background(Color.Black.copy(alpha = 0.5f)),
             factory = {
                 MyWebView(it).apply {
                     webViewClient = MyClient(
