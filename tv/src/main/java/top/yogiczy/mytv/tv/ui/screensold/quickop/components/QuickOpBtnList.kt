@@ -69,7 +69,7 @@ fun QuickOpBtnList(
     if (playerMetadata.videoTracks.isNotEmpty()) {
         for (videoTrack in playerMetadata.videoTracks) {
             if (videoTrack.isSelected == true) {
-                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + audioTrack.mimeType.toString() + "," + videoTrack.decoder.toString()
+                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + videoTrack.mimeType.toString() + "," + videoTrack.decoder.toString()
                 break
             }
         }
