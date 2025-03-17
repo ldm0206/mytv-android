@@ -187,6 +187,7 @@ private fun QuickOpScreenBottom(
 
             QuickOpBtnList(
                 playerMetadataProvider = videoPlayerMetadataProvider,
+                currentChannelLineIdxProvider = currentChannelLineIdxProvider,
                 onShowEpg = onShowEpg,
                 onShowChannelLine = onShowChannelLine,
                 onShowVideoPlayerController = onShowVideoPlayerController,

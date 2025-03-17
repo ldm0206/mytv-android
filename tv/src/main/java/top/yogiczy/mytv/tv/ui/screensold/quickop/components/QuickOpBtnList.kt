@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 fun QuickOpBtnList(
     modifier: Modifier = Modifier,
     playerMetadataProvider: () -> VideoPlayer.Metadata = { VideoPlayer.Metadata() },
+    currentChannelLineIdxProvider: () -> Int = { 0 },
     onShowEpg: () -> Unit = {},
     onShowChannelLine: () -> Unit = {},
     onShowVideoPlayerController: () -> Unit = {},
@@ -58,12 +59,37 @@ fun QuickOpBtnList(
     val listState = rememberLazyListState()
     val playerMetadata = playerMetadataProvider()
     val settingsViewModel = settingsVM
-
+    var currentVideoTrack = ""
+    var currentAudioTrack = ""
+    var currentSubtitleTrack = ""
     LaunchedEffect(listState) {
         snapshotFlow { listState.isScrollInProgress }.distinctUntilChanged()
             .collect { _ -> onUserAction() }
     }
-
+    if (playerMetadata.videoTracks.isNotEmpty()) {
+        for (videoTrack in playerMetadata.videoTracks) {
+            if (videoTrack.isSelected == true) {
+                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + videoTrack.mimeType.toString() + "," + videoTrack.decoder.toString()
+                break
+            }
+        }
+    }
+    if (playerMetadata.audioTracks.isNotEmpty()) {
+        for (audioTrack in playerMetadata.audioTracks) {
+            if (audioTrack.isSelected == true) {
+                currentAudioTrack = audioTrack.mimeType.toString() + "," + audioTrack.decoder.toString()
+                break
+            }
+        }
+    }
+    if (playerMetadata.subtitleTracks.isNotEmpty()) {
+        for (subtitleTrack in playerMetadata.subtitleTracks) {
+            if (subtitleTrack.isSelected == true) {
+                currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.toString()
+                break
+            }
+        }
+    }
     LazyRow(
         modifier = modifier,
         state = listState,
@@ -90,7 +116,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(settingsViewModel.iptvSourceCurrent.name) 
+                        Text("线路" + (currentChannelLineIdxProvider() + 1).toString()) 
                     }
                 },
                 onSelect = onShowChannelLine,
@@ -130,7 +156,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.VideoLibrary, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp)) 
-                            Text("视轨") 
+                            Text(currentVideoTrack) 
                         }
                     },
                     onSelect = onShowVideoTracks,
@@ -145,7 +171,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.MusicNote, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("音轨")
+                            Text(currentAudioTrack)
                         }
                     },
                     onSelect = onShowAudioTracks,
@@ -160,7 +186,7 @@ fun QuickOpBtnList(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Filled.Subtitles, contentDescription = "图标")
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("字幕") 
+                            Text(currentSubtitleTrack) 
                         }
                 },
                     onSelect = onShowSubtitleTracks,
@@ -174,7 +200,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Outlined.SmartDisplay, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text( settingsViewModel.videoPlayerCore.label) 
+                        Text( "播放器："+settingsViewModel.videoPlayerCore.label) 
                     }
                 },
                 onSelect = {
@@ -205,7 +231,7 @@ fun QuickOpBtnList(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.Home, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("主页") 
+                        Text("主页面") 
                     }
                 },
                 onSelect = onShowDashboardScreen,
