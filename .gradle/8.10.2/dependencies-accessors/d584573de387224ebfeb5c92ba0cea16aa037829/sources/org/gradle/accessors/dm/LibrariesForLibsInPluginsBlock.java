@@ -1220,7 +1220,7 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
         public Provider<String> getMedia3() { return getVersion("media3"); }
 
         /**
-         * Version alias <b>minSdk</b> with value <b>21</b>
+         * Version alias <b>minSdk</b> with value <b>30</b>
          * <p>
          * If the version is a rich version and cannot be represented as a
          * single version string, an empty string is returned.
