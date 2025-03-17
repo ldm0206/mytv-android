@@ -9,8 +9,32 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd259492-5fbe-4be8-849d-b4e0a9f5bf65" name="Changes" comment="update files">
+    <list default="true" id="fd259492-5fbe-4be8-849d-b4e0a9f5bf65" name="Changes" comment="update icons">
+      <change afterPath="$PROJECT_DIR$/tv/src/main/res/drawable/ic_banner_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tv/src/main/res/drawable/ic_banner_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tv/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tv/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-anydpi-v26/ic_banner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xhdpi/ic_banner.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/ic_launcher-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/drawable/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/drawable/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-hdpi/ic_banner.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/tv/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +76,10 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2tybEPtKa91yvGL4B0LRodTqos9" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -218,6 +246,33 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update files" />
-    <option name="LAST_COMMIT_MESSAGE" value="update files" />
+    <MESSAGE value="update icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="update icons" />
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="com.chinablue.tv">
+          <value>
+            <CheckInfo lastCheckTimestamp="1742237911296" />
+          </value>
+        </entry>
+        <entry key="com.chinablue.tv.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1742237911296" />
+          </value>
+        </entry>
+        <entry key="com.github.ldm0206.mytv">
+          <value>
+            <CheckInfo lastCheckTimestamp="1742237911295" />
+          </value>
+        </entry>
+        <entry key="com.github.ldm0206.mytv.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1742237911294" />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
