@@ -17,7 +17,7 @@ data class EpgSource(
     /**
      * 链接
      */
-    val url: String = "",
+    val urls: String = "",
 ) {
 
     fun cacheFileName(ext: String) =
@@ -28,7 +28,7 @@ data class EpgSource(
 
         val EXAMPLE = EpgSource(
             name = "测试节目单1",
-            url = "http://1.2.3.4/all.xml",
+            urls = "http://1.2.3.4/all.xml",
         )
     }
 }

@@ -133,13 +133,22 @@ object EpgParser : Loggable("EpgParser") {
         }
     }
 
-    suspend fun fromXml(inputStream: InputStream): EpgList {
+    suspend fun fromXml(inputStreams: List<InputStream>): EpgList {
         return runCatching {
             log.d("开始解析节目单xml...")
-            val t = measureTimedValue { parse(inputStream) }
-            log.i("节目单xml解析完成", null, t.duration)
-
-            t.value
+            var i = 0
+            val values: MutableList<Epg> = mutableListOf(),
+            for (inputStream in inputStreams){
+                i++
+                try {
+                val t = measureTimedValue { parse(inputStream) }
+                log.i("节目单${i} xml解析完成", null, t.duration)
+                values.addAll(t.value.value.toMutableList())
+                } catch (ex: Exception) {
+                    log.e("节目单${i} xml解析失败", ex)
+                }
+            }
+            EpgList(values.toList())
         }
             .onFailure { log.e("节目单xml解析失败", it) }
             .getOrThrow()

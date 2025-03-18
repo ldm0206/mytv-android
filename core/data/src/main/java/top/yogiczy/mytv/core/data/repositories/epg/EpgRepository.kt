@@ -3,6 +3,7 @@ package top.yogiczy.mytv.core.data.repositories.epg
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
+import kotlin.collections.MutableList
 import top.yogiczy.mytv.core.data.entities.epg.EpgList
 import top.yogiczy.mytv.core.data.entities.epgsource.EpgSource
 import top.yogiczy.mytv.core.data.network.HttpException
@@ -74,25 +75,37 @@ private class EpgXmlRepository(private val source: EpgSource) :
 
     private val log = Logger.create("EpgXmlRepository")
 
-    suspend fun getXml(): InputStream {
-        return getOrRefreshInputStream(0) {
-            log.i("开始获取节目单（${source.name}）xml: ${source.url}")
-
+    suspend fun getXml(): List<InputStream> {
+        log.i("开始获取节目单（${source.name}）")
+        val urls = source.urls.split(",")
+        val xmlStreams : MutableList<InputStream> = mutableListOf()
+        for (url_raw in urls) {
+            val url = url_raw.trim()
             try {
-                val t = measureTimedValue {
-                    source.url.request { response, request ->
-                        val fetcher =
-                            EpgFetcher.instances.first { it.isSupport(request.url.toString()) }
-                        fetcher.fetch(response.body!!)
+                val xmlStream = getOrRefreshInputStream(0) {
+                    log.i("开始获取节目单（${source.name}）xml: $url")
+
+                    try {
+                        val t = measureTimedValue {
+                            url.request { response, _ ->
+                                response.body!!.byteStream()
+                            }
+                        }
+                        log.i("获取节目单（${source.name}）xml成功", null, t.duration)
+
+                        t.value
+                    } catch (ex: Exception) {
+                        log.e("获取节目单（${source.name}）xml失败", ex)
                     }
                 }
-                log.i("获取节目单（${source.name}）xml成功", null, t.duration)
-
-                t.value
+                if (xmlStream != null) {
+                    xmlStreams.add(xmlStream)
+                }
             } catch (ex: Exception) {
                 log.e("获取节目单（${source.name}）xml失败", ex)
-                throw HttpException("获取节目单xml失败，请检查网络连接", ex)
             }
         }
+        return xmlStreams.toList()
     }
 }
+

@@ -209,10 +209,10 @@ class MainViewModel : ViewModel() {
                     .takeIf { it }
                     ?.let {
                         val iptvRepository = IptvRepository(Configs.iptvSourceCurrent)
-                        iptvRepository.getEpgUrl()?.let { epgUrl ->
+                        iptvRepository.getEpgUrls()?.let { epgUrls ->
                             EpgSource(
                                 name = Configs.iptvSourceCurrent.name,
-                                url = epgUrl,
+                                urls = epgUrls,
                             )
                         }
                     } ?: Configs.epgSourceCurrent

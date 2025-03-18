@@ -23,7 +23,7 @@ interface IptvParser {
      */
     suspend fun parse(data: String): List<ChannelItem>
 
-    suspend fun getEpgUrl(data: String): String? {
+    suspend fun getEpgUrls(data: String): String? {
         return null
     }
 

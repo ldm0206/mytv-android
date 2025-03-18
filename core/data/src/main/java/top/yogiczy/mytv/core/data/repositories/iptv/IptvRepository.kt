@@ -97,11 +97,11 @@ class IptvRepository(private val source: IptvSource) :
         }
     }
 
-    suspend fun getEpgUrl(): String? {
+    suspend fun getEpgUrls(): String? {
         return runCatching {
             val sourceData = rawRepository.getRaw(Long.MAX_VALUE)
             val parser = IptvParser.instances.first { it.isSupport(source.url, sourceData) }
-            parser.getEpgUrl(sourceData)
+            parser.getEpgUrls(sourceData)
         }.getOrNull()
     }
 
