@@ -48,7 +48,7 @@ object Constants {
         listOf(
             EpgSource(
                 name = "默认节目单",
-                url = "https://e.erw.cc/all.xml.gz",
+                urls = "https://e.erw.cc/all.xml.gz",
             )
         )
     )

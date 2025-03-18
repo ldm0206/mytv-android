@@ -16,7 +16,7 @@ data class EpgSourceList(
             listOf(
                 EpgSource(
                     name = "",
-                    url = "",
+                    urls = "",
                 )
             )
         )

@@ -94,10 +94,8 @@ class M3uIptvParser : IptvParser {
         return lines.firstOrNull { it.startsWith("#EXTM3U") }?.let { defLine ->
             Regex("x-tvg-url=\"(.*?)\"").find(defLine)?.groupValues?.get(1)
                 ?.firstOrNull()
-                ?.trim()
                 ?: Regex("url-tvg=\"(.*?)\"").find(defLine)?.groupValues?.get(1)
                     ?.firstOrNull()
-                    ?.trim()
         }
     }
 }

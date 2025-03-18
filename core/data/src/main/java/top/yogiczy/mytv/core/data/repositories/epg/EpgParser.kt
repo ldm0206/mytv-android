@@ -137,7 +137,7 @@ object EpgParser : Loggable("EpgParser") {
         return runCatching {
             log.d("开始解析节目单xml...")
             var i = 0
-            val values: MutableList<Epg> = mutableListOf(),
+            val values: MutableList<Epg> = mutableListOf()
             for (inputStream in inputStreams){
                 i++
                 try {
