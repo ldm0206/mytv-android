@@ -98,7 +98,7 @@ private class EpgXmlRepository(private val source: EpgSource) :
                     }
                 }as? InputStream
                 if (xmlStream != null) {
-                    xmlStreams.add(xmlStream)
+                    xmlStreams.add(xmlStream as InputStream)
                 }
             } catch (ex: Exception) {
                 log.e("获取节目单（${source.name}）xml失败", ex)
