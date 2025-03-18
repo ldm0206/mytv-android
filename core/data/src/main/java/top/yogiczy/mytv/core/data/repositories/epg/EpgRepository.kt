@@ -84,24 +84,19 @@ private class EpgXmlRepository(private val source: EpgSource) :
             try {
                 val xmlStream = getOrRefreshInputStream(0) {
                     log.i("开始获取节目单（${source.name}）xml: $url")
-                    try {
-                        val t = measureTimedValue {
-                            url.request { response, _ ->
-                                response.body!!.byteStream()
-                            }
+                    val t = measureTimedValue {
+                        url.request { response, _ ->
+                            response.body!!.byteStream()
                         }
-                        log.i("获取节目单（${source.name}）xml成功", null, t.duration)
-                        t.value
-                    } catch (ex: Exception) {
-                        log.e("获取节目单（${source.name}）xml失败", ex)
-                        null
                     }
-                }as? InputStream
+                    log.i("获取节目单（${source.name}）xml : $url 成功", null, t.duration)
+                    t.value
+                }as InputStream
                 if (xmlStream != null) {
-                    xmlStreams.add(xmlStream as InputStream)
+                    xmlStreams.add(xmlStream)
                 }
             } catch (ex: Exception) {
-                log.e("获取节目单（${source.name}）xml失败", ex)
+                log.e("获取节目单（${source.name}）xml : $url 失败", ex)
             }
         }
         return xmlStreams.toList()
