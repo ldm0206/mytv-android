@@ -71,7 +71,7 @@ class MyTVApplication : Application(), ImageLoaderFactory {
 
         @Suppress("UnstableApiUsage")
         Sentry.withScope { scope ->
-            Globals.deviceId = scope.options.distinctId ?: ""
+            Globals.deviceId = scope.options.distinct_Id ?: ""
         }
     }
 
