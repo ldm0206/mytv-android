@@ -78,7 +78,7 @@ fun CrashHandlerScreen(
         LazyColumn {
             @Suppress("UnstableApiUsage")
             Sentry.withScope {
-                it.options.distinct_Id?.let { distinctId ->
+                it.options.distinctId?.let { distinctId ->
                     item { Text(text = "设备ID: $distinctId") }
                 }
             }

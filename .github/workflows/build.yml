@@ -24,9 +24,8 @@ jobs:
         cache: gradle
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    
     - name: Add signing properties
-      env:
-        SIGNING_PROPERTIES: ${{ secrets.SIGNING_PROPERTIES }}
       run: |
           echo ${{ secrets.SIGNING_PROPERTIES }} > encoded_signing_properties
           base64 -d -i encoded_signing_properties > signing.properties
@@ -37,10 +36,12 @@ jobs:
           base64 -d -i encoded_key > keystore.jks
 
     - name: Build with Gradle
+      env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       run: ./gradlew :tv:assembleRelease
     
-    - name: Output directory structure
-      run: sudo apt-get install tree && tree -L 7
+    # - name: Output directory structure
+    #   run: sudo apt-get install tree && tree -L 7
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
