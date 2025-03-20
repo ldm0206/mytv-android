@@ -218,7 +218,8 @@ class Media3VideoPlayer(
             }
 
             C.CONTENT_TYPE_RTSP -> {
-                RtspMediaSource.Factory().createMediaSource(mediaItem)
+                RtspMediaSource.Factory().setForceUseRtpTcp(true)
+                    .setTimeoutMs(3000).createMediaSource(mediaItem)
             }
 
             C.CONTENT_TYPE_OTHER -> {
