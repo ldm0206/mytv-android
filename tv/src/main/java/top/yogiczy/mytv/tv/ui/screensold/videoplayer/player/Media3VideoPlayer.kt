@@ -152,15 +152,22 @@ class Media3VideoPlayer(
 
         var contentTypeForce = contentType
 
-        if (uri.toString().startsWith("rtp://")) {
-            contentTypeForce = C.CONTENT_TYPE_RTSP
+        if (contentTypeForce == null){
+            if (uri.toString().startsWith("rtp://") || uri.toString().startsWith("rtsp://")) {
+                contentTypeForce = C.CONTENT_T0YPE_RTSP
+            }
+
+            if (currentChannelLine.manifestType == "mpd") {
+                contentTypeForce = C.CONTENT_TYPE_DASH
+            }
+
+            if (uri.toString().startsWith("rtmp://")){
+                contentTypeForce = C.CONTENT_TYPE_OTHER
+            }
         }
 
-        if (currentChannelLine.manifestType == "mpd") {
-            contentTypeForce = C.CONTENT_TYPE_DASH
-        }
+        var dataSourceFactory = getDataSourceFactory()
 
-        val dataSourceFactory = getDataSourceFactory()
         return when (contentTypeForce ?: Util.inferContentType(uri)) {
             C.CONTENT_TYPE_HLS -> {
                 HlsMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
@@ -213,9 +220,15 @@ class Media3VideoPlayer(
             }
 
             C.CONTENT_TYPE_OTHER -> {
+                if (uri.toString().startsWith("rtmp://")) {
+                    dataSourceFactory = RtmpDataSource.Factory()
+                }
                 ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
             }
 
+            C.CONTENT_TYPE_SS -> {
+                SsMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
+            }
             else -> {
                 triggerError(PlaybackException.UNSUPPORTED_TYPE)
                 null
