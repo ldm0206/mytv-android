@@ -21,6 +21,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.common.util.Util
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.datasource.rtmp.RtmpDataSource
 import androidx.media3.exoplayer.DecoderReuseEvaluation
 import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
@@ -31,6 +32,7 @@ import androidx.media3.exoplayer.drm.FrameworkMediaDrm
 import androidx.media3.exoplayer.drm.LocalMediaDrmCallback
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.rtsp.RtspMediaSource
+import androidx.media3.exoplayer.smoothstreaming.SsMediaSource
 import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -154,7 +156,7 @@ class Media3VideoPlayer(
 
         if (contentTypeForce == null){
             if (uri.toString().startsWith("rtp://") || uri.toString().startsWith("rtsp://")) {
-                contentTypeForce = C.CONTENT_T0YPE_RTSP
+                contentTypeForce = C.CONTENT_TYPE_RTSP
             }
 
             if (currentChannelLine.manifestType == "mpd") {
