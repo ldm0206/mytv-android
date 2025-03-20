@@ -279,7 +279,9 @@ class Media3VideoPlayer(
                             prepare(C.CONTENT_TYPE_RTSP)
                         } else if (contentTypeAttempts[C.CONTENT_TYPE_OTHER] != true) {
                             prepare(C.CONTENT_TYPE_OTHER)
-                        } else {
+                        } else if(contentTypeAttempts[C.CONTENT_TYPE_SS] != true){
+                            prepare(C.CONTENT_TYPE_SS)
+                        }else {
                             triggerError(PlaybackException.UNSUPPORTED_TYPE)
                         }
                     }
