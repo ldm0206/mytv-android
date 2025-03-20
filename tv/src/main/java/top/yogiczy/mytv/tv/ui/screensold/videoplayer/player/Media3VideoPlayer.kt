@@ -168,7 +168,7 @@ class Media3VideoPlayer(
             }
         }
 
-        var dataSourceFactory = getDataSourceFactory()
+        val dataSourceFactory = getDataSourceFactory()
 
         return when (contentTypeForce ?: Util.inferContentType(uri)) {
             C.CONTENT_TYPE_HLS -> {
@@ -223,9 +223,11 @@ class Media3VideoPlayer(
 
             C.CONTENT_TYPE_OTHER -> {
                 if (uri.toString().startsWith("rtmp://")) {
-                    dataSourceFactory = RtmpDataSource.Factory()
+                    ProgressiveMediaSource.Factory(RtmpDataSource.Factory()).createMediaSource(mediaItem)
                 }
-                ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
+                else{
+                    ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
+                }
             }
 
             C.CONTENT_TYPE_SS -> {
