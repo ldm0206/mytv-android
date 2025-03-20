@@ -156,8 +156,8 @@ dependencies {
 }
 
 sentry {
-    org.set("yogiczy")
-    projectName.set("mytv-android")
+    org.set("ldm")
+    projectName.set("mytv")
     authToken.set(getProperty("sentry.auth_token") ?: System.getenv("SENTRY_AUTH_TOKEN"))
     ignoredBuildTypes.set(setOf("debug"))
     autoUploadProguardMapping = false
