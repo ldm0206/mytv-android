@@ -66,29 +66,20 @@ fun QuickOpBtnList(
         snapshotFlow { listState.isScrollInProgress }.distinctUntilChanged()
             .collect { _ -> onUserAction() }
     }
-    if (playerMetadata.videoTracks.isNotEmpty()) {
-        for (videoTrack in playerMetadata.videoTracks) {
-            if (videoTrack.isSelected == true) {
-                currentVideoTrack = videoTrack.width.toString() + "x" + videoTrack.height.toString() + "," + videoTrack.mimeType.toString() + "," + videoTrack.decoder.toString()
-                break
-            }
-        }
+    if (playerMetadata.video) {
+        val videoTrack = playerMetadata.video
+        currentVideoTrack = "${videoTrack.width}x${videoTrack.height},${videoTrack.mimeType}" +
+            (if (videoTrack.decoder != null) ",${videoTrack.decoder.toString()}" else "")
     }
-    if (playerMetadata.audioTracks.isNotEmpty()) {
-        for (audioTrack in playerMetadata.audioTracks) {
-            if (audioTrack.isSelected == true) {
-                currentAudioTrack = audioTrack.mimeType.toString() + "," + audioTrack.decoder.toString()
-                break
-            }
-        }
+    if (playerMetadata.audio) {
+        val audioTrack = playerMetadata.audio
+        currentAudioTrack = audioTrack.mimeType.toString() + 
+            (if (audioTrack.decoder != null) ",${audioTrack.decoder.toString()}" else "") +
+            (if (audioTrack.channelsLabel != null) ",${audioTrack.channelsLabel}" else "")
     }
-    if (playerMetadata.subtitleTracks.isNotEmpty()) {
-        for (subtitleTrack in playerMetadata.subtitleTracks) {
-            if (subtitleTrack.isSelected == true) {
-                currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.toString()
-                break
-            }
-        }
+    if (playerMetadata.subtitle) {
+        val subtitleTrack = playerMetadata.subtitle
+        currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.humanizeLanguage()
     }
     LazyRow(
         modifier = modifier,

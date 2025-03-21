@@ -25,6 +25,10 @@ class MyTVApplication : Application(), ImageLoaderFactory {
 
         initSentry()
         crashHandle()
+        val latestFile by lazy { File(Globals.cacheDir, "latest.apk") }
+        if (latestFile.exists()) {
+            latestFile.delete()
+        }
         AppData.init(applicationContext)
         UnsafeTrustManager.enableUnsafeTrustManager()
     }
