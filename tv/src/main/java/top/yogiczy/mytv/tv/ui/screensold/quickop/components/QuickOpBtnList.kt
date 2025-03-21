@@ -81,7 +81,7 @@ fun QuickOpBtnList(
     if (playerMetadata.subtitleTracks.isNotEmpty()) {
         for (subtitleTrack in playerMetadata.subtitleTracks) {
             if (subtitleTrack.isSelected == true) {
-                currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.humanizeLanguage()
+                currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + (subtitleTrack.language?.humanizeLanguage() ?: "null")
                 break
             }
         }
