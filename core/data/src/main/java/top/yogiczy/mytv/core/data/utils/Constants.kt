@@ -25,19 +25,19 @@ object Constants {
     const val GROUP_TELEGRAM = "https://t.me/mytv_android"
 
     /**
-     * 直播源
+     * 播放源
      */
     val IPTV_SOURCE_LIST = IptvSourceList(
         listOf(
             IptvSource(
-                name = "默认直播源",
+                name = "默认播放源",
                 url = "https://gh-proxy.com/https://raw.githubusercontent.com/0047ol/China-TV-Live-M3U8/refs/heads/main/tv.m3u",
             )
         )
     )
 
     /**
-     * 直播源缓存时间（毫秒）
+     * 播放源缓存时间（毫秒）
      */
     const val IPTV_SOURCE_CACHE_TIME = 1000 * 60 * 60L // 24小时
 

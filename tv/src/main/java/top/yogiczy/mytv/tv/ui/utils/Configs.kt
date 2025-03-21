@@ -51,17 +51,17 @@ object Configs {
         /** 显示布局网格 */
         DEBUG_SHOW_LAYOUT_GRIDS,
 
-        /** ==================== 直播源 ==================== */
-        /** 当前直播源 */
+        /** ==================== 播放源 ==================== */
+        /** 当前播放源 */
         IPTV_SOURCE_CURRENT,
 
-        /** 直播源列表 */
+        /** 播放源列表 */
         IPTV_SOURCE_LIST,
 
         /** 直播源缓存时间（毫秒） */
         IPTV_SOURCE_CACHE_TIME,
 
-        /** 直播源分组隐藏列表 */
+        /** 播放源分组隐藏列表 */
         IPTV_CHANNEL_GROUP_HIDDEN_LIST,
 
         /** 混合模式 */
@@ -79,13 +79,13 @@ object Configs {
         /** 频道图标覆盖 */
         IPTV_CHANNEL_LOGO_OVERRIDE,
 
-        /** 是否启用直播源频道收藏 */
+        /** 是否启用播放源频道收藏 */
         IPTV_CHANNEL_FAVORITE_ENABLE,
 
-        /** 显示直播源频道收藏列表 */
+        /** 显示播放源频道收藏列表 */
         IPTV_CHANNEL_FAVORITE_LIST_VISIBLE,
 
-        /** 直播源频道收藏列表 */
+        /** 播放源频道收藏列表 */
         IPTV_CHANNEL_FAVORITE_LIST,
 
         /** 上一次播放频道 */
@@ -109,7 +109,7 @@ object Configs {
         /** 换台跨分组切换 **/
         IPTV_CHANNEL_CHANGE_CROSS_GROUP,
 
-        /** 左右键切换直播源线路 **/
+        /** 左右键切换播放源线路 **/
         IPTV_CHANNEL_CHANGE_LINE_WITH_LEFT_RIGHT,
 
         /** ==================== 节目单 ==================== */
@@ -125,7 +125,7 @@ object Configs {
         /** 节目单刷新时间阈值（小时） */
         EPG_REFRESH_TIME_THRESHOLD,
 
-        /** 节目单跟随直播源 */
+        /** 节目单跟随播放源 */
         EPG_SOURCE_FOLLOW_IPTV,
 
         /** 节目预约列表 */
@@ -286,8 +286,8 @@ object Configs {
         get() = SP.getBoolean(KEY.DEBUG_SHOW_LAYOUT_GRIDS.name, false)
         set(value) = SP.putBoolean(KEY.DEBUG_SHOW_LAYOUT_GRIDS.name, value)
 
-    /** ==================== 直播源 ==================== */
-    /** 当前直播源 */
+    /** ==================== 播放源 ==================== */
+    /** 当前播放源 */
     var iptvSourceCurrent: IptvSource
         get() = Globals.json.decodeFromString(SP.getString(KEY.IPTV_SOURCE_CURRENT.name, "")
             .ifBlank {
@@ -295,7 +295,7 @@ object Configs {
             })
         set(value) = SP.putString(KEY.IPTV_SOURCE_CURRENT.name, Globals.json.encodeToString(value))
 
-    /** 直播源列表 */
+    /** 播放源列表 */
     var iptvSourceList: IptvSourceList
         get() = Globals.json.decodeFromString(
             SP.getString(KEY.IPTV_SOURCE_LIST.name, Globals.json.encodeToString(IptvSourceList()))
@@ -307,7 +307,7 @@ object Configs {
         get() = SP.getLong(KEY.IPTV_SOURCE_CACHE_TIME.name, Constants.IPTV_SOURCE_CACHE_TIME)
         set(value) = SP.putLong(KEY.IPTV_SOURCE_CACHE_TIME.name, value)
 
-    /** 直播源分组隐藏列表 */
+    /** 播放源分组隐藏列表 */
     var iptvChannelGroupHiddenList: Set<String>
         get() = SP.getStringSet(KEY.IPTV_CHANNEL_GROUP_HIDDEN_LIST.name, emptySet())
         set(value) = SP.putStringSet(KEY.IPTV_CHANNEL_GROUP_HIDDEN_LIST.name, value)
@@ -339,17 +339,17 @@ object Configs {
         get() = SP.getBoolean(KEY.IPTV_CHANNEL_LOGO_OVERRIDE.name, true)
         set(value) = SP.putBoolean(KEY.IPTV_CHANNEL_LOGO_OVERRIDE.name, value)
 
-    /** 是否启用直播源频道收藏 */
+    /** 是否启用播放源频道收藏 */
     var iptvChannelFavoriteEnable: Boolean
         get() = SP.getBoolean(KEY.IPTV_CHANNEL_FAVORITE_ENABLE.name, true)
         set(value) = SP.putBoolean(KEY.IPTV_CHANNEL_FAVORITE_ENABLE.name, value)
 
-    /** 显示直播源频道收藏列表 */
+    /** 显示播放源频道收藏列表 */
     var iptvChannelFavoriteListVisible: Boolean
         get() = SP.getBoolean(KEY.IPTV_CHANNEL_FAVORITE_LIST_VISIBLE.name, false)
         set(value) = SP.putBoolean(KEY.IPTV_CHANNEL_FAVORITE_LIST_VISIBLE.name, value)
 
-    /** 直播源频道收藏列表 */
+    /** 播放源频道收藏列表 */
     var iptvChannelFavoriteList: ChannelFavoriteList
         get() = Globals.json.decodeFromString(
             SP.getString(
@@ -406,7 +406,7 @@ object Configs {
         get() = SP.getBoolean(KEY.IPTV_CHANNEL_CHANGE_CROSS_GROUP.name, true)
         set(value) = SP.putBoolean(KEY.IPTV_CHANNEL_CHANGE_CROSS_GROUP.name, value)
 
-    /** 左右键切换直播源线路 **/
+    /** 左右键切换播放源线路 **/
     var iptvChannelChangeLineWithLeftRight: Boolean
         get() = SP.getBoolean(KEY.IPTV_CHANNEL_CHANGE_LINE_WITH_LEFT_RIGHT.name, true)
         set(value) = SP.putBoolean(KEY.IPTV_CHANNEL_CHANGE_LINE_WITH_LEFT_RIGHT.name, value)
@@ -441,7 +441,7 @@ object Configs {
         get() = SP.getInt(KEY.EPG_REFRESH_TIME_THRESHOLD.name, Constants.EPG_REFRESH_TIME_THRESHOLD)
         set(value) = SP.putInt(KEY.EPG_REFRESH_TIME_THRESHOLD.name, value)
 
-    /** 节目单跟随直播源 */
+    /** 节目单跟随播放源 */
     var epgSourceFollowIptv: Boolean
         get() = SP.getBoolean(KEY.EPG_SOURCE_FOLLOW_IPTV.name, false)
         set(value) = SP.putBoolean(KEY.EPG_SOURCE_FOLLOW_IPTV.name, value)
