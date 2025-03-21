@@ -63,7 +63,7 @@ fun VideoPlayerMetadata(
                     }
                 }
             }
-            metadata.subtitleTracks?.let { nnSubtitleracks ->
+            metadata.subtitleTracks?.let { nnSubtitleTracks ->
                 Column {
                     Text("字幕轨道", style = MaterialTheme.typography.titleMedium)
                     Column(modifier = Modifier.padding(start = 10.dp)) {
