@@ -390,7 +390,7 @@ class Media3VideoPlayer(
                     List(group.mediaTrackGroup.length) { trackIndex ->
                         group.mediaTrackGroup
                             .getFormat(trackIndex)
-                            .takeIf { it.roleFlags == C.ROLE_FLAG_SUBTITLE }
+                            // .takeIf { it.roleFlags == C.ROLE_FLAG_SUBTITLE }
                             ?.toSubtitleMetadata()
                             ?.copy(isSelected = group.isTrackSelected(trackIndex))
                     }
