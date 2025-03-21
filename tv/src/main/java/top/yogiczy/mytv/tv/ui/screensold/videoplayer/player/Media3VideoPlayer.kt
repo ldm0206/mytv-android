@@ -597,6 +597,7 @@ class Media3VideoPlayer(
 
     override fun selectSubtitleTrack(track: Metadata.Subtitle?) {
         if (track?.language == null) {
+            logger.i("字幕${track.toString()}或字幕语言属性${track?.language.toString()}为空，不予加载")
             videoPlayer.trackSelectionParameters = videoPlayer.trackSelectionParameters
                 .buildUpon()
                 .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, true)

@@ -18,6 +18,8 @@ import top.yogiczy.mytv.tv.ui.screensold.videoplayer.player.VideoPlayer
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.utils.focusOnLaunched
+import top.yogiczy.mytv.core.util.utils.humanizeLanguage
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -27,7 +29,6 @@ import androidx.compose.material.icons.automirrored.outlined.LibraryBooks
 import androidx.compose.material.icons.outlined.LiveTv
 import androidx.compose.material.icons.outlined.ControlCamera
 import androidx.compose.material.icons.outlined.SmartDisplay
-
 import androidx.compose.material.icons.filled.AspectRatio
 import androidx.compose.material.icons.filled.VideoLibrary
 import androidx.compose.material.icons.filled.MusicNote
