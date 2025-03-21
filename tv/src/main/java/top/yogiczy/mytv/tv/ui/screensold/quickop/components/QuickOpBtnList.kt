@@ -66,21 +66,26 @@ fun QuickOpBtnList(
         snapshotFlow { listState.isScrollInProgress }.distinctUntilChanged()
             .collect { _ -> onUserAction() }
     }
-    if (playerMetadata.video) {
+    if (playerMetadata.video != null) {
         val videoTrack = playerMetadata.video
         currentVideoTrack = "${videoTrack.width}x${videoTrack.height},${videoTrack.mimeType}" +
-            (if (videoTrack.decoder != null) ",${videoTrack.decoder.toString()}" else "")
+            (if (videoTrack?.decoder != null) ",${videoTrack.decoder.toString()}" else "")
     }
-    if (playerMetadata.audio) {
+    if (playerMetadata.audio != null) {
         val audioTrack = playerMetadata.audio
         currentAudioTrack = audioTrack.mimeType.toString() + 
-            (if (audioTrack.decoder != null) ",${audioTrack.decoder.toString()}" else "") +
-            (if (audioTrack.channelsLabel != null) ",${audioTrack.channelsLabel}" else "")
+            (if (audioTrack?.decoder != null) ",${audioTrack.decoder.toString()}" else "") +
+            (if (audioTrack?.channelsLabel != null) ",${audioTrack.channelsLabel}" else "")
     }
-    if (playerMetadata.subtitle) {
-        val subtitleTrack = playerMetadata.subtitle
-        currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.humanizeLanguage()
+    if (playerMetadata.subtitleTracks.isNotEmpty()) {
+        for (subtitleTrack in playerMetadata.subtitleTracks) {
+            if (subtitleTrack.isSelected == true) {
+                currentSubtitleTrack = subtitleTrack.mimeType.toString() + "," + subtitleTrack.language.humanizeLanguage()
+                break
+            }
+        }
     }
+
     LazyRow(
         modifier = modifier,
         state = listState,

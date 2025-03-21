@@ -18,6 +18,7 @@ import io.sentry.android.core.SentryAndroid
 import top.yogiczy.mytv.core.data.AppData
 import top.yogiczy.mytv.core.data.utils.Globals
 import kotlin.system.exitProcess
+import java.io.File
 
 class MyTVApplication : Application(), ImageLoaderFactory {
     override fun onCreate() {
@@ -25,7 +26,7 @@ class MyTVApplication : Application(), ImageLoaderFactory {
 
         initSentry()
         crashHandle()
-        val latestFile by lazy { File(Globals.cacheDir, "latest.apk") }
+        val latestFile = File(Globals.cacheDir, "latest.apk")
         if (latestFile.exists()) {
             latestFile.delete()
         }
