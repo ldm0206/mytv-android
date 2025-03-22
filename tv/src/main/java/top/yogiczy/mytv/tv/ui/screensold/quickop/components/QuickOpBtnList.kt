@@ -105,7 +105,7 @@ fun QuickOpBtnList(
                         Text("播放源") 
                     }
                 },
-                onSelect = onShowEpg,
+                onSelect = onShowIptvSource,
             )
         }
 

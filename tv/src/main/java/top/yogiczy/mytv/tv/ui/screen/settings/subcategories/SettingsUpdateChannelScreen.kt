@@ -30,7 +30,7 @@ fun SettingsUpdateChannelScreen(
     onUpdateChannelChanged: (String) -> Unit = {},
     onBackPressed: () -> Unit = {},
 ) {
-    val updateChannelList = listOf("stable", "beta", "dev")
+    val updateChannelList = listOf("stable", "dev")//"beta", 
     val currentUpdateChannel = updateChannelProvider()
     val childPadding = rememberChildPadding()
 
