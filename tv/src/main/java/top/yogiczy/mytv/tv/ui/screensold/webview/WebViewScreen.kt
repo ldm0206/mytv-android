@@ -102,7 +102,6 @@ fun WebViewScreen(
                     settings.useWideViewPort = true
                     settings.loadWithOverviewMode = true
                     settings.domStorageEnabled = true
-                    settings.databaseEnabled = true
                     settings.loadsImagesAutomatically = false
                     settings.blockNetworkImage = true
                     settings.userAgentString =
