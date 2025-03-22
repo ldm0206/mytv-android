@@ -15,6 +15,7 @@ import top.yogiczy.mytv.tv.ui.utils.backHandler
 import top.yogiczy.mytv.core.data.entities.iptvsource.IptvSource
 import top.yogiczy.mytv.core.data.entities.iptvsource.IptvSourceList
 import top.yogiczy.mytv.tv.ui.screensold.iptvsource.components.IptvSourceItemList
+import top.yogiczy.mytv.tv.ui.screensold.components.rememberScreenAutoCloseState
 
 @Composable
 fun IptvSourceScreen(
