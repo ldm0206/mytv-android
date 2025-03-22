@@ -84,8 +84,8 @@ object Constants {
      */
     val GIT_RELEASE_LATEST_URL = mapOf(
         "stable" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
-        "beta" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
-        "dev" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        // "beta" to "https://api.github.com/repos/ldm0206/mytv-android/releases/latest",
+        "dev" to "https://api.github.com/repos/ldm0206/mytv-android/releases",
     )
 
     /**

@@ -25,10 +25,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Alignment
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.LibraryBooks
-import androidx.compose.material.icons.outlined.LiveTv
-import androidx.compose.material.icons.outlined.ControlCamera
-import androidx.compose.material.icons.outlined.SmartDisplay
+import androidx.compose.material.icons.automirrored.filled.LibraryBooks
+import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
+import androidx.compose.material.icons.filled.LiveTv
+import androidx.compose.material.icons.filled.ControlCamera
+import androidx.compose.material.icons.filled.SmartDisplay
 import androidx.compose.material.icons.filled.AspectRatio
 import androidx.compose.material.icons.filled.VideoLibrary
 import androidx.compose.material.icons.filled.MusicNote
@@ -44,6 +45,7 @@ fun QuickOpBtnList(
     modifier: Modifier = Modifier,
     playerMetadataProvider: () -> VideoPlayer.Metadata = { VideoPlayer.Metadata() },
     currentChannelLineIdxProvider: () -> Int = { 0 },
+    onShowIptvSource: () -> Unit = {},
     onShowEpg: () -> Unit = {},
     onShowChannelLine: () -> Unit = {},
     onShowVideoPlayerController: () -> Unit = {},
@@ -98,6 +100,20 @@ fun QuickOpBtnList(
                 modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("播放源") 
+                    }
+                },
+                onSelect = onShowEpg,
+            )
+        }
+
+        item {
+            QuickOpBtn(
+                modifier = Modifier.focusOnLaunched(),
+                title = { 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.AutoMirrored.Outlined.LibraryBooks, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("节目单") 
@@ -111,7 +127,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
+                        Icon(Icons.AutoMirrored.Outlined.FormatListBulleted, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("线路" + (currentChannelLineIdxProvider() + 1).toString()) 
                     }

@@ -38,7 +38,6 @@ data class IptvSource(
         val EXAMPLE = IptvSource(
             name = "测试直播源1",
             url = "http://1.2.3.4/tv.txt",
-            transformJs = "",
         )
 
         fun IptvSource.needExternalStoragePermission(): Boolean {

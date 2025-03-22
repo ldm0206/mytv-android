@@ -23,6 +23,8 @@ import top.yogiczy.mytv.core.data.entities.channel.ChannelGroupList.Companion.ch
 import top.yogiczy.mytv.core.data.entities.channel.ChannelLine
 import top.yogiczy.mytv.core.data.entities.channel.ChannelLineList
 import top.yogiczy.mytv.core.data.entities.channel.ChannelList
+import top.yogiczy.mytv.core.data.entities.iptvsource.IptvSource
+import top.yogiczy.mytv.core.data.entities.iptvsource.IptvSourceList
 import top.yogiczy.mytv.core.data.entities.epg.EpgProgramme
 import top.yogiczy.mytv.core.data.entities.epg.EpgProgrammeReserve
 import top.yogiczy.mytv.core.data.entities.epg.EpgProgrammeReserveList
@@ -57,7 +59,7 @@ class MainContentState(
     val currentChannelLineIdx get() = _currentChannelLineIdx
 
     val currentChannelLine get() = _currentChannel.lineList[_currentChannelLineIdx]
-
+    
     private var _currentPlaybackEpgProgramme by mutableStateOf<EpgProgramme?>(null)
     val currentPlaybackEpgProgramme get() = _currentPlaybackEpgProgramme
 
@@ -82,6 +84,13 @@ class MainContentState(
         get() = _isVideoPlayerControllerScreenVisible
         set(value) {
             _isVideoPlayerControllerScreenVisible = value
+        }
+
+    private var _isIptvSourceScreenVisible by mutableStateOf(false)
+    var isIptvSourceScreenVisible
+        get() = _isIptvSourceScreenVisible
+        set(value) {
+            _isIptvSourceScreenVisible = value
         }
 
     private var _isQuickOpScreenVisible by mutableStateOf(false)

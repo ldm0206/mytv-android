@@ -16,7 +16,15 @@ class GithubGitReleaseParser : GitReleaseParser {
     }
 
     override suspend fun parse(data: String): GitRelease {
-        val json = Globals.json.parseToJsonElement(data).jsonObject
+        val jsonElement = Globals.json.parseToJsonElement(data)
+        // 判断 JSON 是数组还是对象
+        val json = if (jsonElement is kotlinx.serialization.json.JsonArray) {
+            // 如果是数组，取第一个元素
+            jsonElement.first().jsonObject
+        } else {
+            // 如果是对象，直接使用
+            jsonElement.jsonObject
+        }
         val downloadUrl = Constants.GITHUB_PROXY + json.getValue("assets").jsonArray[1].jsonObject["browser_download_url"]!!.jsonPrimitive.content
         return GitRelease(
             version = json.getValue("tag_name").jsonPrimitive.content.substring(1),

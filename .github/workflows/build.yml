@@ -69,4 +69,5 @@ jobs:
             tv/build/outputs/apk/release/*.apk
         tag_name: V${{ env.info_version_name }}
         name: V${{ env.info_version_name }}, Version${{ env.info_version_code }}
+        prerelease: true
     

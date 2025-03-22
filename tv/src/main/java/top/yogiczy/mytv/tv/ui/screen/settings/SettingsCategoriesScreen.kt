@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.FormatListBulleted
 import androidx.compose.material.icons.automirrored.outlined.LibraryBooks
+import androidx.compose.material.icons.automirrored.Contract 
 import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.CloudSync
 import androidx.compose.material.icons.outlined.ColorLens
@@ -206,7 +207,7 @@ enum class SettingsCategories(
     CLOUD_SYNC(Icons.Outlined.CloudSync, "云同步"),
     PERMISSIONS(Icons.Outlined.Shield, "权限"),
     DEBUG(Icons.Outlined.BugReport, "调试"),
-    LOG(Icons.AutoMirrored.Outlined.FormatListBulleted, "日志"),
+    LOG(Icons.AutoMirrored.Outlined.Contract, "日志"),
 }
 
 enum class SettingsSubCategories {
