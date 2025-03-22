@@ -1,4 +1,4 @@
-package top.yogiczy.mytv.tv.ui.screensold.IPTVsource.components
+package top.yogiczy.mytv.tv.ui.screensold.iptvsource.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,6 +41,7 @@ import androidx.tv.material3.ListItem
 import androidx.tv.material3.ListItemDefaults
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.RadioButton
 import androidx.tv.material3.Text
 import kotlinx.coroutines.launch
 import top.yogiczy.mytv.core.data.entities.channel.ChannelGroupList.Companion.channelList
@@ -65,7 +66,7 @@ import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
 import top.yogiczy.mytv.tv.ui.utils.ifElse
 
 @Composable
-private fun IptvSourceItem(
+fun IptvSourceItem(
     modifier: Modifier = Modifier,
     lineProvider: () -> IptvSource = { IptvSource() },
     lineIdxProvider: () -> Int = { 0 },
@@ -75,8 +76,6 @@ private fun IptvSourceItem(
     val line = lineProvider()
     val lineIdx = lineIdxProvider()
     val isSelected = isSelectedProvider()
-
-    val lineDelay = rememberLineDelay(line)
 
     ListItem(
         modifier = modifier

@@ -1,4 +1,4 @@
-package top.yogiczy.mytv.tv.ui.screensold.IPTVsource.components
+package top.yogiczy.mytv.tv.ui.screensold.iptvsource.components
 
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import kotlin.math.max

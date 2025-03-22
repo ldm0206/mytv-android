@@ -100,7 +100,7 @@ fun QuickOpBtnList(
                 modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Outlined.LiveTv, contentDescription = "图标")
+                        Icon(Icons.Filled.LiveTv, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("播放源") 
                     }
@@ -114,7 +114,7 @@ fun QuickOpBtnList(
                 modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.AutoMirrored.Outlined.LibraryBooks, contentDescription = "图标")
+                        Icon(Icons.AutoMirrored.Filled.LibraryBooks, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("节目单") 
                     }
@@ -127,7 +127,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.AutoMirrored.Outlined.FormatListBulleted, contentDescription = "图标")
+                        Icon(Icons.AutoMirrored.Filled.FormatListBulleted, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("线路" + (currentChannelLineIdxProvider() + 1).toString()) 
                     }
@@ -140,7 +140,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Outlined.ControlCamera, contentDescription = "图标")
+                        Icon(Icons.Filled.ControlCamera, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("播放控制")
                     }
@@ -211,7 +211,7 @@ fun QuickOpBtnList(
             QuickOpBtn(
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Outlined.SmartDisplay, contentDescription = "图标")
+                        Icon(Icons.Filled.SmartDisplay, contentDescription = "图标")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text( "播放器："+settingsViewModel.videoPlayerCore.label) 
                     }

@@ -19,19 +19,19 @@ import top.yogiczy.mytv.tv.ui.screensold.iptvsource.components.IptvSourceItemLis
 @Composable
 fun IptvSourceScreen(
     modifier: Modifier = Modifier,
-    currentIptvSourceProvider: IptvSource() = { IptvSource() },
-    iptvSourceListProvider: IptvSourceList() = { IptvSourceList() },
+    currentIptvSourceProvider: () ->IptvSource = { IptvSource() },
+    iptvSourceListProvider: () ->IptvSourceList = { IptvSourceList() },
     onIptvSourceChanged: (IptvSource) -> Unit = {},
     onClose: () -> Unit = {},
 ) {
+    val screenAutoCloseState = rememberScreenAutoCloseState(onTimeout = onClose)
+
     Drawer(
         modifier = modifier.backHandler { onClose() },
         onDismissRequest = onClose,
         position = DrawerPosition.End,
         header = { Text("播放源") },
     ) {
-        val screenAutoCloseState = rememberScreenAutoCloseState(onTimeout = onClose)
-
         IptvSourceItemList(
             modifier = Modifier.width(268.dp),
             iptvSourceListProvider = iptvSourceListProvider,
