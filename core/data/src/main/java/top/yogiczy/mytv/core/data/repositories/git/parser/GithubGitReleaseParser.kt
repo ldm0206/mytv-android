@@ -19,8 +19,12 @@ class GithubGitReleaseParser : GitReleaseParser {
         val jsonElement = Globals.json.parseToJsonElement(data)
         // 判断 JSON 是数组还是对象
         val json = if (jsonElement is kotlinx.serialization.json.JsonArray) {
-            // 如果是数组，取第一个元素
-            jsonElement.first().jsonObject
+            // 如果是数组，取第二个元素
+            if (jsonElement.size > 1) {
+                    jsonElement[1].jsonObject
+            } else {
+                jsonElement[0].jsonObject
+            }
         } else {
             // 如果是对象，直接使用
             jsonElement.jsonObject

@@ -41,10 +41,10 @@ jobs:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       run: ./gradlew :tv:assembleRelease
     
-    - name: Output temp
-      if: failure()
-      run: |
-        cat tv/build/outputs/mapping/disguisedRelease/missing_rules.txt
+    # - name: Output temp
+    #   if: failure()
+    #   run: |
+    #     cat tv/build/outputs/mapping/disguisedRelease/missing_rules.txt
 
     - name: Output directory structure
       if: failure()
