@@ -39,8 +39,8 @@ jobs:
       env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-      run: ./gradlew :tv:assembleRelease
-    
+      run: |
+        ./gradlew :tv:assembleRelease || (cat tv/build/outputs/mapping/disguisedRelease/missing_rules.txt && exit 1)    
     # - name: Output directory structure
     #   run: sudo apt-get install tree && tree -L 7
 

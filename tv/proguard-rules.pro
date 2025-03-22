@@ -30,7 +30,6 @@
 -keepclassmembers class jdk.dynalink.** { *; }
 
 # 保留 org.mozilla.javascript 相关的类
--keep class org.mozilla.javascript.** { *; }
 -keepclassmembers class org.mozilla.javascript.** { *; }
 
 -dontwarn java.awt.**
