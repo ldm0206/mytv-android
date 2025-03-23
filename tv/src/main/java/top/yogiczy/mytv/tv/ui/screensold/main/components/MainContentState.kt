@@ -347,7 +347,12 @@ class MainContentState(
                 timeFormat.format(_currentPlaybackEpgProgramme!!.endAt),
             ).joinToString("")
             url = if (URI(url).query.isNullOrBlank()) "$url?$query" else "$url&$query"
-            url = ChannelUtil.urlToCanPlayback(url)
+            if(!url.contains("10.255.128.136"))
+            {
+                 url = ChannelUtil.urlToCanPlayback(url)
+            }
+            
+           
         }
         val line = currentChannelLine.copy(url = url)
 
