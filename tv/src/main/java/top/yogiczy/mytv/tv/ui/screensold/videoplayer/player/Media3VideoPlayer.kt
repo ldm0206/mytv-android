@@ -611,7 +611,7 @@ class Media3VideoPlayer(
         videoPlayer.trackSelectionParameters = videoPlayer.trackSelectionParameters
             .buildUpon()
             .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, false)
-            .setPreferredTextLanguages(track.language)
+            .setPreferredTextLanguages(track.language?: "默认")
             .build()
     }
 
