@@ -323,6 +323,6 @@ object ChannelUtil {
     }
 
     fun urlToCanPlayback(url: String): String {
-        return url.replace("pltv", "tvod", ignoreCase = true)
+        return url
     }
 }
