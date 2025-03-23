@@ -1,0 +1,81 @@
+name: Kotlin CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: gradle
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Add signing properties
+      run: |
+          echo ${{ secrets.SIGNING_PROPERTIES }} > encoded_signing_properties
+          base64 -d -i encoded_signing_properties > signing.properties
+
+    - name: Add jks file
+      run: |
+          echo ${{ secrets.SIGN_KEY }} > ./encoded_key
+          base64 -d -i encoded_key > keystore.jks
+
+    - name: Build with Gradle
+      env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      run: ./gradlew :tv:assembleRelease
+    
+    # - name: Output temp
+    #   if: failure()
+    #   run: |
+    #     cat tv/build/outputs/mapping/disguisedRelease/missing_rules.txt
+
+    - name: Output directory structure
+      if: failure()
+      run: |
+        sudo apt-get install tree
+        tree tv/build/outputs/mapping -L 3
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: mytv-android.apk
+        path: tv/build/outputs/apk/release/*.apk
+
+    - name: Read alpha apk output metadata
+      id: apk-meta-alpha
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: tv/build/outputs/apk/original/release/output-metadata.json
+    
+    - name: Parse apk infos
+      id: versionCode
+      run: |
+        echo "info_version_code=${{ fromJson(steps.apk-meta-alpha.outputs.content).elements[0].versionCode }}" >> $GITHUB_ENV
+        echo "info_version_name=${{ fromJson(steps.apk-meta-alpha.outputs.content).elements[0].versionName }}" >> $GITHUB_ENV
+
+    - name: Publish Pre-Release
+      if: github.event_name == 'push'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+            tv/build/outputs/apk/release/*.apk
+        tag_name: V${{ env.info_version_name }}
+        name: V${{ env.info_version_name }}, Version${{ env.info_version_code }}
+        prerelease: true
