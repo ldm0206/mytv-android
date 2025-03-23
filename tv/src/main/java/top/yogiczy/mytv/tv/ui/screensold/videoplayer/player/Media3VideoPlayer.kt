@@ -594,18 +594,20 @@ class Media3VideoPlayer(
             .setOverrideForType(TrackSelectionOverride(group, trackIndex))
             .build()
     }
-
+    //或字幕语言属性${track?.language.toString()}
     override fun selectSubtitleTrack(track: Metadata.Subtitle?) {
-        if (track?.language == null) {
-            logger.i("字幕${track.toString()}或字幕语言属性${track?.language.toString()}为空，不予加载")
+        if (track == null) {  
+            logger.i("字幕${track.toString()}为空，不予加载")
             videoPlayer.trackSelectionParameters = videoPlayer.trackSelectionParameters
                 .buildUpon()
                 .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, true)
                 .build()
-
             return
         }
 
+        if (track.language == null) {
+            track.language = "默认"
+        }
         videoPlayer.trackSelectionParameters = videoPlayer.trackSelectionParameters
             .buildUpon()
             .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, false)
