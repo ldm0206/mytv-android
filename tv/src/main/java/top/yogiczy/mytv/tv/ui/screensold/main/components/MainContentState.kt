@@ -32,6 +32,7 @@ import top.yogiczy.mytv.core.data.utils.ChannelUtil
 import top.yogiczy.mytv.core.data.utils.Constants
 import top.yogiczy.mytv.core.data.utils.Loggable
 import top.yogiczy.mytv.core.util.utils.urlHost
+import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.material.Snackbar
 import top.yogiczy.mytv.tv.ui.screen.settings.SettingsViewModel
 import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
@@ -315,8 +316,7 @@ class MainContentState(
 
         return max(0, min(idx, lineList.size - 1))
     }
-    
-    @Composable
+
     fun changeCurrentChannel(
         channel: Channel,
         lineIdx: Int? = null,
@@ -348,7 +348,7 @@ class MainContentState(
                 timeFormat.format(_currentPlaybackEpgProgramme!!.endAt),
             ).joinToString("")
             url = if (URI(url).query.isNullOrBlank()) "$url?$query" else "$url&$query"
-            if (settingsVM.iptvPLTVToTVOD)
+            if (Configs.iptvPLTVToTVOD)
             {
                 url = ChannelUtil.urlToCanPlayback(url)
             }
