@@ -699,7 +699,7 @@ class SettingsViewModel : ViewModel() {
         _iptvSimilarChannelMerge = Configs.iptvSimilarChannelMerge
         _iptvChannelLogoProvider = Configs.iptvChannelLogoProvider
         _iptvChannelLogoOverride = Configs.iptvChannelLogoOverride
-        _iptvPLTVToTVO = Configs.iptvPLTVToTVOD
+        _iptvPLTVToTVOD = Configs.iptvPLTVToTVOD
         _iptvChannelFavoriteEnable = Configs.iptvChannelFavoriteEnable
         _iptvChannelFavoriteListVisible = Configs.iptvChannelFavoriteListVisible
         _iptvChannelFavoriteList = Configs.iptvChannelFavoriteList

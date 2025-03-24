@@ -315,7 +315,8 @@ class MainContentState(
 
         return max(0, min(idx, lineList.size - 1))
     }
-
+    
+    @Composable
     fun changeCurrentChannel(
         channel: Channel,
         lineIdx: Int? = null,
