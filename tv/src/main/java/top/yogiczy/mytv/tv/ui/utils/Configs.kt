@@ -79,6 +79,9 @@ object Configs {
         /** 频道图标覆盖 */
         IPTV_CHANNEL_LOGO_OVERRIDE,
 
+        /** PLTV转换至TVOD */
+        IPTV_PLTV_TO_TVOD,
+
         /** 是否启用播放源频道收藏 */
         IPTV_CHANNEL_FAVORITE_ENABLE,
 
@@ -338,6 +341,11 @@ object Configs {
     var iptvChannelLogoOverride: Boolean
         get() = SP.getBoolean(KEY.IPTV_CHANNEL_LOGO_OVERRIDE.name, true)
         set(value) = SP.putBoolean(KEY.IPTV_CHANNEL_LOGO_OVERRIDE.name, value)
+
+    /** PLTV转换至TVOD */
+    var iptvPLTVToTVOD: Boolean
+        get() = SP.getBoolean(KEY.IPTV_PLTV_TO_TVOD.name, true)
+        set(value) = SP.putBoolean(KEY.IPTV_PLTV_TO_TVOD.name, value)
 
     /** 是否启用播放源频道收藏 */
     var iptvChannelFavoriteEnable: Boolean
@@ -745,6 +753,7 @@ object Configs {
             iptvSimilarChannelMerge = iptvSimilarChannelMerge,
             iptvChannelLogoProvider = iptvChannelLogoProvider,
             iptvChannelLogoOverride = iptvChannelLogoOverride,
+            iptvPLTVToTVOD = iptvPLTVToTVOD,
             iptvChannelFavoriteEnable = iptvChannelFavoriteEnable,
             iptvChannelFavoriteListVisible = iptvChannelFavoriteListVisible,
             iptvChannelFavoriteList = iptvChannelFavoriteList,
@@ -819,6 +828,7 @@ object Configs {
         configs.iptvSimilarChannelMerge?.let { iptvSimilarChannelMerge = it }
         configs.iptvChannelLogoProvider?.let { iptvChannelLogoProvider = it }
         configs.iptvChannelLogoOverride?.let { iptvChannelLogoOverride = it }
+        configs.iptvPLTVToTVOD?.let { iptvPLTVToTVOD = it }
         configs.iptvChannelFavoriteEnable?.let { iptvChannelFavoriteEnable = it }
         configs.iptvChannelFavoriteListVisible?.let { iptvChannelFavoriteListVisible = it }
         configs.iptvChannelFavoriteList?.let { iptvChannelFavoriteList = it }
@@ -895,6 +905,7 @@ object Configs {
         val iptvSimilarChannelMerge: Boolean? = null,
         val iptvChannelLogoProvider: String? = null,
         val iptvChannelLogoOverride: Boolean? = null,
+        val iptvPLTVToTVOD: Boolean? = null,
         val iptvChannelFavoriteEnable: Boolean? = null,
         val iptvChannelFavoriteListVisible: Boolean? = null,
         val iptvChannelFavoriteList: ChannelFavoriteList? = null,

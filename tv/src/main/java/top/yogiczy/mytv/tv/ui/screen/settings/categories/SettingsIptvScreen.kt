@@ -145,6 +145,20 @@ fun SettingsIptvScreen(
         }
 
         item {
+            SettingsListItem(
+                headlineContent = "PLTV转TVOD",
+                supportingContent = "自动将播放源链接中的PLTV替换为TVOD以支持回看",
+                trailingContent = {
+                    Switch(settingsViewModel.iptvPLTVToTVOD, null)
+                },
+                onSelect = {
+                    settingsViewModel.iptvPLTVToTVOD =
+                        !settingsViewModel.iptvPLTVToTVOD
+                },
+            )
+        }
+
+        item {
             val hybridMode = settingsViewModel.iptvHybridMode
 
             SettingsListItem(

@@ -347,7 +347,11 @@ class MainContentState(
                 timeFormat.format(_currentPlaybackEpgProgramme!!.endAt),
             ).joinToString("")
             url = if (URI(url).query.isNullOrBlank()) "$url?$query" else "$url&$query"
-            url = ChannelUtil.urlToCanPlayback(url)
+            if (settingsVM.iptvPLTVToTVOD)
+            {
+                url = ChannelUtil.urlToCanPlayback(url)
+            }
+            
         }
         val line = currentChannelLine.copy(url = url)
 
