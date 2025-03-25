@@ -66,7 +66,6 @@ fun VideoPlayerScreen(
                     factory = { 
                         SurfaceView(context).apply {
                             setZOrderMediaOverlay(true) // 确保 SurfaceView 是媒体覆盖层
-                            getHolder().setFormat(PixelFormat.TRANSPARENT)
                         } 
                     },
                     update = { state.setVideoSurfaceView(it) },
