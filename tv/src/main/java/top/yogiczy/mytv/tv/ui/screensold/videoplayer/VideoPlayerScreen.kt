@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
+import android.graphics.PixelFormat
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.SubtitleView
 import top.yogiczy.mytv.tv.ui.material.Visibility
@@ -61,7 +62,12 @@ fun VideoPlayerScreen(
                     modifier = Modifier
                         .align(Alignment.Center)
                         .then(displayModeModifier),
-                    factory = { SurfaceView(context) },
+                    factory = { 
+                        SurfaceView(context).apply {
+                            setZOrderMediaOverlay(true)
+                            setZOrderOnTop(true)
+                            getHolder().setFormat(PixelFormat.TRANSPARENT)
+                        } },
                     update = { state.setVideoSurfaceView(it) },
                 )
             }
