@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.zIndex
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceDefaults
@@ -100,6 +101,7 @@ fun MultiViewItem(
 
     Surface(
         modifier = modifier
+            .zIndex(0f)
             .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
             .handleKeyEvents(
                 onSelect = { actionsVisible = true },
