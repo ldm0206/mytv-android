@@ -12,7 +12,7 @@ android {
     defaultConfig {
         consumerProguardFiles "consumer-rules.pro"
         minSdk 21
-        targetSdk 33
+        targetSdk 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures.buildConfig = false
