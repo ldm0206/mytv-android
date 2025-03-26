@@ -99,26 +99,41 @@ fun MultiViewItem(
         player.volume = if (isFocused) 1f else 0f
     }
 
-    Surface(
-        modifier = modifier
-            .zIndex(0f)
-            .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
-            .handleKeyEvents(
-                onSelect = { actionsVisible = true },
-                onLongSelect = { moveVisible = true },
-            ),
-        onClick = {},
-        colors = ClickableSurfaceDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.surface,
-            focusedContentColor = MaterialTheme.colorScheme.onSurface,
-        ),
-        border = ClickableSurfaceDefaults.border(
-            focusedBorder = Border(
-                BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
-                inset = 2.dp
-            )
-        ),
-        scale = ClickableSurfaceDefaults.scale(focusedScale = 1f),
+    // Surface(
+    //     modifier = modifier
+    //         .zIndex(0f)
+    //         .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
+    //         .handleKeyEvents(
+    //             onSelect = { actionsVisible = true },
+    //             onLongSelect = { moveVisible = true },
+    //         ),
+    //     onClick = {},
+    //     colors = ClickableSurfaceDefaults.colors(
+    //         focusedContainerColor = MaterialTheme.colorScheme.surface,
+    //         focusedContentColor = MaterialTheme.colorScheme.onSurface,
+    //     ),
+    //     border = ClickableSurfaceDefaults.border(
+    //         focusedBorder = Border(
+    //             BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
+    //             inset = 2.dp
+    //         )
+    //     ),
+    //     scale = ClickableSurfaceDefaults.scale(focusedScale = 1f),
+    Box(
+    modifier = modifier
+        // .zIndex(0f)
+        .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
+        .handleKeyEvents(
+            onSelect = { actionsVisible = true },
+            onLongSelect = { moveVisible = true },
+        )
+        .background(
+            if (isFocused) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.background
+        )
+        .border(
+            if (isFocused) BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface) else null
+        )
+        .scale(if (isFocused) 1f else 0.95f),
     ) {
         VideoPlayerScreen(state = player)
 
