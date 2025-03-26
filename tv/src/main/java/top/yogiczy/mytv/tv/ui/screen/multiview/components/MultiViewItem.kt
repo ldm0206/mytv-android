@@ -141,7 +141,7 @@ fun MultiViewItem(
                 it // 不添加边框
             }
         }
-        .scale(if (isFocused) 1f else 0.95f),
+        // .scale(if (isFocused) 1f else 0.95f),
     ) {
         VideoPlayerScreen(state = player)
 
