@@ -134,9 +134,13 @@ fun MultiViewItem(
         .background(
             if (isFocused) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.background
         )
-        .border(
-            if (isFocused) BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface) else null
-        )
+        .let {
+            if (isFocused) {
+                it.border(BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface))
+            } else {
+                it // 不添加边框
+            }
+        }
         .scale(if (isFocused) 1f else 0.95f),
     ) {
         VideoPlayerScreen(state = player)
