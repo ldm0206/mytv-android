@@ -44,6 +44,7 @@ import top.yogiczy.mytv.tv.ui.screensold.videoplayer.VideoPlayerScreen
 import top.yogiczy.mytv.tv.ui.screensold.videoplayer.rememberVideoPlayerState
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun MultiViewItem(
@@ -103,45 +104,27 @@ fun MultiViewItem(
         player.volume = if (isFocused) 1f else 0f
     }
 
-    // Surface(
-    //     modifier = modifier
-    //         .zIndex(0f)
-    //         .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
-    //         .handleKeyEvents(
-    //             onSelect = { actionsVisible = true },
-    //             onLongSelect = { moveVisible = true },
-    //         ),
-    //     onClick = {},
-    //     colors = ClickableSurfaceDefaults.colors(
-    //         focusedContainerColor = MaterialTheme.colorScheme.surface,
-    //         focusedContentColor = MaterialTheme.colorScheme.onSurface,
-    //     ),
-    //     border = ClickableSurfaceDefaults.border(
-    //         focusedBorder = Border(
-    //             BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
-    //             inset = 2.dp
-    //         )
-    //     ),
-    //     scale = ClickableSurfaceDefaults.scale(focusedScale = 1f),
-    Box(
-    modifier = modifier
-        // .zIndex(0f)
-        .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
-        .handleKeyEvents(
-            onSelect = { actionsVisible = true },
-            onLongSelect = { moveVisible = true },
-        )
-        .background(
-            if (isFocused) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.background
-        )
-        .let {
-            if (isFocused) {
-                it.border(BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface))
-            } else {
-                it // 不添加边框
-            }
-        }
-        // .scale(if (isFocused) 1f else 0.95f),
+    Surface(
+        modifier = modifier
+            .zIndex(0f)
+            .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
+            .handleKeyEvents(
+                onSelect = { actionsVisible = true },
+                onLongSelect = { moveVisible = true },
+            ),
+        onClick = {},
+        colors = ClickableSurfaceDefaults.colors(
+            containerColor = Color.Transparent,
+            focusedContainerColor = MaterialTheme.colorScheme.surface,
+            focusedContentColor = MaterialTheme.colorScheme.onSurface,
+        ),
+        border = ClickableSurfaceDefaults.border(
+            focusedBorder = Border(
+                BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
+                inset = 2.dp
+            )
+        ),
+        scale = ClickableSurfaceDefaults.scale(focusedScale = 1f),
     ) {
         VideoPlayerScreen(state = player)
 

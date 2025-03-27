@@ -107,7 +107,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-
+    implementation(libs.android.material)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.androidx.material.icons.extended)
