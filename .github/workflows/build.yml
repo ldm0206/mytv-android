@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
@@ -71,7 +72,7 @@ jobs:
         echo "info_version_name=${{ fromJson(steps.apk-meta-alpha.outputs.content).elements[0].versionName }}" >> $GITHUB_ENV
 
     - name: Publish Pre-Release
-      if: github.event_name == 'push'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: softprops/action-gh-release@v2
       with:
         files: |
