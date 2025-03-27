@@ -171,6 +171,7 @@ fun MainScreen(
                     channelFavoriteListProvider = { settingsViewModel.iptvChannelFavoriteList },
                     onChannelSelected = { onChannelSelected(it) },
                     epgListProvider = epgListProvider,
+                    filteredChannelGroupListProvider = filteredChannelGroupListProvider,
                     toLiveScreen = { navController.navigateSingleTop(Screens.Live()) },
                     toChannelsScreen = { navController.navigateSingleTop(Screens.Channels()) },
                     toFavoritesScreen = { navController.navigateSingleTop(Screens.Favorites()) },

@@ -52,6 +52,7 @@ fun DashboardScreen(
     onChannelSelected: (Channel) -> Unit = {},
     onChannelFavoriteToggle: (Channel) -> Unit = {},
     epgListProvider: () -> EpgList = { EpgList() },
+    filteredChannelGroupListProvider: () -> ChannelList = { ChannelList() },
     toLiveScreen: () -> Unit = {},
     toChannelsScreen: () -> Unit = {},
     toFavoritesScreen: () -> Unit = {},
@@ -84,6 +85,86 @@ fun DashboardScreen(
         headerExtra = { DashboardTime() },
         onBackPressed = onBackPressed,
     ) {
+        val childPadding = rememberChildPadding()
+        val tabs = listOf("直播", "频道", "搜索", "多屏同播", "设置")
+        val pagerState = rememberPagerState(pageCount = {tabs.size}, initialPage = 0)
+        val icons = listof(Icons.Outlined.Tv, Icons.Outlined.GridView, Icons.Outlined.Search, Icons.Outlined.ViewCozy, Icons.Outlined.Settings)
+        var selectedTabIndex by remember { mutableStateOf(0) }
+
+        Box(modifier = Modifier.fillMaxSize().background(bgColors[activeTabIndex])) {
+            TabRow(
+                selectedTabIndex = focusedTabIndex,
+                indicator = { tabPositions, doesTabRowHaveFocus ->
+                    TabRowDefaults.PillIndicator(
+                        currentTabPosition = tabPositions[focusedTabIndex],
+                        activeColor = Color.Blue.copy(alpha = 0.4f),
+                        inactiveColor = Color.Transparent,
+                        doesTabRowHaveFocus = doesTabRowHaveFocus,
+                    )
+
+                    TabRowDefaults.PillIndicator(
+                        currentTabPosition = tabPositions[activeTabIndex],
+                        doesTabRowHaveFocus = doesTabRowHaveFocus,
+                    )
+                },
+                modifier = modifier.focusRestorer()
+            ) { tabs.forEachIndexed { index, tab ->
+                key(index) {
+                        Tab(
+                            selected = activeTabIndex == index,
+                            onFocus = { focusedTabIndex = index },
+                            onClick = {
+                                focusedTabIndex = index
+                                activeTabIndex = index
+                                scope.launch {
+                                    pagerState.animateScrollToPage(index, 0f)
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = icons[index],
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Text(
+                                text = tab,
+                                fontSize = 12.sp,
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
+                            )
+                        }
+                    }
+                }
+            }
+            VerticalPager(state = pagerState, modifier.fillMaxHeight(),beyondBoundsPageCount = 2,verticalAlignment=Alignment.Top) {page->
+                if (page==0){//直播
+                    item {
+                        DashboardFavoriteList(
+                            channelFavoriteListProvider = channelFavoriteListProvider,
+                            onChannelSelected = onChannelSelected,
+                            onChannelUnFavorite = onChannelFavoriteToggle,
+                            epgListProvider = epgListProvider,
+                        )
+                    }
+                }
+                else if (page==1){//频道
+                    item {
+                        DashboardChannels(
+                            channelGroupListProvider = filteredChannelGroupListProvider,
+                            onChannelSelected = onChannelSelected,
+                            onChannelFavoriteToggle = onChannelFavoriteToggle,
+                            epgListProvider = epgListProvider,
+                        )
+                    }
+                }
+                else if (page==2){//搜索
+                    
+                }
+                else if (page==3){//多屏同播
+                }
+                else if (page==4){//设置
+                }
+            }
+        }
         LazyColumn(
             contentPadding = PaddingValues(top = 20.dp, bottom = childPadding.bottom),
             verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -99,15 +180,6 @@ fun DashboardScreen(
                     toPushScreen = toPushScreen,
                     toSettingsScreen = toSettingsScreen,
                     toAboutScreen = toAboutScreen,
-                )
-            }
-
-            item {
-                DashboardFavoriteList(
-                    channelFavoriteListProvider = channelFavoriteListProvider,
-                    onChannelSelected = onChannelSelected,
-                    onChannelUnFavorite = onChannelFavoriteToggle,
-                    epgListProvider = epgListProvider,
                 )
             }
         }
