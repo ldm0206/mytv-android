@@ -23,6 +23,23 @@ import top.yogiczy.mytv.tv.ui.rememberChildPadding
 import top.yogiczy.mytv.tv.ui.screen.components.AppScreen
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
+import androidx.tv.material3.Tab
+import androidx.tv.material3.TabRow
+import androidx.tv.material3.Text
+import top.yogiczy.mytv.tv.ui.screen.Screens
+import top.yogiczy.mytv.tv.ui.screen.about.AboutScreen
+import top.yogiczy.mytv.tv.ui.screen.agreement.AgreementScreen
+import top.yogiczy.mytv.tv.ui.screen.channels.ChannelsScreen
+import top.yogiczy.mytv.tv.ui.screen.dashboard.DashboardScreen
+import top.yogiczy.mytv.tv.ui.screen.favorites.FavoritesScreen
+import top.yogiczy.mytv.tv.ui.screen.loading.LoadingScreen
+import top.yogiczy.mytv.tv.ui.screen.multiview.MultiViewScreen
+import top.yogiczy.mytv.tv.ui.screen.push.PushScreen
+import top.yogiczy.mytv.tv.ui.screen.search.SearchScreen
+import top.yogiczy.mytv.tv.ui.screen.settings.SettingsScreen
+import top.yogiczy.mytv.tv.ui.screen.settings.SettingsSubCategories
+import top.yogiczy.mytv.tv.ui.screen.settings.SettingsViewModel
+import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
 
 @Composable
 fun DashboardModuleList(
@@ -37,6 +54,82 @@ fun DashboardModuleList(
     toAboutScreen: () -> Unit = {},
 ) {
     val childPadding = rememberChildPadding()
+    val tabs = listOf("直播", "频道", "搜索", "多屏同播", "设置")
+    val pagerState = rememberPagerState(pageCount = {tabs.size}, initialPage = 0)
+    val icons = listof(Icons.Outlined.Tv, Icons.Outlined.GridView, Icons.Outlined.Search, Icons.Outlined.ViewCozy, Icons.Outlined.Settings)
+    var selectedTabIndex by remember { mutableStateOf(0) }
+
+    Box(modifier = Modifier.fillMaxSize().background(bgColors[activeTabIndex])) {
+        TabRow(
+            selectedTabIndex = focusedTabIndex,
+            indicator = { tabPositions, doesTabRowHaveFocus ->
+                TabRowDefaults.PillIndicator(
+                    currentTabPosition = tabPositions[focusedTabIndex],
+                    activeColor = Color.Blue.copy(alpha = 0.4f),
+                    inactiveColor = Color.Transparent,
+                    doesTabRowHaveFocus = doesTabRowHaveFocus,
+                )
+
+                TabRowDefaults.PillIndicator(
+                    currentTabPosition = tabPositions[activeTabIndex],
+                    doesTabRowHaveFocus = doesTabRowHaveFocus,
+                )
+            },
+            modifier = modifier.focusRestorer()
+        ) { tabs.forEachIndexed { index, tab ->
+            key(index) {
+                    Tab(
+                        selected = activeTabIndex == index,
+                        onFocus = { focusedTabIndex = index },
+                        onClick = {
+                            focusedTabIndex = index
+                            activeTabIndex = index
+                            scope.launch {
+                                pagerState.animateScrollToPage(index, 0f)
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = icons[index],
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Text(
+                            text = tab,
+                            fontSize = 12.sp,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
+                        )
+                    }
+                }
+            }
+        }
+        HorizontalPager(state = pagerState, modifier.fillMaxHeight(),beyondBoundsPageCount = 2,verticalAlignment=Alignment.Top) {page->
+            if (page==0){//直播
+            }
+            else if (page==1){//频道
+                ChannelsScreen(
+                    channelGroupListProvider = filteredChannelGroupListProvider,
+                    onChannelSelected = { onChannelSelected(it) },
+                    onChannelFavoriteToggle = { onChannelFavoriteToggle(it) },
+                    epgListProvider = epgListProvider,
+                    onBackPressed = { navController.navigateUp() },
+                )
+            }
+            else if (page==2){//搜索
+                SearchScreen(
+                    channelGroupListProvider = filteredChannelGroupListProvider,
+                    onChannelSelected = { onChannelSelected(it) },
+                    onChannelFavoriteToggle = { onChannelFavoriteToggle(it) },
+                    epgListProvider = epgListProvider,
+                    onBackPressed = { navController.navigateUp() },
+                )
+            }
+            else if (page==3){//多屏同播
+            }
+            else if (page==4){//设置
+            }
+        }
+    }
 
     LazyRow(
         modifier = modifier,
