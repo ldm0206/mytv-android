@@ -43,7 +43,27 @@ import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.utils.focusOnLaunched
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
-
+import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.pager.VerticalPager
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Tv
+import androidx.compose.material.icons.outlined.GridView
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.ViewCozy
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.tv.material3.TabRowDefaults
+import androidx.tv.material3.Tab
+import androidx.tv.material3.TabRow
+import androidx.tv.material3.Text
+import androidx.compose.runtime.key
 @Composable
 fun DashboardScreen(
     modifier: Modifier = Modifier,
@@ -52,7 +72,7 @@ fun DashboardScreen(
     onChannelSelected: (Channel) -> Unit = {},
     onChannelFavoriteToggle: (Channel) -> Unit = {},
     epgListProvider: () -> EpgList = { EpgList() },
-    filteredChannelGroupListProvider: () -> ChannelList = { ChannelList() },
+    filteredChannelGroupListProvider: () -> ChannelGroupList = { ChannelGroupList() },
     toLiveScreen: () -> Unit = {},
     toChannelsScreen: () -> Unit = {},
     toFavoritesScreen: () -> Unit = {},
@@ -85,12 +105,12 @@ fun DashboardScreen(
         headerExtra = { DashboardTime() },
         onBackPressed = onBackPressed,
     ) {
-        val childPadding = rememberChildPadding()
         val tabs = listOf("直播", "频道", "搜索", "多屏同播", "设置")
         val pagerState = rememberPagerState(pageCount = {tabs.size}, initialPage = 0)
-        val icons = listof(Icons.Outlined.Tv, Icons.Outlined.GridView, Icons.Outlined.Search, Icons.Outlined.ViewCozy, Icons.Outlined.Settings)
+        val icons = listOf(Icons.Outlined.Tv, Icons.Outlined.GridView, Icons.Outlined.Search, Icons.Outlined.ViewCozy, Icons.Outlined.Settings)
         var selectedTabIndex by remember { mutableStateOf(0) }
-
+        var activeTabIndex by remember { mutableStateOf(0) }
+        var focusedTabIndex by remember { mutableStateOf(0) }
         Box(modifier = Modifier.fillMaxSize().background(bgColors[activeTabIndex])) {
             TabRow(
                 selectedTabIndex = focusedTabIndex,

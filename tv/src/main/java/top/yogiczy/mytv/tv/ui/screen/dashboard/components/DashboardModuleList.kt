@@ -53,6 +53,7 @@ fun DashboardModuleList(
     toSettingsScreen: () -> Unit = {},
     toAboutScreen: () -> Unit = {},
 ) {
+    val childPadding = rememberChildPadding()
     LazyRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(20.dp),

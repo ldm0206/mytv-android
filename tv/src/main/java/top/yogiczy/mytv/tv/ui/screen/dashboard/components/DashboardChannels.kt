@@ -60,9 +60,9 @@ fun DashboardChannels(
 
 @Preview(device = "id:Android TV (720p)")
 @Composable
-private fun ChannelsScreenPreview() {
+private fun DashboardChannelsPreview() {
     MyTvTheme {
-        ChannelsScreen(
+        DashboardChannels(
             channelGroupListProvider = { ChannelGroupList.EXAMPLE },
             epgListProvider = { EpgList.example(ChannelGroupList.EXAMPLE.channelList) },
         )
@@ -71,8 +71,8 @@ private fun ChannelsScreenPreview() {
 
 @Preview(device = "id:Android TV (720p)")
 @Composable
-private fun ChannelsScreenEmptyPreview() {
+private fun DashboardChannelsEmptyPreview() {
     MyTvTheme {
-        ChannelsScreen()
+        DashboardChannels()
     }
 }
