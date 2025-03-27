@@ -15,6 +15,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
@@ -105,6 +106,7 @@ fun DashboardScreen(
         headerExtra = { DashboardTime() },
         onBackPressed = onBackPressed,
     ) {
+        val focusRequester = remember { FocusRequester() }
         val tabs = listOf("直播", "频道", "搜索", "多屏同播", "设置")
         val pagerState = rememberPagerState(pageCount = {tabs.size}, initialPage = 0)
         val icons = listOf(Icons.Outlined.Tv, Icons.Outlined.GridView, Icons.Outlined.Search, Icons.Outlined.ViewCozy, Icons.Outlined.Settings)
@@ -128,7 +130,7 @@ fun DashboardScreen(
                         doesTabRowHaveFocus = doesTabRowHaveFocus,
                     )
                 },
-                modifier = modifier.focusRequester()
+                modifier = modifier.focusRequester(focusRequester)
             ) { tabs.forEachIndexed { index, tab ->
                 key(index) {
                         Tab(
