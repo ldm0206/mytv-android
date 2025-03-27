@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.SyncAlt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -17,20 +15,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ClickableSurfaceDefaults
-import androidx.tv.material3.Icon
-import androidx.tv.material3.Surface
-import androidx.tv.material3.Text
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import top.yogiczy.mytv.core.data.entities.channel.Channel
 import top.yogiczy.mytv.core.data.entities.channel.ChannelFavoriteList
 import top.yogiczy.mytv.core.data.entities.channel.ChannelList
+import top.yogiczy.mytv.core.data.entities.channel.ChannelGroupList
 import top.yogiczy.mytv.core.data.entities.epg.EpgList
 import top.yogiczy.mytv.core.data.entities.iptvsource.IptvSource
 import top.yogiczy.mytv.core.data.repositories.iptv.IptvRepository
@@ -39,13 +36,15 @@ import top.yogiczy.mytv.tv.ui.screen.components.AppScreen
 import top.yogiczy.mytv.tv.ui.screen.dashboard.components.DashboardFavoriteList
 import top.yogiczy.mytv.tv.ui.screen.dashboard.components.DashboardModuleList
 import top.yogiczy.mytv.tv.ui.screen.dashboard.components.DashboardTime
+import top.yogiczy.mytv.tv.ui.screen.dashboard.components.DashboardChannels
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.utils.focusOnLaunched
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
-import com.google.accompanist.pager.rememberPagerState
-import com.google.accompanist.pager.VerticalPager
+import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.SyncAlt
 import androidx.compose.material.icons.outlined.Tv
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Search
@@ -56,13 +55,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.tv.material3.TabRowDefaults
 import androidx.tv.material3.Tab
 import androidx.tv.material3.TabRow
 import androidx.tv.material3.Text
+import androidx.tv.material3.ClickableSurfaceDefaults
+import androidx.tv.material3.Icon
+import androidx.tv.material3.Surface
+
 import androidx.compose.runtime.key
 @Composable
 fun DashboardScreen(
@@ -111,7 +111,8 @@ fun DashboardScreen(
         var selectedTabIndex by remember { mutableStateOf(0) }
         var activeTabIndex by remember { mutableStateOf(0) }
         var focusedTabIndex by remember { mutableStateOf(0) }
-        Box(modifier = Modifier.fillMaxSize().background(bgColors[activeTabIndex])) {
+        Box(modifier = modifier.fillMaxSize()) {
+            val scope = rememberCoroutineScope()
             TabRow(
                 selectedTabIndex = focusedTabIndex,
                 indicator = { tabPositions, doesTabRowHaveFocus ->
@@ -157,24 +158,34 @@ fun DashboardScreen(
             }
             VerticalPager(state = pagerState, modifier.fillMaxHeight(),beyondBoundsPageCount = 2,verticalAlignment=Alignment.Top) {page->
                 if (page==0){//直播
-                    item {
-                        DashboardFavoriteList(
-                            channelFavoriteListProvider = channelFavoriteListProvider,
-                            onChannelSelected = onChannelSelected,
-                            onChannelUnFavorite = onChannelFavoriteToggle,
-                            epgListProvider = epgListProvider,
-                        )
+                    LazyColumn(
+                        contentPadding = PaddingValues(top = 20.dp, bottom = childPadding.bottom),
+                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                    ) {
+                        item {
+                            DashboardFavoriteList(
+                                channelFavoriteListProvider = channelFavoriteListProvider,
+                                onChannelSelected = onChannelSelected,
+                                onChannelUnFavorite = onChannelFavoriteToggle,
+                                epgListProvider = epgListProvider,
+                            )
+                        }
                     }
                 }
                 else if (page==1){//频道
-                    item {
-                        DashboardChannels(
-                            channelGroupListProvider = filteredChannelGroupListProvider,
-                            onChannelSelected = onChannelSelected,
-                            onChannelFavoriteToggle = onChannelFavoriteToggle,
-                            epgListProvider = epgListProvider,
-                        )
-                    }
+                    LazyColumn(
+                        contentPadding = PaddingValues(top = 20.dp, bottom = childPadding.bottom),
+                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                    ) {
+                        item {
+                            DashboardChannels(
+                                channelGroupListProvider = filteredChannelGroupListProvider,
+                                onChannelSelected = onChannelSelected,
+                                onChannelFavoriteToggle = onChannelFavoriteToggle,
+                                epgListProvider = epgListProvider,
+                            )
+                        }
+                }
                 }
                 else if (page==2){//搜索
                     
