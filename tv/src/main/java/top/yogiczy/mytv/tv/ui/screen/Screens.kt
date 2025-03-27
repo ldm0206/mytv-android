@@ -7,16 +7,16 @@ enum class Screens(
 ) {
     Agreement,
     Loading,
-    Dashboard,
+    Dashboard(isTabItem = true),
     Live,
-    Channels,
+    Channels(isTabItem = true),
     Favorites,
-    Search,
-    Push,
+    Search(isTabItem = true),
+    MultiView(isTabItem = true),
+    Push(isTabItem = true),
     Settings(listOf(SettingsScreen.START_DESTINATION)),
     About,
     Update,
-    MultiView,
     ;
 
     operator fun invoke(): String {

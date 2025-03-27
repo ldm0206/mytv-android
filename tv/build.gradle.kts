@@ -21,8 +21,8 @@ android {
         applicationId = "com.github.ldm0206.mytv"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 16
-        versionName = "1.5.2"
+        versionCode = 17
+        versionName = "1.6.0"
         vectorDrawables {
             useSupportLibrary = true
         }
