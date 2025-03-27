@@ -126,7 +126,7 @@ fun MultiViewItem(
         ),
         scale = ClickableSurfaceDefaults.scale(focusedScale = 1f),
     ) {
-        VideoPlayerScreen(state = player)
+        VideoPlayerScreen(state = player, forceTextureView = true)
 
         Row(
             modifier = Modifier

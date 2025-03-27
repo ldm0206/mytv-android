@@ -36,6 +36,7 @@ fun VideoPlayerScreen(
     modifier: Modifier = Modifier,
     state: VideoPlayerState = rememberVideoPlayerState(),
     showMetadataProvider: () -> Boolean = { false },
+    forceTextureView: Boolean = false,
 ) {
     val context = LocalContext.current
 
@@ -55,31 +56,40 @@ fun VideoPlayerScreen(
             VideoPlayerDisplayMode.SIXTEEN_NINE -> Modifier.aspectRatio(16f / 9)
             VideoPlayerDisplayMode.WIDE -> Modifier.aspectRatio(2.35f / 1)
         }
+        if (forceTextureView) {
+            AndroidView(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .then(displayModeModifier),
+                factory = { TextureView(context) },
+                update = { state.setVideoTextureView(it) },
+            )
+        } else {
+            when (settingsVM.videoPlayerRenderMode) {
+                Configs.VideoPlayerRenderMode.SURFACE_VIEW -> {
+                    AndroidView(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .zIndex(1f)
+                            .then(displayModeModifier),
+                        factory = { 
+                            SurfaceView(context).apply {
+                                setZOrderMediaOverlay(true) // 确保 SurfaceView 是媒体覆盖层
+                            } 
+                        },
+                        update = { state.setVideoSurfaceView(it) },
+                    )
+                }
 
-        when (settingsVM.videoPlayerRenderMode) {
-            Configs.VideoPlayerRenderMode.SURFACE_VIEW -> {
-                AndroidView(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .zIndex(1f)
-                        .then(displayModeModifier),
-                    factory = { 
-                        SurfaceView(context).apply {
-                            setZOrderMediaOverlay(true) // 确保 SurfaceView 是媒体覆盖层
-                        } 
-                    },
-                    update = { state.setVideoSurfaceView(it) },
-                )
-            }
-
-            Configs.VideoPlayerRenderMode.TEXTURE_VIEW -> {
-                AndroidView(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .then(displayModeModifier),
-                    factory = { TextureView(context) },
-                    update = { state.setVideoTextureView(it) },
-                )
+                Configs.VideoPlayerRenderMode.TEXTURE_VIEW -> {
+                    AndroidView(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .then(displayModeModifier),
+                        factory = { TextureView(context) },
+                        update = { state.setVideoTextureView(it) },
+                    )
+                }
             }
         }
 

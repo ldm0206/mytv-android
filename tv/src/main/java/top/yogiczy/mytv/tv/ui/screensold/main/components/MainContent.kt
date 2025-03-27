@@ -147,6 +147,7 @@ fun MainContent(
         VideoPlayerScreen(
             state = videoPlayerState,
             showMetadataProvider = { settingsViewModel.debugShowVideoPlayerMetadata },
+            forceTextureView = false,
         )
 
         Visibility({ mainContentState.currentChannelLine.hybridType == ChannelLine.HybridType.WebView }) {
