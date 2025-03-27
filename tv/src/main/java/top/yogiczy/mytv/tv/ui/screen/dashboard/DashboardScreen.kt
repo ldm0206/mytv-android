@@ -128,7 +128,7 @@ fun DashboardScreen(
                         doesTabRowHaveFocus = doesTabRowHaveFocus,
                     )
                 },
-                modifier = modifier.focusRestorer()
+                modifier = modifier.focusRequester()
             ) { tabs.forEachIndexed { index, tab ->
                 key(index) {
                         Tab(
@@ -156,7 +156,10 @@ fun DashboardScreen(
                     }
                 }
             }
-            VerticalPager(state = pagerState, modifier.fillMaxHeight(),beyondBoundsPageCount = 2,verticalAlignment=Alignment.Top) {page->
+            VerticalPager(
+                state = pagerState, 
+                modifier.fillMaxHeight(),
+            ) {page->
                 if (page==0){//直播
                     LazyColumn(
                         contentPadding = PaddingValues(top = 20.dp, bottom = childPadding.bottom),
