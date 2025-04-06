@@ -1,5 +1,6 @@
 package top.yogiczy.mytv.tv.ui.screen.settings.subcategories
 
+import android.util.TypedValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.LaunchedEffect
@@ -95,72 +96,51 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             modifier = modifier.fillMaxWidth()
                 .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
-            ) {
-                // 字体颜色选择器
-                ColorPickerSection(
-                    title = "字体颜色",
-                    selectedColor = foregroundColor.value,
-                    onColorSelected = { color ->
-                        foregroundColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-
-                // 背景颜色选择器
-                ColorPickerSection(
-                    title = "背景颜色",
-                    selectedColor = backgroundColor.value,
-                    onColorSelected = { color ->
-                        backgroundColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
-            ) {
-                // 边框颜色选择器
-                ColorPickerSection(
-                    title = "边框颜色",
-                    selectedColor = edgeColor.value,
-                    onColorSelected = { color ->
-                        edgeColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-
-                // 窗口颜色选择器
-                ColorPickerSection(
-                    title = "窗口颜色",
-                    selectedColor = windowColor.value,
-                    onColorSelected = { color ->
-                        windowColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
-            ) {
-                SizePickerSection(
-                    title = "字体大小",
-                    selectedSize = textSize.value,
-                    onSizeSelected = { size ->
-                        textSize.value = size
-                        updateSubtitleSettings()
-                    }
-                )
-            }
+            ColorPickerSection(
+                title = "字体颜色",
+                selectedColor = foregroundColor.value,
+                onColorSelected = { color ->
+                    foregroundColor.value = color
+                    updateSubtitleSettings()
+                }
+            )
+            ColorPickerSection(
+                title = "背景颜色",
+                selectedColor = backgroundColor.value,
+                onColorSelected = { color ->
+                    backgroundColor.value = color
+                    updateSubtitleSettings()
+                }
+            )
+            ColorPickerSection(
+                title = "边框颜色",
+                selectedColor = edgeColor.value,
+                onColorSelected = { color ->
+                    edgeColor.value = color
+                    updateSubtitleSettings()
+                }
+            )
+            ColorPickerSection(
+                title = "窗口颜色",
+                selectedColor = windowColor.value,
+                onColorSelected = { color ->
+                    windowColor.value = color
+                    updateSubtitleSettings()
+                }
+            )
+            SizePickerSection(
+                title = "字体大小",
+                selectedSize = textSize.value,
+                onSizeSelected = { size ->
+                    textSize.value = size
+                    updateSubtitleSettings()
+                }
+            )
         }
         AndroidView(
             factory = { SubtitleView(it) },
             update = { subtitleView ->
-                subtitleView.setFixedTextSize(SubtitleView.TEXT_SIZE_TYPE_ABSOLUTE, textSize.value)
+                subtitleView.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.value)
                 subtitleView.setStyle(currentSubtitleSettings.style)
                 val exampleCue = Cue.Builder()
                     .setText("示例字幕") // 设置字幕内容
@@ -216,7 +196,7 @@ fun ColorPicker(
     // 简单的颜色选择器实现
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(6),
+        columns = GridCells.Fixed(12),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {

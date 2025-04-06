@@ -3,6 +3,7 @@ package top.yogiczy.mytv.tv.ui.screensold.videoplayer
 import android.view.SurfaceView
 import android.view.TextureView
 import androidx.annotation.OptIn
+import android.util.TypedValue
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -101,7 +102,7 @@ fun VideoPlayerScreen(
                 factory = { SubtitleView(context) },
                 update = { subtitleView ->
                     // 设置字幕字体大小（相对于视频高度的比例）
-                    subtitleViewsubtitleView.setFixedTextSize(SubtitleView.TEXT_SIZE_TYPE_ABSOLUTE, textSize)
+                    subtitleView.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
                     // 设置字幕的样式
                     subtitleView.setStyle(style)
                     state.instance.onCues { cues -> subtitleView.setCues(cues) }
