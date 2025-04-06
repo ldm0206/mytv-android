@@ -5,11 +5,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -96,62 +97,79 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Row(
-                    modifier = Modifier.width(5.gridColumns()),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
-                    Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
-                    ColorPicker(
-                        selectedColor = foregroundColor.value,
-                        onColorSelected = { color ->
-                            foregroundColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
-
-                    Text("背景颜色", style = MaterialTheme.typography.bodyMedium)
-                    ColorPicker(
-                        selectedColor = backgroundColor.value,
-                        onColorSelected = { color -> 
-                            backgroundColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
+                        ColorPicker(
+                            selectedColor = foregroundColor.value,
+                            onColorSelected = { color ->
+                                foregroundColor.value = color
+                                updateSubtitleSettings()
+                            }
+                        )
+                    }
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Text("背景颜色", style = MaterialTheme.typography.bodyMedium)
+                        ColorPicker(
+                            selectedColor = backgroundColor.value,
+                            onColorSelected = { color -> 
+                                backgroundColor.value = color
+                                updateSubtitleSettings()
+                            }
+                        )
+                    }
                 }
                 Row(
-                    modifier = Modifier.width(5.gridColumns()),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
-
-                    Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
-                    ColorPicker(
-                        selectedColor = edgeColor.value,
-                        onColorSelected = { 
-                            color -> edgeColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
-
-                    Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
-                    ColorPicker(
-                        selectedColor = windowColor.value,
-                        onColorSelected = { color -> 
-                            windowColor.value = color
-                            updateSubtitleSettings()
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
+                        ColorPicker(
+                            selectedColor = edgeColor.value,
+                            onColorSelected = { 
+                                color -> edgeColor.value = color
+                                updateSubtitleSettings()
+                            }
+                        )
+                    }
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
+                        ColorPicker(
+                            selectedColor = windowColor.value,
+                            onColorSelected = { color -> 
+                                windowColor.value = color
+                                updateSubtitleSettings()
+                            }
+                        )
+                    }
+                }
+                Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+                    AndroidView(
+                        factory = { SubtitleView(it) },
+                        update = { subtitleView ->
+                            subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
+                            subtitleView.setStyle(currentSubtitleSettings.style)
+                            val exampleCue = Cue.Builder()
+                                .setText("示例字幕") // 设置字幕内容
+                                .build()
+                            subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
                         }
                     )
                 }
-                Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
-                AndroidView(
-                    factory = { SubtitleView(it) },
-                    update = { subtitleView ->
-                        subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
-                        subtitleView.setStyle(currentSubtitleSettings.style)
-                        val exampleCue = Cue.Builder()
-                            .setText("示例字幕") // 设置字幕内容
-                            .build()
-                        subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-                    }
-                )
             }
         }
     }
