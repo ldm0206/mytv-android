@@ -99,7 +99,6 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = modifier.fillMaxWidth()
                     .padding(SAFE_AREA_HORIZONTAL_PADDING.dp)
-                    .weight(1f) // Constrain the height of LazyColumn
             ) {
                 item {
                     ColorPickerSection(
