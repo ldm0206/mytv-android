@@ -170,6 +170,17 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                         }
                     )
                 }
+                AndroidView(
+                    factory = { SubtitleView(it) },
+                    update = { subtitleView ->
+                        subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
+                        subtitleView.setStyle(currentSubtitleSettings.style)
+                        val exampleCue = Cue.Builder()
+                            .setText("示例字幕") // 设置字幕内容
+                            .build()
+                        subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
+                    }
+                )
             }
         }
     }
