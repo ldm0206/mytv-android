@@ -94,41 +94,51 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                 modifier = Modifier.width(5.gridColumns()),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
-                ColorPicker(
-                    selectedColor = foregroundColor.value,
-                    onColorSelected = { color ->
-                        foregroundColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
+                Row(
+                    modifier = Modifier.align(Alignment.Center),
+                    horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
+                ) {
+                    Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
+                    ColorPicker(
+                        selectedColor = foregroundColor.value,
+                        onColorSelected = { color ->
+                            foregroundColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
 
-                Text("背景颜色", style = MaterialTheme.typography.bodyMedium)
-                ColorPicker(
-                    selectedColor = backgroundColor.value,
-                    onColorSelected = { color -> 
-                        backgroundColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
+                    Text("背景颜色", style = MaterialTheme.typography.bodyMedium)
+                    ColorPicker(
+                        selectedColor = backgroundColor.value,
+                        onColorSelected = { color -> 
+                            backgroundColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
+                Row(
+                    modifier = Modifier.align(Alignment.Center),
+                    horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
+                ) {
 
-                Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
-                ColorPicker(
-                    selectedColor = edgeColor.value,
-                    onColorSelected = { 
-                        color -> edgeColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
+                    Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
+                    ColorPicker(
+                        selectedColor = edgeColor.value,
+                        onColorSelected = { 
+                            color -> edgeColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
 
-                Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
-                ColorPicker(
-                    selectedColor = windowColor.value,
-                    onColorSelected = { color -> 
-                        windowColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
+                    Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
+                    ColorPicker(
+                        selectedColor = windowColor.value,
+                        onColorSelected = { color -> 
+                            windowColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
                 Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
                 AndroidView(
                     factory = { SubtitleView(it) },
@@ -156,11 +166,12 @@ fun ColorPicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Black, Color.White, Color.Transparent).forEach { color ->
+            val isSelected = selectedColor == color.toArgb()
             Box(
                 modifier = Modifier
                     .size(40.dp)
                     .background(color)
-                    .border(2.dp, Color(0xFFFFD700)) // 添加金色边框
+                    .border(2.dp, if (isSelected) Color(0xFFFFD700) else Color.Gray)
                     .clickable { onColorSelected(color.toArgb()) }
             )
         }
