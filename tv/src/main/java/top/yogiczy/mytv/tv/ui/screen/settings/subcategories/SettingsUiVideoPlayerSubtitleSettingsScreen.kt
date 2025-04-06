@@ -91,78 +91,85 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         canBack = true,
         onBackPressed = onBackPressed,
     ) {
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = modifier.fillMaxWidth()
-                .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
+        Box(
+            modifier = Modifier
+                .fillMaxSize() // Ensure the parent container has bounded constraints
         ) {
-            item {
-                ColorPickerSection(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = "字体颜色",
-                    selectedColor = foregroundColor.value,
-                    onColorSelected = { color ->
-                        foregroundColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = modifier.fillMaxWidth()
+                    .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
+                    .weight(1f) // Constrain the height of LazyColumn
+
+            ) {
+                item {
+                    ColorPickerSection(
+                        modifier = Modifier.fillMaxWidth(),
+                        title = "字体颜色",
+                        selectedColor = foregroundColor.value,
+                        onColorSelected = { color ->
+                            foregroundColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
+                item {
+                    ColorPickerSection(
+                        modifier = modifier.fillMaxWidth(),
+                        title = "背景颜色",
+                        selectedColor = backgroundColor.value,
+                        onColorSelected = { color ->
+                            backgroundColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
+                item {
+                    ColorPickerSection(
+                        modifier = modifier.fillMaxWidth(),
+                        title = "边框颜色",
+                        selectedColor = edgeColor.value,
+                        onColorSelected = { color ->
+                            edgeColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
+                item {
+                    ColorPickerSection(
+                        modifier = modifier.fillMaxWidth(),
+                        title = "窗口颜色",
+                        selectedColor = windowColor.value,
+                        onColorSelected = { color ->
+                            windowColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
+                item {
+                    SizePickerSection(
+                        modifier = modifier.fillMaxWidth(),
+                        title = "字体大小",
+                        selectedSize = textSize.value,
+                        onSizeSelected = { size ->
+                            textSize.value = size
+                            updateSubtitleSettings()
+                        }
+                    )
+                }
             }
-            item {
-                ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
-                    title = "背景颜色",
-                    selectedColor = backgroundColor.value,
-                    onColorSelected = { color ->
-                        backgroundColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-            }
-            item {
-                ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
-                    title = "边框颜色",
-                    selectedColor = edgeColor.value,
-                    onColorSelected = { color ->
-                        edgeColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-            }
-            item {
-                ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
-                    title = "窗口颜色",
-                    selectedColor = windowColor.value,
-                    onColorSelected = { color ->
-                        windowColor.value = color
-                        updateSubtitleSettings()
-                    }
-                )
-            }
-            item {
-                SizePickerSection(
-                    modifier = modifier.fillMaxWidth(),
-                    title = "字体大小",
-                    selectedSize = textSize.value,
-                    onSizeSelected = { size ->
-                        textSize.value = size
-                        updateSubtitleSettings()
-                    }
-                )
-            }
+            AndroidView(
+                factory = { SubtitleView(it) },
+                update = { subtitleView ->
+                    subtitleView.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.value)
+                    subtitleView.setStyle(currentSubtitleSettings.style)
+                    val exampleCue = Cue.Builder()
+                        .setText("示例字幕") // 设置字幕内容
+                        .build()
+                    subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
+                }
+            )
         }
-        AndroidView(
-            factory = { SubtitleView(it) },
-            update = { subtitleView ->
-                subtitleView.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.value)
-                subtitleView.setStyle(currentSubtitleSettings.style)
-                val exampleCue = Cue.Builder()
-                    .setText("示例字幕") // 设置字幕内容
-                    .build()
-                subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-            }
-        )
     }
 }
 
@@ -213,37 +220,43 @@ fun ColorPicker(
     onColorSelected: (Int) -> Unit
 ) {
     // 简单的颜色选择器实现
-    LazyVerticalGrid(
-        modifier = modifier.fillMaxWidth(),
-        columns = GridCells.Fixed(12),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-        // verticalArrangement = Arrangement.spacedBy(4.dp),
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp) // Set a fixed height to avoid infinite constraints
     ) {
-        items( listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, 
-            Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent)) { color ->
-            ListItem(
-                modifier = Modifier
-                    .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
-                    .width(45.dp) 
-                    .height(45.dp)
-                    .border(2.dp, Color.DarkGray), 
+        LazyVerticalGrid(
+            modifier = modifier.fillMaxWidth(),
+            columns = GridCells.Fixed(12),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            // verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            items( listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, 
+                Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent)) { color ->
+                ListItem(
+                    modifier = Modifier
+                        .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
+                        .width(45.dp) 
+                        .height(45.dp)
+                        .border(2.dp, Color.DarkGray), 
 
-                headlineContent = {
-                    if (selectedColor == color.toArgb()) {
-                        Icon(
-                            Icons.Default.CheckCircle,
-                            contentDescription = null,
-                            modifier = Modifier.size(35.dp)
-                        )
-                    }
-                },
-                trailingContent = {},
-                colors = ListItemDefaults.colors(
-                    containerColor = color,
-                ),
-                selected = false,
-                onClick = {},
-            )
+                    headlineContent = {
+                        if (selectedColor == color.toArgb()) {
+                            Icon(
+                                Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(35.dp)
+                            )
+                        }
+                    },
+                    trailingContent = {},
+                    colors = ListItemDefaults.colors(
+                        containerColor = color,
+                    ),
+                    selected = false,
+                    onClick = {},
+                )
+            }
         }
     }
 }
@@ -255,41 +268,47 @@ fun SizePicker(
     onSizeSelected: (Float) -> Unit
 ) {
     // 简单的大小选择器实现
-    LazyVerticalGrid(
-        modifier = modifier.fillMaxWidth(),
-        columns = GridCells.Fixed(8),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-        // verticalArrangement = Arrangement.spacedBy(4.dp),
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp) // Set a fixed height to avoid infinite constraints
     ) {
-        items((1..8).map { it * 5f }){ size ->
-            ListItem(
-                modifier = Modifier
-                    .handleKeyEvents(onSelect = { onSizeSelected(size) })
-                    .width(60.dp) // 设置宽度
-                    .height(45.dp), // 设置高度
+        LazyVerticalGrid(
+            modifier = modifier.fillMaxWidth(),
+            columns = GridCells.Fixed(8),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            // verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            items((1..8).map { it * 5f }){ size ->
+                ListItem(
+                    modifier = Modifier
+                        .handleKeyEvents(onSelect = { onSizeSelected(size) })
+                        .width(60.dp) // 设置宽度
+                        .height(45.dp), // 设置高度
 
-                headlineContent = {
-                    Text(
-                        text = String.format("%.0f", size), // 保留 1 位小数
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.size(35.dp)
-                    )
-                    if (selectedSize == size) {
-                        Icon(
-                            Icons.Default.CheckCircle,
-                            contentDescription = null,
+                    headlineContent = {
+                        Text(
+                            text = String.format("%.0f", size), // 保留 1 位小数
+                            textAlign = TextAlign.Center,
                             modifier = Modifier.size(35.dp)
                         )
-                    }
-                },
-                trailingContent = {
-                },
-                colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
-                ),
-                selected = false,
-                onClick = {},
-            )
+                        if (selectedSize == size) {
+                            Icon(
+                                Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(35.dp)
+                            )
+                        }
+                    },
+                    trailingContent = {
+                    },
+                    colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
+                    ),
+                    selected = false,
+                    onClick = {},
+                )
+            }
         }
     }
 }
