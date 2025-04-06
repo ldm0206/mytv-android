@@ -281,7 +281,6 @@ fun SizePicker(
                         text = String.format("%.1f", size), // 保留 1 位小数
                         textAlign = TextAlign.Center,
                         modifier = Modifier.size(35.dp)
-                        color = Color.White
                     )
                     if (selectedSize == size) {
                         Icon(
