@@ -126,19 +126,19 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                         updateSubtitleSettings()
                     }
                 )
+                Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+                AndroidView(
+                    factory = { SubtitleView(it) },
+                    update = { subtitleView ->
+                        subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
+                        subtitleView.setStyle(currentSubtitleSettings.style)
+                        val exampleCue = Cue.Builder()
+                            .setText("示例字幕") // 设置字幕内容
+                            .build()
+                        subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
+                    }
+                )
             }
-            Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
-            AndroidView(
-                factory = { SubtitleView(it) },
-                update = { subtitleView ->
-                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
-                    subtitleView.setStyle(currentSubtitleSettings.style)
-                    val exampleCue = Cue.Builder()
-                        .setText("示例字幕") // 设置字幕内容
-                        .build()
-                    subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-                }
-            )
         }
     }
 }
@@ -152,11 +152,12 @@ fun ColorPicker(
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Black, Color.White).forEach { color ->
+        listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Black, Color.White, Color.Transparent).forEach { color ->
             Box(
                 modifier = Modifier
                     .size(40.dp)
                     .background(color)
+                    .border(2.dp, Color(0xFFFFD700)) // 添加金色边框
                     .clickable { onColorSelected(color.toArgb()) }
             )
         }

@@ -365,7 +365,7 @@ fun SettingsScreen(
                         subtitleSettingsProvider = { settingsViewModel.uiVideoPlayerSubtitle },
                         onSubtitleSettingsChanged = {
                             settingsViewModel.uiVideoPlayerSubtitle = it
-                            navController.navigateUp()
+                            // navController.navigateUp()
                         },
                         onBackPressed = { navController.navigateUp() },
                     )
