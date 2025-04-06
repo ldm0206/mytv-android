@@ -10,7 +10,14 @@ import androidx.media3.ui.CaptionStyleCompat
 @Immutable
 data class VideoPlayerSubtitleStyle(
     val textSize: Float = 1f,
-    val style: CaptionStyleCompat = CaptionStyleCompat(),
+    val style: CaptionStyleCompat = CaptionStyleCompat(
+                Color.WHITE,
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+                CaptionStyleCompat.EDGE_TYPE_NONE,
+                Color.TRANSPARENT,
+                null
+            ),
 ) {
     companion object {
         val EXAMPLE = VideoPlayerSubtitleStyle(
