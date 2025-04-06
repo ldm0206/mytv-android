@@ -4,14 +4,21 @@ import android.graphics.Color
 import androidx.compose.runtime.Immutable
 import androidx.media3.ui.CaptionStyleCompat
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.encoding.decodeStructure
+import kotlinx.serialization.encoding.encodeStructure
 
 /**
  * 频道节目列表
  */
 @Serializable
-@Immutable
 data class VideoPlayerSubtitleStyle(
     val textSize: Float = 1f,
+    @Serializable(with = CaptionStyleCompatSerializer::class)
     val style: CaptionStyleCompat = CaptionStyleCompat(
                 Color.WHITE,
                 Color.TRANSPARENT,
@@ -33,5 +40,55 @@ data class VideoPlayerSubtitleStyle(
                 null
             )
         )
+    }
+}
+
+object CaptionStyleCompatSerializer : KSerializer<CaptionStyleCompat> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CaptionStyleCompat") {
+        element<Int>("foregroundColor")
+        element<Int>("backgroundColor")
+        element<Int>("windowColor")
+        element<Int>("edgeType")
+        element<Int>("edgeColor")
+    }
+
+    override fun serialize(encoder: Encoder, value: CaptionStyleCompat) {
+        encoder.encodeStructure(descriptor) {
+            encodeIntElement(descriptor, 0, value.foregroundColor)
+            encodeIntElement(descriptor, 1, value.backgroundColor)
+            encodeIntElement(descriptor, 2, value.windowColor)
+            encodeIntElement(descriptor, 3, value.edgeType)
+            encodeIntElement(descriptor, 4, value.edgeColor)
+        }
+    }
+
+    override fun deserialize(decoder: Decoder): CaptionStyleCompat {
+        return decoder.decodeStructure(descriptor) {
+            var foregroundColor = 0
+            var backgroundColor = 0
+            var windowColor = 0
+            var edgeType = 0
+            var edgeColor = 0
+
+            while (true) {
+                when (val index = decodeElementIndex(descriptor)) {
+                    0 -> foregroundColor = decodeIntElement(descriptor, 0)
+                    1 -> backgroundColor = decodeIntElement(descriptor, 1)
+                    2 -> windowColor = decodeIntElement(descriptor, 2)
+                    3 -> edgeType = decodeIntElement(descriptor, 3)
+                    4 -> edgeColor = decodeIntElement(descriptor, 4)
+                    else -> break
+                }
+            }
+
+            CaptionStyleCompat(
+                foregroundColor,
+                backgroundColor,
+                windowColor,
+                edgeType,
+                edgeColor,
+                null // 字体类型可以设置为 null
+            )
+        }
     }
 }
