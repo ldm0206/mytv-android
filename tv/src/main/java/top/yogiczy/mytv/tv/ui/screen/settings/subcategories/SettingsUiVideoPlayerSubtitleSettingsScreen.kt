@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -49,26 +50,27 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
     onSubtitleSettingsChanged: (VideoPlayerSubtitleStyle) -> Unit = {},
     onBackPressed: () -> Unit = {},
 ) {
-    val currentSubtitleSettings = subtitleSettingsProvider()
+    var currentSubtitleSettings = subtitleSettingsProvider()
 
     val childPadding = rememberChildPadding()
 
     val textSize = remember { mutableStateOf(currentSubtitleSettings.textSize) }
     val foregroundColor = remember { mutableStateOf(currentSubtitleSettings.style.foregroundColor) }
     val backgroundColor = remember { mutableStateOf(currentSubtitleSettings.style.backgroundColor) }
-    val outlineColor = remember { mutableStateOf(currentSubtitleSettings.style.outlineColor) }
+    val edgeColor = remember { mutableStateOf(currentSubtitleSettings.style.edgeColor) }
     val windowColor = remember { mutableStateOf(currentSubtitleSettings.style.windowColor) }
 
     fun updateSubtitleSettings() {
         currentSubtitleSettings = VideoPlayerSubtitleStyle(
             textSize = textSize.value,
-            style = CaptionStyleCompat.Builder()
-                .setForegroundColor(foregroundColor.value)
-                .setBackgroundColor(backgroundColor.value)
-                .setEdgeType(CaptionStyleCompat.EDGE_TYPE_OUTLINE)
-                .setEdgeColor(outlineColor.value)
-                .setWindowColor(windowColor.value)
-                .build()
+            style = CaptionStyleCompat(
+                foregroundColor.value,
+                backgroundColor.value,
+                windowColor.value,
+                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
+                edgeColor.value,
+                null // 字体类型可以设置为 null
+            )
         )
         onSubtitleSettingsChanged(currentSubtitleSettings)
     }
@@ -94,9 +96,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     selectedColor = foregroundColor.value,
                     onColorSelected = { color ->
                         foregroundColor.value = color
-                        LaunchedEffect(color) {
-                            updateSubtitleSettings()
-                        }
+                        updateSubtitleSettings()
                     }
                 )
 
@@ -105,20 +105,16 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     selectedColor = backgroundColor.value,
                     onColorSelected = { color -> 
                         backgroundColor.value = color
-                        LaunchedEffect(color) {
-                            updateSubtitleSettings()
-                        }
+                        updateSubtitleSettings()
                     }
                 )
 
                 Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
                 ColorPicker(
-                    selectedColor = outlineColor.value,
+                    selectedColor = edgeColor.value,
                     onColorSelected = { 
-                        color -> outlineColor.value = color
-                        LaunchedEffect(color) {
-                            updateSubtitleSettings()
-                        }
+                        color -> edgeColor.value = color
+                        updateSubtitleSettings()
                     }
                 )
 
@@ -127,9 +123,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     selectedColor = windowColor.value,
                     onColorSelected = { color -> 
                         windowColor.value = color
-                        LaunchedEffect(color) {
-                            updateSubtitleSettings()
-                        }
+                        updateSubtitleSettings()
                     }
                 )
             }
