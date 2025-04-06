@@ -88,10 +88,10 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         canBack = true,
         onBackPressed = onBackPressed,
     ) {
-        Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = modifier.fillMaxWidth()
+                .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
             Column(
                 modifier = Modifier.align(Alignment.Center),
@@ -233,7 +233,8 @@ fun ColorPicker(
             ListItem(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
-                    .size(45.dp)
+                    .width(45.dp) 
+                    .height(45.dp), 
                     .border(2.dp, Color.DarkGray), 
 
                 headlineContent = {
