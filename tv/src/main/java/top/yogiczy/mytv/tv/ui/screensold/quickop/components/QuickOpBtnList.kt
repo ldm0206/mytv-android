@@ -76,7 +76,7 @@ fun QuickOpBtnList(
     }
     if (playerMetadata.audio != null) {
         val audioTrack = playerMetadata.audio
-        currentAudioTrack = audioTrack.channels.humanizeAudioChannels() //audioTrack.mimeType.toString() + 
+        currentAudioTrack = audioTrack.channels?.humanizeAudioChannels()?: "null" //audioTrack.mimeType.toString() + 
             //(if (audioTrack?.decoder != null) ",${audioTrack.decoder.toString()}" else "") +
             // (if (audioTrack?.channelsLabel != null) ",${audioTrack.channelsLabel}" else "")
     }
