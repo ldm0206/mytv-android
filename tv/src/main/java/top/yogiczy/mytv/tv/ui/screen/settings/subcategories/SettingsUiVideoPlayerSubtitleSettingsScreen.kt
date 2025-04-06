@@ -106,6 +106,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     ) {
                         Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
                         ColorPicker(
+                            modifier = Modifier.fillMaxHeight(),
                             selectedColor = foregroundColor.value,
                             onColorSelected = { color ->
                                 foregroundColor.value = color
@@ -118,6 +119,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     ) {
                         Text("背景颜色", style = MaterialTheme.typography.bodyMedium)
                         ColorPicker(
+                            modifier = Modifier.fillMaxHeight(),
                             selectedColor = backgroundColor.value,
                             onColorSelected = { color -> 
                                 backgroundColor.value = color
@@ -135,6 +137,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     ) {
                         Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
                         ColorPicker(
+                            modifier = Modifier.fillMaxHeight(),
                             selectedColor = edgeColor.value,
                             onColorSelected = { 
                                 color -> edgeColor.value = color
@@ -147,6 +150,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     ) {
                         Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
                         ColorPicker(
+                            modifier = Modifier.fillMaxHeight(),
                             selectedColor = windowColor.value,
                             onColorSelected = { color -> 
                                 windowColor.value = color
@@ -163,7 +167,8 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
                         Text("字体大小", style = MaterialTheme.typography.bodyMedium)
-                        sizePicker(
+                        SizePicker(
+                            modifier = Modifier.fillMaxHeight(),
                             selectedSize = textSize.value,
                             onSizeSelected = { size ->
                                 textSize.value = size
@@ -195,6 +200,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
 
 @Composable
 fun ColorPicker(
+    modifier: Modifier = Modifier,
     selectedColor: Int,
     onColorSelected: (Int) -> Unit
 ) {
@@ -233,7 +239,8 @@ fun ColorPicker(
 }
 
 @Composable
-fun sizePicker(
+fun SizePicker(
+    modifier: Modifier = Modifier,
     selectedSize: Float,
     onSizeSelected: (Float) -> Unit
 ) {
