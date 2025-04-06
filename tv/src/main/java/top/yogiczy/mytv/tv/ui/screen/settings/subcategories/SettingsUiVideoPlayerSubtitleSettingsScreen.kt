@@ -49,7 +49,6 @@ import top.yogiczy.mytv.tv.ui.utils.gridColumns
 import top.yogiczy.mytv.core.data.entities.subtitle.VideoPlayerSubtitleStyle
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import java.text.DecimalFormat
-import androidx.tv.material3.ListItem
 
 @Composable
 fun SettingsUiVideoPlayerSubtitleSettingsScreen(
@@ -204,15 +203,10 @@ fun ColorPicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Black, Color.White, Color.Transparent).forEach { color ->
-            val isSelected = 
-            Box(
-                modifier = Modifier
-                    .size(45.dp)
-                    .clickable { }
-            )
             ListItem(
                 modifier = Modifier
-                    .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) }),
+                    .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
+                    .size(45.dp),
                 headlineContent = {
                     // Text(
                     //     text = String.format("%.1f", size), // 保留 1 位小数
@@ -251,9 +245,9 @@ fun sizePicker(
         listOf(0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f).forEach { size ->
             ListItem(
                 modifier = Modifier
-                    .handleKeyEvents(onSelect = { onSizeSelected(size) }),
+                    .handleKeyEvents(onSelect = { onSizeSelected(size) })
                     .width(60.dp) // 设置宽度
-                    .height(30.dp) // 设置高度
+                    .height(30.dp), // 设置高度
 
                 headlineContent = {
                     Text(
