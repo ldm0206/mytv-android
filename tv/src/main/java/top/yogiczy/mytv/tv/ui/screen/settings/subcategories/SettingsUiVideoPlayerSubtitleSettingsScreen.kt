@@ -98,6 +98,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         ) {
             item {
                 ColorPickerSection(
+                    modifier = modifier.fillMaxWidth(),
                     title = "字体颜色",
                     selectedColor = foregroundColor.value,
                     onColorSelected = { color ->
@@ -108,6 +109,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
+                    modifier = modifier.fillMaxWidth(),
                     title = "背景颜色",
                     selectedColor = backgroundColor.value,
                     onColorSelected = { color ->
@@ -118,6 +120,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
+                    modifier = modifier.fillMaxWidth(),
                     title = "边框颜色",
                     selectedColor = edgeColor.value,
                     onColorSelected = { color ->
@@ -128,6 +131,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
+                    modifier = modifier.fillMaxWidth(),
                     title = "窗口颜色",
                     selectedColor = windowColor.value,
                     onColorSelected = { color ->
@@ -138,6 +142,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 SizePickerSection(
+                    modifier = modifier.fillMaxWidth(),
                     title = "字体大小",
                     selectedSize = textSize.value,
                     onSizeSelected = { size ->
@@ -163,6 +168,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
 
 @Composable
 fun ColorPickerSection(
+    modifier: Modifier = Modifier,
     title: String,
     selectedColor: Int,
     onColorSelected: (Int) -> Unit
@@ -172,7 +178,7 @@ fun ColorPickerSection(
     ) {
         Text(title, style = MaterialTheme.typography.bodyMedium)
         ColorPicker(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = modifier.fillMaxWidth(),
             selectedColor = selectedColor,
             onColorSelected = onColorSelected
         )
@@ -181,6 +187,7 @@ fun ColorPickerSection(
 
 @Composable
 fun SizePickerSection(
+    modifier: Modifier = Modifier,
     title: String,
     selectedSize: Float,
     onSizeSelected: (Float) -> Unit
@@ -190,7 +197,7 @@ fun SizePickerSection(
     ) {
         Text(title, style = MaterialTheme.typography.bodyMedium)
         SizePicker(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = modifier.fillMaxWidth(),
             selectedSize = selectedSize,
             onSizeSelected = onSizeSelected
         )
