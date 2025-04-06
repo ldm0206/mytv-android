@@ -119,6 +119,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                             backgroundColor.value = color
                             updateSubtitleSettings()
                         }
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -227,7 +228,8 @@ fun ColorPicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent).forEach { color ->
+        items( listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, 
+            Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent)) { color ->
             ListItem(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
@@ -267,7 +269,7 @@ fun SizePicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        listOf(0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f).forEach { size ->
+        items((1..8).map { it * 0.5f }){ size ->
             ListItem(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onSizeSelected(size) })
