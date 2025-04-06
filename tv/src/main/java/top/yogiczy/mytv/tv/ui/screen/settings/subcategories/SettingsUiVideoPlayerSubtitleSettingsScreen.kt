@@ -49,7 +49,7 @@ import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
 import top.yogiczy.mytv.tv.ui.utils.gridColumns
 import top.yogiczy.mytv.core.data.entities.subtitle.VideoPlayerSubtitleStyle
 import top.yogiczy.mytv.tv.ui.utils.Configs
-import top.yogiczy.mytv.tv.ui.material.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 
 import java.text.DecimalFormat
 
@@ -91,7 +91,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         canBack = true,
         onBackPressed = onBackPressed,
     ) {
-        LazyRow(
+        LazyColumn(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier.fillMaxWidth()
                 .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
@@ -109,7 +109,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = modifier.fillMaxWidth(),
                     title = "背景颜色",
                     selectedColor = backgroundColor.value,
                     onColorSelected = { color ->
@@ -120,7 +120,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = modifier.fillMaxWidth(),
                     title = "边框颜色",
                     selectedColor = edgeColor.value,
                     onColorSelected = { color ->
@@ -131,7 +131,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = modifier.fillMaxWidth(),
                     title = "窗口颜色",
                     selectedColor = windowColor.value,
                     onColorSelected = { color ->
@@ -142,7 +142,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 SizePickerSection(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = modifier.fillMaxWidth(),
                     title = "字体大小",
                     selectedSize = textSize.value,
                     onSizeSelected = { size ->
