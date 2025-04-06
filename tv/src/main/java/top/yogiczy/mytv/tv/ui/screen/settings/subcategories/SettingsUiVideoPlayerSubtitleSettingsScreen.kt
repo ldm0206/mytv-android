@@ -210,38 +210,42 @@ fun ColorPicker(
     selectedColor: Int,
     onColorSelected: (Int) -> Unit
 ) {
-    // 简单的颜色选择器实现
-    LazyVerticalGrid(
-        modifier = modifier.fillMaxWidth(),
-        columns = GridCells.Fixed(12),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-        // verticalArrangement = Arrangement.spacedBy(4.dp),
+    Box(
+        modifier = modifier.fillMaxWidth()
     ) {
-        items( listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, 
-            Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent)) { color ->
-            ListItem(
-                modifier = Modifier
-                    .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
-                    .width(45.dp) 
-                    .height(45.dp)
-                    .border(2.dp, Color.DarkGray), 
+        // 简单的颜色选择器实现
+        LazyVerticalGrid(
+            modifier = modifier.fillMaxWidth(),
+            columns = GridCells.Fixed(12),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            // verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            items( listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, 
+                Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent)) { color ->
+                ListItem(
+                    modifier = Modifier
+                        .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
+                        .width(45.dp) 
+                        .height(45.dp)
+                        .border(2.dp, Color.DarkGray), 
 
-                headlineContent = {
-                    if (selectedColor == color.toArgb()) {
-                        Icon(
-                            Icons.Default.CheckCircle,
-                            contentDescription = null,
-                            modifier = Modifier.size(35.dp)
-                        )
-                    }
-                },
-                trailingContent = {},
-                colors = ListItemDefaults.colors(
-                    containerColor = color,
-                ),
-                selected = false,
-                onClick = {},
-            )
+                    headlineContent = {
+                        if (selectedColor == color.toArgb()) {
+                            Icon(
+                                Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(35.dp)
+                            )
+                        }
+                    },
+                    trailingContent = {},
+                    colors = ListItemDefaults.colors(
+                        containerColor = color,
+                    ),
+                    selected = false,
+                    onClick = {},
+                )
+            }
         }
     }
 }
@@ -253,41 +257,45 @@ fun SizePicker(
     onSizeSelected: (Float) -> Unit
 ) {
     // 简单的大小选择器实现
-    LazyVerticalGrid(
-        modifier = modifier.fillMaxWidth(),
-        columns = GridCells.Fixed(8),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-        // verticalArrangement = Arrangement.spacedBy(4.dp),
+    Box(
+        modifier = modifier.fillMaxWidth()
     ) {
-        items((1..8).map { it * 5f }){ size ->
-            ListItem(
-                modifier = Modifier
-                    .handleKeyEvents(onSelect = { onSizeSelected(size) })
-                    .width(60.dp) // 设置宽度
-                    .height(45.dp), // 设置高度
+        LazyVerticalGrid(
+            modifier = modifier.fillMaxWidth(),
+            columns = GridCells.Fixed(8),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            // verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            items((1..8).map { it * 5f }){ size ->
+                ListItem(
+                    modifier = Modifier
+                        .handleKeyEvents(onSelect = { onSizeSelected(size) })
+                        .width(60.dp) // 设置宽度
+                        .height(45.dp), // 设置高度
 
-                headlineContent = {
-                    Text(
-                        text = String.format("%.0f", size), // 保留 1 位小数
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.size(35.dp)
-                    )
-                    if (selectedSize == size) {
-                        Icon(
-                            Icons.Default.CheckCircle,
-                            contentDescription = null,
+                    headlineContent = {
+                        Text(
+                            text = String.format("%.0f", size), // 保留 1 位小数
+                            textAlign = TextAlign.Center,
                             modifier = Modifier.size(35.dp)
                         )
-                    }
-                },
-                trailingContent = {
-                },
-                colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
-                ),
-                selected = false,
-                onClick = {},
-            )
+                        if (selectedSize == size) {
+                            Icon(
+                                Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(35.dp)
+                            )
+                        }
+                    },
+                    trailingContent = {
+                    },
+                    colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
+                    ),
+                    selected = false,
+                    onClick = {},
+                )
+            }
         }
     }
 }
