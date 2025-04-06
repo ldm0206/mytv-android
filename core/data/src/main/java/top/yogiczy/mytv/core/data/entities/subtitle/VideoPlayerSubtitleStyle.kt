@@ -3,10 +3,12 @@ package top.yogiczy.mytv.core.data.entities.subtitle
 import android.graphics.Color
 import androidx.compose.runtime.Immutable
 import androidx.media3.ui.CaptionStyleCompat
+import kotlinx.serialization.Serializable
+
 /**
  * 频道节目列表
  */
-
+@Serializable
 @Immutable
 data class VideoPlayerSubtitleStyle(
     val textSize: Float = 1f,
