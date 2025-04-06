@@ -208,21 +208,15 @@ fun ColorPicker(
                     .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
                     .size(45.dp),
                 headlineContent = {
-                    // Text(
-                    //     text = String.format("%.1f", size), // 保留 1 位小数
-                    //     textAlign = TextAlign.Center,
-                    //     modifier = Modifier.fillMaxSize(),
-                    //     color = Color.White
-                    // )
-                },
-                trailingContent = {
                     if (selectedColor == color.toArgb()) {
                         Icon(
                             Icons.Default.CheckCircle,
                             contentDescription = null,
+                            modifier = Modifier.fillMaxHeight()
                         )
                     }
                 },
+                trailingContent = {},
                 colors = ListItemDefaults.colors(
                     containerColor = color,
                 ),
@@ -253,17 +247,18 @@ fun sizePicker(
                     Text(
                         text = String.format("%.1f", size), // 保留 1 位小数
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.fillMaxHeight(),
                         color = Color.White
                     )
-                },
-                trailingContent = {
                     if (selectedSize == size) {
                         Icon(
                             Icons.Default.CheckCircle,
                             contentDescription = null,
+                            modifier = Modifier.fillMaxHeight()
                         )
                     }
+                },
+                trailingContent = {
                 },
                 colors = ListItemDefaults.colors(
                     containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
