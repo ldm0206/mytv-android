@@ -209,7 +209,7 @@ fun ColorPicker(
         modifier = modifier,
         columns = GridCells.Fixed(7),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent).forEach { color ->
             ListItem(
@@ -249,7 +249,7 @@ fun SizePicker(
         modifier = modifier,
         columns = GridCells.Fixed(7),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         listOf(0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f).forEach { size ->
             ListItem(
