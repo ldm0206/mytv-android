@@ -199,8 +199,6 @@ fun ColorPicker(
     onColorSelected: (Int) -> Unit
 ) {
     // 简单的颜色选择器实现
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(7),
