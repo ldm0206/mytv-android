@@ -92,11 +92,11 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
             Column(
-                modifier = Modifier.width(5.gridColumns()),
+                modifier = Modifier.align(Alignment.Center),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Row(
-                    modifier = Modifier.align(Alignment.Center),
+                    modifier = Modifier.width(5.gridColumns()),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
                     Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
@@ -118,7 +118,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     )
                 }
                 Row(
-                    modifier = Modifier.align(Alignment.Center),
+                    modifier = Modifier.width(5.gridColumns()),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
 
