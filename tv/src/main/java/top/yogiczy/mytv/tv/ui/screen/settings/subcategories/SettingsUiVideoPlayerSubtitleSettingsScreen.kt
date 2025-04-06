@@ -234,7 +234,7 @@ fun sizePicker(
                     .clickable { onSizeSelected(size) }
             ) {
                 Text(
-                    text = "${size.toInt()}",
+                    text = String.format("%.1f", size), // 保留 1 位小数
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
