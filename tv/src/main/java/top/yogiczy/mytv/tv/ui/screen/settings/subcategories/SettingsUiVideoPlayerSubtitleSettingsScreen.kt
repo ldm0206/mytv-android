@@ -227,7 +227,8 @@ fun sizePicker(
             val isSelected = selectedSize == size
             Box(
                 modifier = Modifier
-                    .size(45.dp)
+                    .width(60.dp) // 设置宽度
+                    .height(30.dp) // 设置高度
                     .background(if (isSelected) Color(0xFFFFD700) else Color.Gray)
                     .clickable { onSizeSelected(size) }
             ) {
