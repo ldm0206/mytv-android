@@ -94,14 +94,17 @@ fun VideoPlayerScreen(
         }
 
         if (state.instance is Media3VideoPlayer) {
+            val textSize = settingsVM.uiVideoPlayerSubtitle.textSize
+            val style = settingsVM.uiVideoPlayerSubtitle.style
+
             AndroidView(
                 factory = { SubtitleView(context) },
                 update = { subtitleView ->
                     // 设置字幕字体大小（相对于视频高度的比例）
-                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * settingsVM.uiVideoPlayerSubtitle.textSize)
+                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize)
                     // 设置字幕的样式
-                    subtitleView.setStyle(settingsVM.uiVideoPlayerSubtitle.style)
-                    state.instance.onCues { cues -> it.setCues(cues) }
+                    subtitleView.setStyle(style)
+                    state.instance.onCues { cues -> subtitleView.setCues(cues) }
                 },
             )
         }

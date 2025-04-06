@@ -1,6 +1,7 @@
 package top.yogiczy.mytv.tv.ui.utils
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.encodeToString
 import top.yogiczy.mytv.core.data.entities.channel.Channel
 import top.yogiczy.mytv.core.data.entities.channel.ChannelFavoriteList
@@ -958,7 +959,7 @@ object Configs {
         val uiUseClassicPanelScreen: Boolean? = null,
         val uiDensityScaleRatio: Float? = null,
         val uiFontScaleRatio: Float? = null,
-        val uiVideoPlayerSubtitle: VideoPlayerSubtitleStyle? = null,
+        val uiVideoPlayerSubtitle: @Contextual VideoPlayerSubtitleStyle? = null,
         val uiTimeShowMode: UiTimeShowMode? = null,
         val uiFocusOptimize: Boolean? = null,
         val uiScreenAutoCloseDelay: Long? = null,
