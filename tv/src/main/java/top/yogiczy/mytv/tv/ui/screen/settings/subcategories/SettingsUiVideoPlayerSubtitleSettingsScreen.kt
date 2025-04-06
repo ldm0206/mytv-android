@@ -92,7 +92,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         onBackPressed = onBackPressed,
     ) {
         LazyColumn(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier.fillMaxWidth()
                 .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
