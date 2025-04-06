@@ -48,6 +48,8 @@ import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
 import top.yogiczy.mytv.tv.ui.utils.gridColumns
 import top.yogiczy.mytv.core.data.entities.subtitle.VideoPlayerSubtitleStyle
 import top.yogiczy.mytv.tv.ui.utils.Configs
+import top.yogiczy.mytv.tv.ui.material.LazyRow
+
 import java.text.DecimalFormat
 
 @Composable
