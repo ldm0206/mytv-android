@@ -11,6 +11,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.encoding.decodeStructure
 import kotlinx.serialization.encoding.encodeStructure
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.PrimitiveKind
 
 /**
  * 频道节目列表
@@ -45,11 +47,11 @@ data class VideoPlayerSubtitleStyle(
 
 object CaptionStyleCompatSerializer : KSerializer<CaptionStyleCompat> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CaptionStyleCompat") {
-        element<Int>("foregroundColor")
-        element<Int>("backgroundColor")
-        element<Int>("windowColor")
-        element<Int>("edgeType")
-        element<Int>("edgeColor")
+        element("foregroundColor", PrimitiveSerialDescriptor("foregroundColor", PrimitiveKind.INT))
+        element("backgroundColor", PrimitiveSerialDescriptor("backgroundColor", PrimitiveKind.INT))
+        element("windowColor", PrimitiveSerialDescriptor("windowColor", PrimitiveKind.INT))
+        element("edgeType", PrimitiveSerialDescriptor("edgeType", PrimitiveKind.INT))
+        element("edgeColor", PrimitiveSerialDescriptor("edgeColor", PrimitiveKind.INT))
     }
 
     override fun serialize(encoder: Encoder, value: CaptionStyleCompat) {
