@@ -2,6 +2,7 @@ package top.yogiczy.mytv.tv.ui.screen.settings.subcategories
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,15 +10,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.layout.size
-
+import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,9 +31,9 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.ui.SubtitleView
-import androidx.media3.common.Cue
-import android.graphics.Color
-
+import androidx.media3.ui.CaptionStyleCompat
+import androidx.media3.common.text.Cue
+import androidx.compose.ui.graphics.Color
 import top.yogiczy.mytv.tv.ui.rememberChildPadding
 import top.yogiczy.mytv.tv.ui.screen.components.AppScreen
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
@@ -53,20 +54,23 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
     val childPadding = rememberChildPadding()
 
     val textSize = remember { mutableStateOf(currentSubtitleSettings.textSize) }
-    val textColor = remember { mutableStateOf(currentSubtitleSettings.textColor) }
-    val backgroundColor = remember { mutableStateOf(currentSubtitleSettings.backgroundColor) }
-    val outlineColor = remember { mutableStateOf(currentSubtitleSettings.outlineColor) }
-    val outlineWidth = remember { mutableStateOf(currentSubtitleSettings.outlineWidth) }
+    val foregroundColor = remember { mutableStateOf(currentSubtitleSettings.style.foregroundColor) }
+    val backgroundColor = remember { mutableStateOf(currentSubtitleSettings.style.backgroundColor) }
+    val outlineColor = remember { mutableStateOf(currentSubtitleSettings.style.outlineColor) }
+    val windowColor = remember { mutableStateOf(currentSubtitleSettings.style.windowColor) }
 
     fun updateSubtitleSettings() {
-        val updatedSettings = VideoPlayerSubtitleStyle(
+        currentSubtitleSettings = VideoPlayerSubtitleStyle(
             textSize = textSize.value,
-            textColor = textColor.value,
-            backgroundColor = backgroundColor.value,
-            outlineColor = outlineColor.value,
-            outlineWidth = outlineWidth.value
+            style = CaptionStyleCompat.Builder()
+                .setForegroundColor(foregroundColor.value)
+                .setBackgroundColor(backgroundColor.value)
+                .setEdgeType(CaptionStyleCompat.EDGE_TYPE_OUTLINE)
+                .setEdgeColor(outlineColor.value)
+                .setWindowColor(windowColor.value)
+                .build()
         )
-        onSubtitleSettingsChanged(updatedSettings)
+        onSubtitleSettingsChanged(currentSubtitleSettings)
     }
 
     AppScreen(
@@ -87,9 +91,9 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             ) {
                 Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
                 ColorPicker(
-                    selectedColor = textColor.value,
+                    selectedColor = foregroundColor.value,
                     onColorSelected = { color ->
-                        textColor.value = color
+                        foregroundColor.value = color
                         LaunchedEffect(color) {
                             updateSubtitleSettings()
                         }
@@ -117,23 +121,29 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                         }
                     }
                 )
+
+                Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
+                ColorPicker(
+                    selectedColor = windowColor.value,
+                    onColorSelected = { color -> 
+                        windowColor.value = color
+                        LaunchedEffect(color) {
+                            updateSubtitleSettings()
+                        }
+                    }
+                )
             }
             Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
             AndroidView(
                 factory = { SubtitleView(it) },
-                    update = { subtitleView ->
-                        subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
-                        subtitleView.setForegroundColor(textColor.value)
-                        subtitleView.setBackgroundColor(backgroundColor.value)
-                        subtitleView.setOutlineColor(outlineColor.value)
-                        subtitleView.setOutlineWidth(outlineWidth.value)
-                        val exampleCue = Cue.Builder()
-                            .setText("示例字幕") // 设置字幕内容
-                            .build()
-                        subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-
-                    },
-                    modifier = Modifier.weight(1f)
+                update = { subtitleView ->
+                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
+                    subtitleView.setStyle(currentSubtitleSettings.style)
+                    val exampleCue = Cue.Builder()
+                        .setText("示例字幕") // 设置字幕内容
+                        .build()
+                    subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
+                }
             )
         }
     }

@@ -2,27 +2,27 @@ package top.yogiczy.mytv.core.data.entities.subtitle
 
 import android.graphics.Color
 import androidx.compose.runtime.Immutable
-import kotlinx.serialization.Serializable
-
+import androidx.media3.ui.CaptionStyleCompat
 /**
  * 频道节目列表
  */
-@Serializable
+
 @Immutable
 data class VideoPlayerSubtitleStyle(
     val textSize: Float = 1f,
-    val foregroundColor: Int = Color.WHITE,
-    val backgroundColor: Int = Color.BLACK,
-    val outlineColor: Int = Color.BLACK,
-    val outlineWidth: Float = 0.5f,
+    val style: CaptionStyleCompat = CaptionStyleCompat(),
 ) {
     companion object {
         val EXAMPLE = VideoPlayerSubtitleStyle(
             textSize = 1f,
-            foregroundColor = Color.WHITE,
-            backgroundColor = Color.BLACK,
-            outlineColor = Color.BLACK,
-            outlineWidth = 0.5f,
+            style = CaptionStyleCompat(
+                Color.WHITE,
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+                CaptionStyleCompat.EDGE_TYPE_NONE,
+                Color.TRANSPARENT,
+                null
+            )
         )
     }
 }
