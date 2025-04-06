@@ -49,6 +49,7 @@ import top.yogiczy.mytv.tv.ui.utils.gridColumns
 import top.yogiczy.mytv.core.data.entities.subtitle.VideoPlayerSubtitleStyle
 import top.yogiczy.mytv.tv.ui.utils.Configs
 import java.text.DecimalFormat
+import androidx.tv.material3.ListItem
 
 @Composable
 fun SettingsUiVideoPlayerSubtitleSettingsScreen(
@@ -203,13 +204,36 @@ fun ColorPicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Black, Color.White, Color.Transparent).forEach { color ->
-            val isSelected = selectedColor == color.toArgb()
+            val isSelected = 
             Box(
                 modifier = Modifier
                     .size(45.dp)
-                    .background(color)
-                    .border(2.dp, if (isSelected) Color(0xFFFFD700) else Color.Gray)
-                    .clickable { onColorSelected(color.toArgb()) }
+                    .clickable { }
+            )
+            ListItem(
+                modifier = Modifier
+                    .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) }),
+                headlineContent = {
+                    // Text(
+                    //     text = String.format("%.1f", size), // 保留 1 位小数
+                    //     textAlign = TextAlign.Center,
+                    //     modifier = Modifier.fillMaxSize(),
+                    //     color = Color.White
+                    // )
+                },
+                trailingContent = {
+                    if (selectedColor == color.toArgb()) {
+                        Icon(
+                            Icons.Default.CheckCircle,
+                            contentDescription = null,
+                        )
+                    }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = color,
+                ),
+                selected = false,
+                onClick = {},
             )
         }
     }
@@ -225,21 +249,34 @@ fun sizePicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         listOf(0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f).forEach { size ->
-            val isSelected = selectedSize == size
-            Box(
+            ListItem(
                 modifier = Modifier
+                    .handleKeyEvents(onSelect = { onSizeSelected(size) }),
                     .width(60.dp) // 设置宽度
                     .height(30.dp) // 设置高度
-                    .background(if (isSelected) Color(0xFFFFD700) else Color.Gray)
-                    .clickable { onSizeSelected(size) }
-            ) {
-                Text(
-                    text = String.format("%.1f", size), // 保留 1 位小数
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.White
-                )
-            }
+
+                headlineContent = {
+                    Text(
+                        text = String.format("%.1f", size), // 保留 1 位小数
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxSize(),
+                        color = Color.White
+                    )
+                },
+                trailingContent = {
+                    if (selectedSize == size) {
+                        Icon(
+                            Icons.Default.CheckCircle,
+                            contentDescription = null,
+                        )
+                    }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
+                ),
+                selected = false,
+                onClick = {},
+            )
         }
     }
 }
