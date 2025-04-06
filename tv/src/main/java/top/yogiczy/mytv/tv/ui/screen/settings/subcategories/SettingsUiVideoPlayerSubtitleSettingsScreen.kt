@@ -212,7 +212,7 @@ fun ColorPicker(
 ) {
     // 简单的颜色选择器实现
     LazyVerticalGrid(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         columns = GridCells.Fixed(12),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -254,7 +254,7 @@ fun SizePicker(
 ) {
     // 简单的大小选择器实现
     LazyVerticalGrid(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         columns = GridCells.Fixed(8),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
