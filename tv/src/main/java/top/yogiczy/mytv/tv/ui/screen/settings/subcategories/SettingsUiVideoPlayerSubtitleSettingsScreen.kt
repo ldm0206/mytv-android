@@ -98,7 +98,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         ) {
             item {
                 ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     title = "字体颜色",
                     selectedColor = foregroundColor.value,
                     onColorSelected = { color ->
@@ -109,7 +109,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     title = "背景颜色",
                     selectedColor = backgroundColor.value,
                     onColorSelected = { color ->
@@ -120,7 +120,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     title = "边框颜色",
                     selectedColor = edgeColor.value,
                     onColorSelected = { color ->
@@ -131,7 +131,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 ColorPickerSection(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     title = "窗口颜色",
                     selectedColor = windowColor.value,
                     onColorSelected = { color ->
@@ -142,7 +142,7 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             }
             item {
                 SizePickerSection(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     title = "字体大小",
                     selectedSize = textSize.value,
                     onSizeSelected = { size ->
@@ -174,11 +174,12 @@ fun ColorPickerSection(
     onColorSelected: (Int) -> Unit
 ) {
     Column(
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(title, style = MaterialTheme.typography.bodyMedium)
         ColorPicker(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier,
             selectedColor = selectedColor,
             onColorSelected = onColorSelected
         )
@@ -193,11 +194,12 @@ fun SizePickerSection(
     onSizeSelected: (Float) -> Unit
 ) {
     Column(
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(title, style = MaterialTheme.typography.bodyMedium)
         SizePicker(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier,
             selectedSize = selectedSize,
             onSizeSelected = onSizeSelected
         )
