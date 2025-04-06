@@ -101,81 +101,61 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
-                        ColorPicker(
-                            modifier = Modifier.fillMaxHeight(),
-                            selectedColor = foregroundColor.value,
-                            onColorSelected = { color ->
-                                foregroundColor.value = color
-                                updateSubtitleSettings()
-                            }
-                        )
-                    }
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text("背景颜色", style = MaterialTheme.typography.bodyMedium)
-                        ColorPicker(
-                            modifier = Modifier.fillMaxHeight(),
-                            selectedColor = backgroundColor.value,
-                            onColorSelected = { color -> 
-                                backgroundColor.value = color
-                                updateSubtitleSettings()
-                            }
-                        )
-                    }
+                    // 字体颜色选择器
+                    ColorPickerSection(
+                        title = "字体颜色",
+                        selectedColor = foregroundColor.value,
+                        onColorSelected = { color ->
+                            foregroundColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+
+                    // 背景颜色选择器
+                    ColorPickerSection(
+                        title = "背景颜色",
+                        selectedColor = backgroundColor.value,
+                        onColorSelected = { color ->
+                            backgroundColor.value = color
+                            updateSubtitleSettings()
+                        }
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text("边框颜色", style = MaterialTheme.typography.bodyMedium)
-                        ColorPicker(
-                            modifier = Modifier.fillMaxHeight(),
-                            selectedColor = edgeColor.value,
-                            onColorSelected = { 
-                                color -> edgeColor.value = color
-                                updateSubtitleSettings()
-                            }
-                        )
-                    }
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text("窗口颜色", style = MaterialTheme.typography.bodyMedium)
-                        ColorPicker(
-                            modifier = Modifier.fillMaxHeight(),
-                            selectedColor = windowColor.value,
-                            onColorSelected = { color -> 
-                                windowColor.value = color
-                                updateSubtitleSettings()
-                            }
-                        )
-                    }
+                    // 边框颜色选择器
+                    ColorPickerSection(
+                        title = "边框颜色",
+                        selectedColor = edgeColor.value,
+                        onColorSelected = { color ->
+                            edgeColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
+
+                    // 窗口颜色选择器
+                    ColorPickerSection(
+                        title = "窗口颜色",
+                        selectedColor = windowColor.value,
+                        onColorSelected = { color ->
+                            windowColor.value = color
+                            updateSubtitleSettings()
+                        }
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text("字体大小", style = MaterialTheme.typography.bodyMedium)
-                        SizePicker(
-                            modifier = Modifier.fillMaxHeight(),
-                            selectedSize = textSize.value,
-                            onSizeSelected = { size ->
-                                textSize.value = size
-                                updateSubtitleSettings()
-                            }
-                        )
-                    }
+                    SizePickerSection(
+                        title = "字体大小",
+                        selectedSize = textSize.value,
+                        onSizeSelected = { size ->
+                            textSize.value = size
+                            updateSubtitleSettings()
+                        }
+                    )
                 }
                 Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -199,6 +179,42 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
 }
 
 @Composable
+fun ColorPickerSection(
+    title: String,
+    selectedColor: Int,
+    onColorSelected: (Int) -> Unit
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(title, style = MaterialTheme.typography.bodyMedium)
+        ColorPicker(
+            modifier = Modifier.fillMaxHeight(),
+            selectedColor = selectedColor,
+            onColorSelected = onColorSelected
+        )
+    }
+}
+
+@Composable
+fun SizePickerSection(
+    title: String,
+    selectedSize: Float,
+    onSizeSelected: (Float) -> Unit
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(title, style = MaterialTheme.typography.bodyMedium)
+        SizePicker(
+            modifier = Modifier.fillMaxHeight(),
+            selectedSize = selectedSize,
+            onSizeSelected = onSizeSelected
+        )
+    }
+}
+
+@Composable
 fun ColorPicker(
     modifier: Modifier = Modifier,
     selectedColor: Int,
@@ -207,7 +223,7 @@ fun ColorPicker(
     // 简单的颜色选择器实现
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(7),
+        columns = GridCells.Fixed(6),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
@@ -247,7 +263,7 @@ fun SizePicker(
     // 简单的大小选择器实现
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(7),
+        columns = GridCells.Fixed(8),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
