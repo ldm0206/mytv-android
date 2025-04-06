@@ -158,30 +158,19 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
-                    AndroidView(
-                        factory = { SubtitleView(it) },
-                        update = { subtitleView ->
-                            subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
-                            subtitleView.setStyle(currentSubtitleSettings.style)
-                            val exampleCue = Cue.Builder()
-                                .setText("示例字幕") // 设置字幕内容
-                                .build()
-                            subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-                        }
-                    )
                 }
-                AndroidView(
-                    factory = { SubtitleView(it) },
-                    update = { subtitleView ->
-                        subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
-                        subtitleView.setStyle(currentSubtitleSettings.style)
-                        val exampleCue = Cue.Builder()
-                            .setText("示例字幕") // 设置字幕内容
-                            .build()
-                        subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-                    }
-                )
             }
+            AndroidView(
+                factory = { SubtitleView(it) },
+                update = { subtitleView ->
+                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
+                    subtitleView.setStyle(currentSubtitleSettings.style)
+                    val exampleCue = Cue.Builder()
+                        .setText("示例字幕") // 设置字幕内容
+                        .build()
+                    subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
+                }
+            )
         }
     }
 }

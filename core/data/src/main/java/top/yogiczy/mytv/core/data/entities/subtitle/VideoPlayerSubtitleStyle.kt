@@ -25,7 +25,7 @@ data class VideoPlayerSubtitleStyle(
                 Color.WHITE,
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
-                CaptionStyleCompat.EDGE_TYPE_NONE,
+                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
                 Color.TRANSPARENT,
                 null
             ),
@@ -37,7 +37,7 @@ data class VideoPlayerSubtitleStyle(
                 Color.WHITE,
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
-                CaptionStyleCompat.EDGE_TYPE_NONE,
+                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
                 Color.TRANSPARENT,
                 null
             )
