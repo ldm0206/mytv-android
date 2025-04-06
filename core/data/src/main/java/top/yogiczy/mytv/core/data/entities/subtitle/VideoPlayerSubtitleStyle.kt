@@ -19,7 +19,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
  */
 @Serializable
 data class VideoPlayerSubtitleStyle(
-    val textSize: Float = 1f,
+    val textSize: Float = 10f,
     @Serializable(with = CaptionStyleCompatSerializer::class)
     val style: CaptionStyleCompat = CaptionStyleCompat(
                 Color.WHITE,
@@ -32,7 +32,7 @@ data class VideoPlayerSubtitleStyle(
 ) {
     companion object {
         val EXAMPLE = VideoPlayerSubtitleStyle(
-            textSize = 1f,
+            textSize = 10f,
             style = CaptionStyleCompat(
                 Color.WHITE,
                 Color.TRANSPARENT,

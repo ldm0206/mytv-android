@@ -95,89 +95,79 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             modifier = modifier.fillMaxWidth()
                 .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
-            Column(
-                modifier = Modifier.align(Alignment.Center),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
-                ) {
-                    // 字体颜色选择器
-                    ColorPickerSection(
-                        title = "字体颜色",
-                        selectedColor = foregroundColor.value,
-                        onColorSelected = { color ->
-                            foregroundColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
+                // 字体颜色选择器
+                ColorPickerSection(
+                    title = "字体颜色",
+                    selectedColor = foregroundColor.value,
+                    onColorSelected = { color ->
+                        foregroundColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
 
-                    // 背景颜色选择器
-                    ColorPickerSection(
-                        title = "背景颜色",
-                        selectedColor = backgroundColor.value,
-                        onColorSelected = { color ->
-                            backgroundColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
-                ) {
-                    // 边框颜色选择器
-                    ColorPickerSection(
-                        title = "边框颜色",
-                        selectedColor = edgeColor.value,
-                        onColorSelected = { color ->
-                            edgeColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
-
-                    // 窗口颜色选择器
-                    ColorPickerSection(
-                        title = "窗口颜色",
-                        selectedColor = windowColor.value,
-                        onColorSelected = { color ->
-                            windowColor.value = color
-                            updateSubtitleSettings()
-                        }
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
-                ) {
-                    SizePickerSection(
-                        title = "字体大小",
-                        selectedSize = textSize.value,
-                        onSizeSelected = { size ->
-                            textSize.value = size
-                            updateSubtitleSettings()
-                        }
-                    )
-                }
-                Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    Text("预览", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
-                }
+                // 背景颜色选择器
+                ColorPickerSection(
+                    title = "背景颜色",
+                    selectedColor = backgroundColor.value,
+                    onColorSelected = { color ->
+                        backgroundColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
             }
-            AndroidView(
-                factory = { SubtitleView(it) },
-                update = { subtitleView ->
-                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize.value)
-                    subtitleView.setStyle(currentSubtitleSettings.style)
-                    val exampleCue = Cue.Builder()
-                        .setText("示例字幕") // 设置字幕内容
-                        .build()
-                    subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
-                }
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
+            ) {
+                // 边框颜色选择器
+                ColorPickerSection(
+                    title = "边框颜色",
+                    selectedColor = edgeColor.value,
+                    onColorSelected = { color ->
+                        edgeColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
+
+                // 窗口颜色选择器
+                ColorPickerSection(
+                    title = "窗口颜色",
+                    selectedColor = windowColor.value,
+                    onColorSelected = { color ->
+                        windowColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
+            ) {
+                SizePickerSection(
+                    title = "字体大小",
+                    selectedSize = textSize.value,
+                    onSizeSelected = { size ->
+                        textSize.value = size
+                        updateSubtitleSettings()
+                    }
+                )
+            }
         }
+        AndroidView(
+            factory = { SubtitleView(it) },
+            update = { subtitleView ->
+                subtitleView.setFixedTextSize(SubtitleView.TEXT_SIZE_TYPE_ABSOLUTE, textSize.value)
+                subtitleView.setStyle(currentSubtitleSettings.style)
+                val exampleCue = Cue.Builder()
+                    .setText("示例字幕") // 设置字幕内容
+                    .build()
+                subtitleView.setCues(listOf(exampleCue)) // 将字幕内容应用到 SubtitleView
+            }
+        )
     }
 }
 
@@ -236,7 +226,7 @@ fun ColorPicker(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
                     .width(45.dp) 
-                    .height(45.dp), 
+                    .height(45.dp)
                     .border(2.dp, Color.DarkGray), 
 
                 headlineContent = {
@@ -272,7 +262,7 @@ fun SizePicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
         // verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        items((1..8).map { it * 0.5f }){ size ->
+        items((1..8).map { it * 5f }){ size ->
             ListItem(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onSizeSelected(size) })
@@ -281,7 +271,7 @@ fun SizePicker(
 
                 headlineContent = {
                     Text(
-                        text = String.format("%.1f", size), // 保留 1 位小数
+                        text = String.format("%.0f", size), // 保留 1 位小数
                         textAlign = TextAlign.Center,
                         modifier = Modifier.size(35.dp)
                     )

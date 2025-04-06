@@ -101,7 +101,7 @@ fun VideoPlayerScreen(
                 factory = { SubtitleView(context) },
                 update = { subtitleView ->
                     // 设置字幕字体大小（相对于视频高度的比例）
-                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * textSize)
+                    subtitleViewsubtitleView.setFixedTextSize(SubtitleView.TEXT_SIZE_TYPE_ABSOLUTE, textSize)
                     // 设置字幕的样式
                     subtitleView.setStyle(style)
                     state.instance.onCues { cues -> subtitleView.setCues(cues) }
