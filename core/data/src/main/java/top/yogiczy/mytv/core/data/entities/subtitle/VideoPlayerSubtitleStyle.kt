@@ -25,19 +25,4 @@ data class VideoPlayerSubtitleStyle(
             outlineWidth = 0.5f,
         )
     }
-    fun copy(
-        textSize: Float = this.textSize,
-        foregroundColor: Int = this.foregroundColor,
-        backgroundColor: Int = this.backgroundColor,
-        outlineColor: Int = this.outlineColor,
-        outlineWidth: Float = this.outlineWidth,
-    ): VideoPlayerSubtitleStyle {
-        return VideoPlayerSubtitleStyle(
-            textSize = textSize,
-            foregroundColor = foregroundColor,
-            backgroundColor = backgroundColor,
-            outlineColor = outlineColor,
-            outlineWidth = outlineWidth,
-        )
-    }
 }
