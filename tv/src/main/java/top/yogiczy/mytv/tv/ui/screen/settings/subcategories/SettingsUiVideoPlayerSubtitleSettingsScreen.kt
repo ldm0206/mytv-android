@@ -154,6 +154,23 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
                         )
                     }
                 }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(2.gridColumns()),
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Text("字体大小", style = MaterialTheme.typography.bodyMedium)
+                        sizePicker(
+                            selectedSize = textSize.value,
+                            onSizeSelected = { size ->
+                                textSize.value = size
+                                updateSubtitleSettings()
+                            }
+                        )
+                    }
+                }
                 Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
@@ -188,11 +205,39 @@ fun ColorPicker(
             val isSelected = selectedColor == color.toArgb()
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(45.dp)
                     .background(color)
                     .border(2.dp, if (isSelected) Color(0xFFFFD700) else Color.Gray)
                     .clickable { onColorSelected(color.toArgb()) }
             )
+        }
+    }
+}
+
+@Composable
+fun sizePicker(
+    selectedSize: Float,
+    onSizeSelected: (Float) -> Unit
+) {
+    // 简单的大小选择器实现
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        listOf(0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f).forEach { size ->
+            val isSelected = selectedSize == size
+            Box(
+                modifier = Modifier
+                    .size(45.dp)
+                    .background(if (isSelected) Color(0xFFFFD700) else Color.Gray)
+                    .clickable { onSizeSelected(size) }
+            ) {
+                Text(
+                    text = "${size.toInt()}",
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color.White
+                )
+            }
         }
     }
 }
