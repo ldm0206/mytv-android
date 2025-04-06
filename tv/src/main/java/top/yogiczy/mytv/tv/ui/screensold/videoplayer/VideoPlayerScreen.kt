@@ -96,7 +96,24 @@ fun VideoPlayerScreen(
         if (state.instance is Media3VideoPlayer) {
             AndroidView(
                 factory = { SubtitleView(context) },
-                update = {
+                update = { subtitleView ->
+                    // 设置字幕字体大小（相对于视频高度的比例）
+                    subtitleView.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * settingsVM.uiVideoPlayerSubtitle.textSize)
+
+                    // 设置字幕的前景色（字体颜色）
+                    subtitleView.setForegroundColor(settingsVM.uiVideoPlayerSubtitle.textColor)
+
+                    // 设置字幕的背景色
+                    subtitleView.setBackgroundColor(settingsVM.uiVideoPlayerSubtitle.backgroundColor)
+
+                    // 设置字幕的边框颜色和宽度
+                    subtitleView.setOutlineColor(settingsVM.uiVideoPlayerSubtitle.outlineColor)
+                    subtitleView.setOutlineWidth(settingsVM.uiVideoPlayerSubtitle.outlineWidth)
+
+                    // // 设置字幕的阴影颜色和偏移
+                    // subtitleView.setShadowColor(Color.DKGRAY)
+                    // subtitleView.setShadowRadius(4f)
+                    // subtitleView.setShadowOffset(2f, 2f)
                     state.instance.onCues { cues -> it.setCues(cues) }
                 },
             )
