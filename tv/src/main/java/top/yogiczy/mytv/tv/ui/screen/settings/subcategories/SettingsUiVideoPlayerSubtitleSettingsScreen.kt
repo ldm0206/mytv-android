@@ -201,18 +201,25 @@ fun ColorPicker(
     // 简单的颜色选择器实现
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(7),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Black, Color.White, Color.Transparent).forEach { color ->
+        listOf(Color.Red, Color.Magenta, Color.Green, Color.Blue, Color.Cyan, Color.Yellow, Color.Black, Color.DarkGray, Color.Gray, Color.LightGray, Color.White, Color.Transparent).forEach { color ->
             ListItem(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onColorSelected(color.toArgb()) })
-                    .size(45.dp),
+                    .size(45.dp)
+                    .border(2.dp, Color.DarkGray), 
+
                 headlineContent = {
                     if (selectedColor == color.toArgb()) {
                         Icon(
                             Icons.Default.CheckCircle,
                             contentDescription = null,
-                            modifier = Modifier.fillMaxHeight()
+                            modifier = Modifier.size(35.dp)
                         )
                     }
                 },
@@ -233,28 +240,31 @@ fun sizePicker(
     onSizeSelected: (Float) -> Unit
 ) {
     // 简单的大小选择器实现
-    Row(
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(7),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         listOf(0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f).forEach { size ->
             ListItem(
                 modifier = Modifier
                     .handleKeyEvents(onSelect = { onSizeSelected(size) })
                     .width(60.dp) // 设置宽度
-                    .height(30.dp), // 设置高度
+                    .height(45.dp), // 设置高度
 
                 headlineContent = {
                     Text(
                         text = String.format("%.1f", size), // 保留 1 位小数
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxHeight(),
+                        modifier = Modifier.size(35.dp)
                         color = Color.White
                     )
                     if (selectedSize == size) {
                         Icon(
                             Icons.Default.CheckCircle,
                             contentDescription = null,
-                            modifier = Modifier.fillMaxHeight()
+                            modifier = Modifier.size(35.dp)
                         )
                     }
                 },
