@@ -96,46 +96,56 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
             modifier = modifier.fillMaxWidth()
                 .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
-            ColorPickerSection(
-                title = "字体颜色",
-                selectedColor = foregroundColor.value,
-                onColorSelected = { color ->
-                    foregroundColor.value = color
-                    updateSubtitleSettings()
-                }
-            )
-            ColorPickerSection(
-                title = "背景颜色",
-                selectedColor = backgroundColor.value,
-                onColorSelected = { color ->
-                    backgroundColor.value = color
-                    updateSubtitleSettings()
-                }
-            )
-            ColorPickerSection(
-                title = "边框颜色",
-                selectedColor = edgeColor.value,
-                onColorSelected = { color ->
-                    edgeColor.value = color
-                    updateSubtitleSettings()
-                }
-            )
-            ColorPickerSection(
-                title = "窗口颜色",
-                selectedColor = windowColor.value,
-                onColorSelected = { color ->
-                    windowColor.value = color
-                    updateSubtitleSettings()
-                }
-            )
-            SizePickerSection(
-                title = "字体大小",
-                selectedSize = textSize.value,
-                onSizeSelected = { size ->
-                    textSize.value = size
-                    updateSubtitleSettings()
-                }
-            )
+            item {
+                ColorPickerSection(
+                    title = "字体颜色",
+                    selectedColor = foregroundColor.value,
+                    onColorSelected = { color ->
+                        foregroundColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
+            }
+            item {
+                ColorPickerSection(
+                    title = "背景颜色",
+                    selectedColor = backgroundColor.value,
+                    onColorSelected = { color ->
+                        backgroundColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
+            }
+            item {
+                ColorPickerSection(
+                    title = "边框颜色",
+                    selectedColor = edgeColor.value,
+                    onColorSelected = { color ->
+                        edgeColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
+            }
+            item {
+                ColorPickerSection(
+                    title = "窗口颜色",
+                    selectedColor = windowColor.value,
+                    onColorSelected = { color ->
+                        windowColor.value = color
+                        updateSubtitleSettings()
+                    }
+                )
+            }
+            item {
+                SizePickerSection(
+                    title = "字体大小",
+                    selectedSize = textSize.value,
+                    onSizeSelected = { size ->
+                        textSize.value = size
+                        updateSubtitleSettings()
+                    }
+                )
+            }
         }
         AndroidView(
             factory = { SubtitleView(it) },
