@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import top.yogiczy.mytv.tv.ui.rememberChildPadding
 import top.yogiczy.mytv.tv.ui.screen.components.AppScreen
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
+import top.yogiczy.mytv.tv.ui.theme.SAFE_AREA_HORIZONTAL_PADDING
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
 import top.yogiczy.mytv.core.data.entities.subtitle.VideoPlayerSubtitleStyle
 import top.yogiczy.mytv.tv.ui.utils.Configs
@@ -84,12 +85,11 @@ fun SettingsUiVideoPlayerSubtitleSettingsScreen(
         Box(
         modifier = modifier
             .fillMaxSize()
+            .padding(SAFE_AREA_HORIZONTAL_PADDING.dp),
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier.width(5.gridColumns()),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Text("字体颜色", style = MaterialTheme.typography.bodyMedium)
                 ColorPicker(
