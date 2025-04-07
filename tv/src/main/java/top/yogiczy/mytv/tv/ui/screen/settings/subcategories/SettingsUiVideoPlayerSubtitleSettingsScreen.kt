@@ -277,7 +277,7 @@ fun SizePicker(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
             // verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            items((1..8).map { it * 5f }){ size ->
+            items((1..16).map { it * 5f }){ size ->
                 ListItem(
                     modifier = Modifier
                         .handleKeyEvents(onSelect = { onSizeSelected(size) })
