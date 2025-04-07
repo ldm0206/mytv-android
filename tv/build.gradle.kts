@@ -56,6 +56,16 @@ android {
                 abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
             }
         }
+        demo{
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+            ndk {
+                abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
+            }
+        }
     }
 
     sourceSets {
