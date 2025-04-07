@@ -269,7 +269,7 @@ fun SizePicker(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp) // Set a fixed height to avoid infinite constraints
+            .height(140.dp) // Set a fixed height to avoid infinite constraints
     ) {
         LazyVerticalGrid(
             modifier = modifier.fillMaxWidth(),
@@ -277,7 +277,7 @@ fun SizePicker(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
             // verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            items((1..16).map { it * 5f }){ size ->
+            items((1..24).map { it * 5f }){ size ->
                 ListItem(
                     modifier = Modifier
                         .handleKeyEvents(onSelect = { onSizeSelected(size) })
