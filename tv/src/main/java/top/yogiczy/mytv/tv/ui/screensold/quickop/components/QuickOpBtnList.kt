@@ -110,7 +110,6 @@ fun QuickOpBtnList(
     ) {
         item {
             QuickOpBtn(
-                modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.LiveTv, contentDescription = "图标")
@@ -124,6 +123,7 @@ fun QuickOpBtnList(
 
         item {
             QuickOpBtn(
+                modifier = Modifier.focusOnLaunched(),
                 title = { 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.AutoMirrored.Filled.LibraryBooks, contentDescription = "图标")
