@@ -288,17 +288,17 @@ fun SizePicker(
                         Text(
                             text = String.format("%.0f", size), // 保留 1 位小数
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.size(35.dp)
+                            modifier = Modifier.size(29.dp)
                         )
+                    },
+                    trailingContent = {
                         if (selectedSize == size) {
                             Icon(
                                 Icons.Default.CheckCircle,
                                 contentDescription = null,
-                                modifier = Modifier.size(35.dp)
+                                modifier = Modifier.size(29.dp)
                             )
                         }
-                    },
-                    trailingContent = {
                     },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.onSurface.copy(0.1f),
