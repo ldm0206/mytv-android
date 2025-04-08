@@ -119,14 +119,14 @@ private fun QuickOpScreenTop(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.titleLarge
-        ) {
-            DashboardScreeIptvSource(
-                //currentIptvSourceProvider = { iptvSourceCurrent },
-                toSettingsIptvSourceScreen = toSettingsIptvSourceScreen,
-            )
-        }
+        // CompositionLocalProvider(
+        //     LocalTextStyle provides MaterialTheme.typography.titleLarge
+        // ) {
+        //     DashboardScreeIptvSource(
+        //         //currentIptvSourceProvider = { iptvSourceCurrent },
+        //         toSettingsIptvSourceScreen = toSettingsIptvSourceScreen,
+        //     )
+        // }
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             ChannelNumber(channelNumberProvider = channelNumberProvider)
