@@ -116,7 +116,7 @@ private fun QuickOpScreenTop(
         modifier = modifier
             .fillMaxWidth()
             .padding(childPadding.paddingValues),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         // CompositionLocalProvider(
