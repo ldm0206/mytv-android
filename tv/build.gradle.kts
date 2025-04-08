@@ -56,7 +56,7 @@ android {
                 abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
             }
         }
-        demo{
+        create("demo"){
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
