@@ -13,7 +13,6 @@ import top.yogiczy.mytv.core.data.repositories.iptv.parser.IptvParser.ChannelIte
 import top.yogiczy.mytv.core.data.utils.Globals
 import top.yogiczy.mytv.core.data.utils.Logger
 import kotlin.time.measureTimedValue
-
 /**
  * 播放源数据获取
  */
@@ -55,7 +54,8 @@ class IptvRepository(private val source: IptvSource) :
         withContext(Dispatchers.IO) {
             if (source.transformJs.isNullOrBlank()) return@withContext channelList
 
-            val context = org.mozilla.javascript.Context.enter()
+            val contextFactory = org.mozilla.javascript.ContextFactory.getGlobal()
+            val context = contextFactory.enterContext()
             context.setOptimizationLevel(-1)
             val result = runCatching {
                 val scope = context.initStandardObjects()
