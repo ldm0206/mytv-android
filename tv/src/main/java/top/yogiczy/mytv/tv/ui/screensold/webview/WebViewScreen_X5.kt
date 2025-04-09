@@ -113,10 +113,12 @@ fun WebViewScreen_X5(
                     getSettings().setMediaPlaybackRequiresUserGesture(false)
                     // getSettings().isHorizontalScrollBarEnabled =(alse
                     // getSettings().isVerticalScrollBarEnabled (false
-                    /*isClickable = false
+                    isClickable = false
                     isFocusable = false
-                    isFocusableInTouchMode = false*/
-
+                    isLongClickable = false
+                    setOnTouchListener { _, _ -> true }
+                    isFocusableInTouchMode = false
+                    
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,
