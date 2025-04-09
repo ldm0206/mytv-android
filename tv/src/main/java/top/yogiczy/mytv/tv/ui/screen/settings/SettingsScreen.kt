@@ -410,9 +410,9 @@ fun SettingsScreen(
 
                 composable(SettingsSubCategories.WEBVIEW_CORE.name) {
                     SettingsWebViewCoreScreen(
-                        coreProvider = { settingsViewModel.webviewCore },
+                        coreProvider = { settingsViewModel.webViewCore },
                         onCoreChanged = {
-                            settingsViewModel.webviewCore = it
+                            settingsViewModel.webViewCore = it
                             navController.navigateUp()
                         },
                         onBackPressed = { navController.navigateUp() },

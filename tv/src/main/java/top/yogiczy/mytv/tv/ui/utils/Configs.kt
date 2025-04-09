@@ -746,8 +746,9 @@ object Configs {
         MEDIA3(0, "Media3"),
 
         /** IJK */
-        IJK(1, "IjkPlayer");
+        IJK(1, "IjkPlayer"),
 
+        /** X5 */
         X5(2, "X5Player");
 
         companion object {
@@ -759,10 +760,10 @@ object Configs {
 
     enum class WebViewCore(val value: Int, val label: String) {
         /** 系统内核 */
-        SYSTEM(0, "Android Webview"),
+        SYSTEM(0, "Android"),
 
         /** X5内核 */
-        X5(1, "Tencent X5 Webview");
+        X5(1, "TBS X5");
 
         companion object {
             fun fromValue(value: Int): WebViewCore {

@@ -155,7 +155,7 @@ fun MainContent(
         Visibility({ mainContentState.currentChannelLine?.hybridType == ChannelLine.HybridType.WebView }) {
             val channelLine = mainContentState.currentChannelLine
             settingsViewModel.webViewCore?.let {
-                if (it == SettingsViewModel.WebViewCore.SYSTEM)  {
+                if (it == settingsViewModel.webViewCore.SYSTEM)  {
                     WebViewScreen(
                         urlProvider = {
                             Pair(
@@ -174,7 +174,7 @@ fun MainContent(
                             mainContentState.isTempChannelScreenVisible = false
                         },
                     )
-                } else if (it == SettingsViewModel.WebViewCore.X5) {
+                } else if (it == settingsViewModel.webViewCore.X5) {
                     WebViewScreen_X5(
                         urlProvider = {
                             Pair(
