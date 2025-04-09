@@ -116,9 +116,8 @@ fun WebViewScreen_X5(
                     isClickable = false
                     isFocusable = false
                     isLongClickable = false
-                    setOnTouchListener { _, _ -> true }
                     isFocusableInTouchMode = false
-                    
+
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,

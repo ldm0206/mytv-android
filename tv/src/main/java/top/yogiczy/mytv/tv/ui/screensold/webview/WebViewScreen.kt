@@ -118,7 +118,6 @@ fun WebViewScreen(
                     isClickable = false
                     isFocusable = false
                     isLongClickable = false
-                    setOnTouchListener { _, _ -> true }
                     isFocusableInTouchMode = false
 
                     addJavascriptInterface(
