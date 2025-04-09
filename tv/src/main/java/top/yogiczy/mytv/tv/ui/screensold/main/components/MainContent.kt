@@ -51,6 +51,7 @@ import top.yogiczy.mytv.tv.ui.screensold.webview.WebViewScreen_X5
 import top.yogiczy.mytv.tv.ui.utils.backHandler
 import top.yogiczy.mytv.tv.ui.utils.handleDragGestures
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
+import top.yogiczy.mytv.tv.ui.utils.Configs
 
 @Composable
 fun MainContent(
@@ -154,8 +155,8 @@ fun MainContent(
 
         Visibility({ mainContentState.currentChannelLine?.hybridType == ChannelLine.HybridType.WebView }) {
             val channelLine = mainContentState.currentChannelLine
-            settingsViewModel.webViewCore?.let {
-                if (it == settingsViewModel.webViewCore.SYSTEM)  {
+            when (settingsViewModel.webViewCore) {
+                Configs.WebViewCore.SYSTEM -> {
                     WebViewScreen(
                         urlProvider = {
                             Pair(
@@ -174,7 +175,8 @@ fun MainContent(
                             mainContentState.isTempChannelScreenVisible = false
                         },
                     )
-                } else if (it == settingsViewModel.webViewCore.X5) {
+                }
+                Configs.WebViewCore.X5 -> {
                     WebViewScreen_X5(
                         urlProvider = {
                             Pair(
