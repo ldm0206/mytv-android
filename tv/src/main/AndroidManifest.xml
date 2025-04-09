@@ -20,8 +20,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />  <!-- X5权限需求 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- X5权限需求 -->
     <uses-permission android:name="android.permission.GET_TASKS"/><!-- X5权限需求 -->
-
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!-- X5权限需求 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- X5权限需求 -->
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />

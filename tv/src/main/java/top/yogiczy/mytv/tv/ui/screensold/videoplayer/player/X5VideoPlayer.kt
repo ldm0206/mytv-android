@@ -23,7 +23,7 @@ class X5VideoPlayer(
             triggerPrepared()
         } else {
             logger.i("X5VideoPlayer 当前不可用")
-            triggerError(PlaybackException("X5VideoPlayer 当前不可用"))
+            triggerError(PlaybackException("X5VideoPlayer 当前不可用",10000))
         }
     }
     override fun play() {
