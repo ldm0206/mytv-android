@@ -12,7 +12,12 @@ class X5CorePreLoadService : IntentService(TAG) {
     private val cb = object : QbSdk.PreInitCallback {
         override fun onViewInitFinished(success: Boolean) {
             // 初始化完成回调
-            Toast.makeText(this@X5CorePreLoadService, "加载h5内核成功  $success", Toast.LENGTH_SHORT).show()
+            val result = if (success) {
+                "X5Webview内核加载成功"
+            } else {
+                "X5Webview内核加载失败"
+            }
+            Toast.makeText(this@X5CorePreLoadService, result, Toast.LENGTH_SHORT).show()
             log.i("$TAG onViewInitFinished: $success")
         }
 
