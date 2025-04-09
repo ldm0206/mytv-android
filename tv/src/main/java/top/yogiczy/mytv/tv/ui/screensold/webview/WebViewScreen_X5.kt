@@ -97,23 +97,22 @@ fun WebViewScreen_X5(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                     )
 
-                    settings.javaScriptEnabled = true
-                    settings.useWideViewPort = true
-                    settings.loadWithOverviewMode = true
-                    settings.domStorageEnabled = true
-                    settings.loadsImagesAutomatically = false
-                    settings.blockNetworkImage = true
-                    settings.userAgentString = httpUserAgent
-                    settings.cacheMode = WebSettings.LOAD_DEFAULT
-                    settings.javaScriptCanOpenWindowsAutomatically = true
-                    settings.setSupportZoom(false)
-                    settings.displayZoomControls = false
-                    settings.builtInZoomControls = false
-                    // settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-                    settings.mediaPlaybackRequiresUserGesture = false
-                    settings.domStorageEnabled = true
-                    isHorizontalScrollBarEnabled = false
-                    isVerticalScrollBarEnabled = false
+                    getSettings().setJavaScriptEnabled(true)
+                    getSettings().setUseWideViewPor(true)
+                    getSettings().setLoadWithOverviewMode(true)
+                    getSettings().setDomStorageEnabled(true)
+                    getSettings().setLoadsImagesAutomatically(false)
+                    getSettings().setBlockNetworkImage(true)
+                    getSettings().setUserAgentString(httpUserAgent)
+                    getSettings().setCacheMode(WebSettings.LOAD_DEFAULT)
+                    getSettings().setJavaScriptCanOpenWindowsAutomatically(true)
+                    getSettings().setSupportZoom(false)
+                    getSettings().setDisplayZoomControls(false)
+                    getSettings().setBuiltInZoomControls(false)
+                    getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW)
+                    getSettings().setMediaPlaybackRequiresUserGesture(false)
+                    // getSettings().isHorizontalScrollBarEnabled =(alse
+                    // getSettings().isVerticalScrollBarEnabled (false
                     /*isClickable = false
                     isFocusable = false
                     isFocusableInTouchMode = false*/

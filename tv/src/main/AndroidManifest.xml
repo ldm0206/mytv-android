@@ -19,6 +19,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />  <!-- X5权限需求 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- X5权限需求 -->
+    <uses-permission android:name="android.permission.GET_TASKS"/><!-- X5权限需求 -->
+
 
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
@@ -35,6 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTV"
         android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true" 
         tools:targetApi="n">
         <activity
             android:name=".MainActivity"
@@ -52,9 +55,10 @@
         </activity>
 
         <activity android:name=".CrashHandlerActivity" />
+        <!-- X5权限需求 -->
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:configChanges="screenSize|keyboardHidden"
             android:exported="false"
             android:launchMode="singleTask"
             android:alwaysRetainTaskState="true">

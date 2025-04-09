@@ -14,36 +14,36 @@ class X5VideoPlayer(
     private val context: Context,
     private val coroutineScope: CoroutineScope,
 ) : VideoPlayer(coroutineScope){
-    private val logger = Logger.create("X5VideoPlayer")
 
+    private val logger = Logger.create("X5VideoPlayer")
     
     override fun prepare(line: ChannelLine) {
         if(TbsVideo.canUseTbsPlayer(context)){
-            logger.i("X5VideoPlayer: TbsVideo can be used")
             TbsVideo.openVideo(context, line.playableUrl)
             triggerPrepared()
         } else {
-            logger.i("X5VideoPlayer: TbsVideo cannot be used")
+            logger.i("X5VideoPlayer 当前不可用")
+            triggerError(PlaybackException("X5VideoPlayer 当前不可用"))
         }
     }
     override fun play() {
-        logger.i("X5VideoPlayer: play")
+        logger.i("play")
     }
     override fun pause() {
-        logger.i("X5VideoPlayer: pause")
+        logger.i("pause")
     }
 
     override fun stop() {
-        logger.i("X5VideoPlayer: stop")
+        logger.i("stop")
     }
     override fun seekTo(position: Long) {
-        logger.i("X5VideoPlayer: seekTo")
+        logger.i("seekTo")
     }
     override fun setVolume(volume: Float) {
-        logger.i("X5VideoPlayer: setVolume")
+        logger.i("setVolume")
     }
     override fun getVolume(): Float {
-        logger.i("X5VideoPlayer: getVolume")
+        logger.i("getVolume")
         return 1f
     }
     override fun selectVideoTrack(track: Metadata.Video?){
