@@ -24,4 +24,43 @@ class X5VideoPlayer(
             logger.i("X5VideoPlayer: TbsVideo cannot be used")
         }
     }
+    override fun play() {
+        logger.i("X5VideoPlayer: play")
+    }
+    override fun pause() {
+        logger.i("X5VideoPlayer: pause")
+    }
+
+    override fun stop() {
+        logger.i("X5VideoPlayer: stop")
+    }
+    override fun seekTo(position: Long) {
+        logger.i("X5VideoPlayer: seekTo")
+    }
+    override fun setVolume(volume: Float) {
+        logger.i("X5VideoPlayer: setVolume")
+    }
+    override fun getVolume(): Float {
+        logger.i("X5VideoPlayer: getVolume")
+        return 1f
+    }
+    override fun selectVideoTrack(track: Metadata.Video?){
+        
+    }
+
+    override fun selectAudioTrack(track: Metadata.Audio?){
+        
+    }
+
+    override fun selectSubtitleTrack(track: Metadata.Subtitle?){
+        
+    }
+
+    override fun setVideoSurfaceView(surfaceView: SurfaceView){
+        
+    }
+
+    override fun setVideoTextureView(textureView: TextureView){
+        
+    }
 }
