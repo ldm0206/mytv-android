@@ -98,7 +98,7 @@ fun WebViewScreen_X5(
                     )
 
                     getSettings().setJavaScriptEnabled(true)
-                    getSettings().setUseWideViewPor(true)
+                    getSettings().setUseWideViewPort(true)
                     getSettings().setLoadWithOverviewMode(true)
                     getSettings().setDomStorageEnabled(true)
                     getSettings().setLoadsImagesAutomatically(false)
