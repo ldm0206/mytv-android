@@ -1,5 +1,7 @@
 package top.yogiczy.mytv.tv.ui.screensold.videoplayer.player
 
+import android.view.SurfaceView
+import android.view.TextureView
 import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import top.yogiczy.mytv.core.data.utils.Logger

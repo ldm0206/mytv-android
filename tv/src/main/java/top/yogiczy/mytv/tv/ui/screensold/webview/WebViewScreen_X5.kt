@@ -109,7 +109,7 @@ fun WebViewScreen_X5(
                     settings.setSupportZoom(false)
                     settings.displayZoomControls = false
                     settings.builtInZoomControls = false
-                    settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                    // settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                     settings.mediaPlaybackRequiresUserGesture = false
                     settings.domStorageEnabled = true
                     isHorizontalScrollBarEnabled = false
