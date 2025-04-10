@@ -38,6 +38,7 @@
         android:theme="@style/Theme.MyTV"
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true" 
+        android:largeHeap = "true"
         tools:targetApi="n">
         <activity
             android:name=".MainActivity"
