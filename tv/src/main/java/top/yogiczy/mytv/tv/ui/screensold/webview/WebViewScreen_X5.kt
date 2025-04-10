@@ -1,7 +1,6 @@
 package top.yogiczy.mytv.tv.ui.screensold.webview
 
 import android.annotation.SuppressLint
-import android.View
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
@@ -68,8 +67,7 @@ fun WebViewScreen_X5(
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxHeight()
-                .background(Color.Black.copy(alpha = 0.5f))
-                .clickable(enabled = false) {}
+                .background(Color.Black.copy(alpha = 0.5f)),
             factory = {
                 MyWebView_X5(it).apply {
                     webViewClient = MyClient_X5(
