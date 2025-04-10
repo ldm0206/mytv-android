@@ -1,6 +1,7 @@
 package top.yogiczy.mytv.tv.ui.screensold.webview
 
 import android.annotation.SuppressLint
+import android.View
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
@@ -67,7 +68,8 @@ fun WebViewScreen_X5(
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxHeight()
-                .background(Color.Black.copy(alpha = 0.5f)),
+                .background(Color.Black.copy(alpha = 0.5f))
+                .clickable(enabled = false) {}
             factory = {
                 MyWebView_X5(it).apply {
                     webViewClient = MyClient_X5(
@@ -117,7 +119,17 @@ fun WebViewScreen_X5(
                     isFocusable = false
                     isLongClickable = false
                     isFocusableInTouchMode = false
-
+                    getView().setOnLongClickListener { 
+                        // 返回 true 禁用长按事件
+                        true
+                    }
+                    getView().setOnClickListener { 
+                        // 点击事件处理逻辑（如果需要）
+                    }
+                    getView().setOnTouchListener { _, _ -> 
+                        // 禁用触摸事件
+                        true
+                    }
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,
