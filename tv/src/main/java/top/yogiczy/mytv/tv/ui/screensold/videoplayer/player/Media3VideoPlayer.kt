@@ -389,6 +389,12 @@ class Media3VideoPlayer(
                 .filter { it.mediaTrackGroup.type == C.TRACK_TYPE_TEXT }
                 .flatMap { group ->
                     List(group.mediaTrackGroup.length) { trackIndex ->
+                        val format = group.mediaTrackGroup.getFormat(trackIndex)
+                        // 输出 roleFlags 和计算结果
+                        logger.i("Track Index: $trackIndex, Role Flags: ${format.roleFlags}")
+                        logger.i("Role Flags & ROLE_FLAG_SUBTITLE: ${format.roleFlags and C.ROLE_FLAG_SUBTITLE}")
+                        logger.i("Role Flags & ROLE_FLAG_CAPTION: ${format.roleFlags and C.ROLE_FLAG_CAPTION}")
+
                         group.mediaTrackGroup
                             .getFormat(trackIndex)
                             .takeIf { 
