@@ -23,17 +23,17 @@ import top.yogiczy.mytv.tv.ui.utils.Configs
 import top.yogiczy.mytv.tv.ui.utils.handleKeyEvents
 
 @Composable
-fun SettingsVideoPlayerCoreScreen(
+fun SettingsWebViewCoreScreen(
     modifier: Modifier = Modifier,
-    coreProvider: () -> Configs.VideoPlayerCore = { Configs.VideoPlayerCore.MEDIA3 },
-    onCoreChanged: (Configs.VideoPlayerCore) -> Unit = {},
+    coreProvider: () -> Configs.WebViewCore = { Configs.WebViewCore.SYSTEM },
+    onCoreChanged: (Configs.WebViewCore) -> Unit = {},
     onBackPressed: () -> Unit = {},
 ) {
     val childPadding = rememberChildPadding()
 
     AppScreen(
         modifier = modifier.padding(top = 10.dp),
-        header = { Text("设置 / 播放器 / 视频播放器内核") },
+        header = { Text("设置 / 播放器 / WebView内核") },
         canBack = true,
         onBackPressed = onBackPressed,
     ) {
@@ -43,7 +43,7 @@ fun SettingsVideoPlayerCoreScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            items(Configs.VideoPlayerCore.entries) { core ->
+            items(Configs.WebViewCore.entries) { core ->
                 ListItem(
                     modifier = Modifier.handleKeyEvents(
                         onSelect = { onCoreChanged(core) },
@@ -52,9 +52,8 @@ fun SettingsVideoPlayerCoreScreen(
                     supportingContent = {
                         Text(
                             when (core) {
-                                Configs.VideoPlayerCore.MEDIA3 -> "除RTSP单播以外基本支持全部功能"
-                                Configs.VideoPlayerCore.IJK -> "部分功能可能无法正常使用，仅支持armeabi-v7a、arm64-v8a"
-                                Configs.VideoPlayerCore.X5 -> "腾讯X5内核，功能受限"
+                                Configs.WebViewCore.SYSTEM -> "系统自带内核"
+                                Configs.WebViewCore.X5 -> "腾讯X5内核"
                             }
                         )
                     },
@@ -76,8 +75,8 @@ fun SettingsVideoPlayerCoreScreen(
 
 @Preview(device = "id:Android TV (720p)")
 @Composable
-private fun SettingsVideoPlayerCoreScreenPreview() {
+private fun SettingsWebViewCoreScreenPreview() {
     MyTvTheme {
-        SettingsVideoPlayerCoreScreen()
+        SettingsWebViewCoreScreen()
     }
 }

@@ -6,11 +6,10 @@ import android.graphics.Bitmap
 import android.util.Log
 import android.view.MotionEvent
 import android.view.ViewGroup
-import android.webkit.JavascriptInterface
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.webkit.CookieManager
+import com.tencent.smtt.sdk.WebSettings
+import com.tencent.smtt.sdk.WebView
+import com.tencent.smtt.sdk.WebViewClient
+import com.tencent.smtt.sdk.CookieManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -33,7 +32,7 @@ import top.yogiczy.mytv.tv.ui.screen.settings.settingsVM
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun WebViewScreen(
+fun WebViewScreen_X5(
     modifier: Modifier = Modifier,
     urlProvider: () -> Pair<String, String> = { Pair("", "") },
     onVideoResolutionChanged: (width: Int, height: Int) -> Unit = { _, _ -> },
@@ -41,7 +40,7 @@ fun WebViewScreen(
     val (url, httpUserAgent) = urlProvider()
     var placeholderVisible by remember { mutableStateOf(true) }
     var placeholderMessage by remember { mutableStateOf("正在加载...") }
-    val logger = remember { Logger.create("WebViewScreen") }
+    val logger = remember { Logger.create("WebViewScreen_X5") }
 
     // 处理webview://前缀
     val actualUrl = remember(url) {
@@ -70,8 +69,8 @@ fun WebViewScreen(
                 .fillMaxHeight()
                 .background(Color.Black.copy(alpha = 0.5f)),
             factory = {
-                MyWebView(it).apply {
-                    webViewClient = MyClient(
+                MyWebView_X5(it).apply {
+                    webViewClient = MyClient_X5(
                         onPageStarted = { 
                             placeholderVisible = true
                             placeholderMessage = "正在加载网页，请稍候..."
@@ -98,28 +97,37 @@ fun WebViewScreen(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                     )
 
-                    settings.javaScriptEnabled = true
-                    settings.useWideViewPort = true
-                    settings.loadWithOverviewMode = true
-                    settings.domStorageEnabled = true
-                    settings.loadsImagesAutomatically = false
-                    settings.blockNetworkImage = true
-                    settings.userAgentString = httpUserAgent
-                    settings.cacheMode = WebSettings.LOAD_DEFAULT
-                    settings.javaScriptCanOpenWindowsAutomatically = true
-                    settings.setSupportZoom(false)
-                    settings.displayZoomControls = false
-                    settings.builtInZoomControls = false
-                    settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-                    settings.mediaPlaybackRequiresUserGesture = false
-                    settings.domStorageEnabled = true
-                    isHorizontalScrollBarEnabled = false
-                    isVerticalScrollBarEnabled = false
+                    getSettings().setJavaScriptEnabled(true)
+                    getSettings().setUseWideViewPort(true)
+                    getSettings().setLoadWithOverviewMode(true)
+                    getSettings().setDomStorageEnabled(true)
+                    getSettings().setLoadsImagesAutomatically(false)
+                    getSettings().setBlockNetworkImage(true)
+                    getSettings().setUserAgentString(httpUserAgent)
+                    getSettings().setCacheMode(WebSettings.LOAD_DEFAULT)
+                    getSettings().setJavaScriptCanOpenWindowsAutomatically(true)
+                    getSettings().setSupportZoom(false)
+                    getSettings().setDisplayZoomControls(false)
+                    getSettings().setBuiltInZoomControls(false)
+                    getSettings().setMixedContentMode(0)
+                    getSettings().setMediaPlaybackRequiresUserGesture(false)
+                    // getSettings().isHorizontalScrollBarEnabled =(alse
+                    // getSettings().isVerticalScrollBarEnabled (false
                     isClickable = false
                     isFocusable = false
                     isLongClickable = false
                     isFocusableInTouchMode = false
-
+                    getView().setOnLongClickListener { 
+                        // 返回 true 禁用长按事件
+                        true
+                    }
+                    getView().setOnClickListener { 
+                        // 点击事件处理逻辑（如果需要）
+                    }
+                    getView().setOnTouchListener { _, _ -> 
+                        // 禁用触摸事件
+                        true
+                    }
                     addJavascriptInterface(
                         MyWebViewInterface(
                             onVideoResolutionChanged = onVideoResolutionChanged,
@@ -137,7 +145,7 @@ fun WebViewScreen(
     }
 }
 
-class MyClient(
+class MyClient_X5(
     private val onPageStarted: () -> Unit,
     private val onPageFinished: () -> Unit,
 ) : WebViewClient() {
@@ -179,25 +187,9 @@ class MyClient(
     }
 }
 
-class MyWebView(context: Context) : WebView(context) {
+class MyWebView_X5(context: Context) : WebView(context) {
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return false
-    }
-}
-
-class MyWebViewInterface(
-    private val onVideoResolutionChanged: (width: Int, height: Int) -> Unit = { _, _ -> },
-    private val onUpdatePlaceholderVisible: (visible: Boolean, message: String) -> Unit,
-) {
-    @JavascriptInterface
-    fun changeVideoResolution(width: Int, height: Int) {
-        onVideoResolutionChanged(width, height)
-        onUpdatePlaceholderVisible(false, "")
-    }
-
-    @JavascriptInterface
-    fun updatePlaceholderVisible(visible: Boolean, message: String) {
-        onUpdatePlaceholderVisible(visible, message)
     }
 }
