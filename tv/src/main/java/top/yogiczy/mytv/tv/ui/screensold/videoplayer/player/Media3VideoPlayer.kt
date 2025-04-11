@@ -92,7 +92,7 @@ class Media3VideoPlayer(
                 .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, false)
                 .setMaxVideoSize(Integer.MAX_VALUE, Integer.MAX_VALUE)
                 .setForceHighestSupportedBitrate(true)
-                .setPreferredTextLanguages("zh")
+                .setPreferredTextLanguage("zh")
                 .build()
         }
 
@@ -174,7 +174,11 @@ class Media3VideoPlayer(
 
         return when (contentTypeForce ?: Util.inferContentType(uri)) {
             C.CONTENT_TYPE_HLS -> {
-                HlsMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
+                HlsMediaSource.Factory(dataSourceFactory)
+                    .apply{
+                        setAllowChunklessPreparation(true)
+                    }
+                    .createMediaSource(mediaItem)
             }
 
             C.CONTENT_TYPE_DASH -> {
@@ -606,7 +610,7 @@ class Media3VideoPlayer(
         videoPlayer.trackSelectionParameters = videoPlayer.trackSelectionParameters
             .buildUpon()
             .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, false)
-            .setPreferredTextLanguages(track.language)
+            .setPreferredTextLanguage(track.language)
             .build()
     }
 
