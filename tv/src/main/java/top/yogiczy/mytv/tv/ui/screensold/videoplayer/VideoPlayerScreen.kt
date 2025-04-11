@@ -95,9 +95,8 @@ fun VideoPlayerScreen(
         }
 
         if (state.instance is Media3VideoPlayer) {
-            val textSize = settingsVM.uiVideoPlayerSubtitle.textSize
-            val style = settingsVM.uiVideoPlayerSubtitle.style
-
+            val textSize = remember { mutableStateOf(settingsVM.uiVideoPlayerSubtitle.textSize) }
+            val style =    remember { mutableStateOf(settingsVM.uiVideoPlayerSubtitle.style) }
             AndroidView(
                 factory = { SubtitleView(context) },
                 update = { subtitleView ->
